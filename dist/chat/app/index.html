@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!--meta-->
+    <title>Rai Chat</title>
+    <meta charset="utf-8" />
+
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="/css/index.css" />
+
+    <!--Favicon-->
+    <link rel="icon" href="/images/profile-image.png" />
+
+    <!--Script-->
+
+    <script src="/js/menu.js"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3326621014935824"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body style="display: none">
+    <header></header>
+
+    <section class="columns p-4 m-0">
+      <div class="submenu column is-4" id="settings-sidebar"></div>
+      <div id="app-content" class="content">
+        <h1>Rai Chat</h1>
+        <p>
+          今日も平和ですよ。Rai Chatへようこそ！ここでは、新しいチャット体験ができます。お楽しみください！<br />
+          <small>※不適切ワードを検出した場合、即座にRai Chatから<strong>永久</strong>BANされます。</small><br /><br />
+        </p>
+        <ul>
+          <li>
+            <i class="fas fa-check"></i>Rai Markdownをサポートしています。記述の詳細:<br />
+            [b]文字[/b]: 太文字<br />
+            [i]文字[/i]: イタリック文字<br />
+            [s]文字[/s]: 打ち消し線<br>
+            [u]文字[/u]: 下線<br>
+            [url]URL[/url]: リンク<br>
+            [icon]Font Awesomeのアイコン名[/icon]: アイコン<br>
+            [img]URL[/img]: 画像<br>
+            [color=色]文字[/color]: 文字色<br>
+          </li>
+          <li>
+            HTMLタグは使用できません。ただし、URLは自動的にリンクに変換されます。(XSS対策)
+          </li>
+          <li>
+            画像はアップロードできません。
+          </li>
+          <li>
+            一度に送信できるメッセージは最大100文字です。
+          </li>
+        </ul>
+        <div class="field">
+          <div class="control">
+            <textarea id="app-message" class="input" style="width: 500px; height: 100px" placeholder="メッセージ"></textarea><br><br>
+            <button id="app-send-message" class="button is-primary">送信</button><br />
+            <p id="app-message-alert" class="is-hidden"><i class="fas fa-info"></i><label></label></p>
+          </div>
+        </div>
+
+        <h2>タイムライン</h2>
+        <input type="text" class="input" id="searchInput" placeholder="ワード、名前、時間で検索">
+        <ul id="app-timeline"></ul>
+        <div id="searchResultNotFoundContainer" class="is-hidden">
+          <p>検索結果が見つかりませんでした。</p>
+        </div>
+      </div>
+    </section>
+
+    <footer></footer>
+
+    <script src="/js/chat-sidebar.js"></script>
+    <script src="/js/chat-app.js"></script>
+  </body>
+</html>

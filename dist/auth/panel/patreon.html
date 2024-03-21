@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!--meta-->
+    <title>Patreonアカウントのリンク(パネル) - 雷のサイト</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="このページは、雷のサイト会員のみがアクセスできます。" />
+    <link rel="canonical" href="https://uplauncher.xyz/" />
+
+    <meta content="ログイン - 雷のサイト" property="og:title" />
+    <meta content="このページは、雷のサイト会員のみがアクセスできます。" property="og:description" />
+    <meta content="https://uplauncher.xyz" property="og:url" />
+    <meta content="https://uplauncher.xyz/images/profile-image.png" property="og:image" />
+    <meta content="#43B581" data-react-helmet="true" name="theme-color" />
+
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="/css/index.css" />
+
+    <!--favicon-->
+    <link rel="icon" href="/images/profile-image.png" />
+
+    <!--JavaScript-->
+
+    <script src="/js/menu.js"></script>
+  </head>
+
+  <body style="display: none">
+    <header></header>
+    <br />
+
+    <section class="columns p-4 m-0">
+      <div class="submenu column is-4" id="settings-sidebar"></div>
+
+      <div class="content">
+        <div id="localLinkAccount_Container" class="is-hidden">
+          <!--
+            
+          ██╗░░░██╗██████╗░██╗░░░░░░█████╗░██╗░░░██╗███╗░░██╗░█████╗░██╗░░██╗███████╗██████╗░
+          ██║░░░██║██╔══██╗██║░░░░░██╔══██╗██║░░░██║████╗░██║██╔══██╗██║░░██║██╔════╝██╔══██╗
+          ██║░░░██║██████╔╝██║░░░░░███████║██║░░░██║██╔██╗██║██║░░╚═╝███████║█████╗░░██████╔╝
+          ██║░░░██║██╔═══╝░██║░░░░░██╔══██║██║░░░██║██║╚████║██║░░██╗██╔══██║██╔══╝░░██╔══██╗
+          ╚██████╔╝██║░░░░░███████╗██║░░██║╚██████╔╝██║░╚███║╚█████╔╝██║░░██║███████╗██║░░██║
+          ░╚═════╝░╚═╝░░░░░╚══════╝╚═╝░░╚═╝░╚═════╝░╚═╝░░╚══╝░╚════╝░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝
+
+            上の文字が見れませんか？デベロッパーツールをウインドウ化しウインドウサイズを大きくしてみましょう。
+            ソースコードからこの文章を読んでいますか？UpLauncherの開発者になりませんか？私たちはあなたを歓迎します！
+            応募はこちらから：https://upl.uplauncher.xyz (応募メニューから)
+          -->
+          <h1>ローカル環境でPatreonアカウントをリンク</h1>
+          <p>
+            こんにちは。この文章を読んでいるのは雷かソースコードを読んでいる方だけでしょう。<br />
+            この機能は、ローカル環境(10.249.176.251:8080)からPatreonアカウントをリンクするためのものです。
+          </p>
+          <a
+            class="button is-primary"
+            href="https://www.patreon.com/oauth2/authorize?response_type=code&client_id=yKTcSFN-9G6eAUiu31dOcpGPaCfzhgEulQZ8B8oVgCqTuz_n1K4JPTNy5VF0wY5i&redirect_uri=http://10.249.176.251:8080/auth/fallback/patreon.html"
+            >[LOCAL] Patreonアカウントをリンク</a
+          >
+        </div>
+
+        <h1>1. プレミアムのサブスクリプションを購入</h1>
+        <p>
+          Patreonで、Standard以上のランクを購入してください。<br />
+          サブスクリプション(ランク)についての詳細は<a href="/category/infomation/ranks">こちら</a>をご覧ください。
+        </p>
+        <a href="https://www.patreon.com/checkout/raisandesu?rid=21880320" class="button is-dark"
+          ><i class="fas fa-cart-arrow-down"></i>Standardを購入</a
+        >
+        <a href="https://www.patreon.com/checkout/raisandesu?rid=10216194" class="button is-primary"
+          ><i class="fas fa-cart-arrow-down"></i>Premiumを購入</a
+        >
+        <a href="https://www.patreon.com/checkout/raisandesu?rid=21880338" class="button is-dark"
+          ><i class="fas fa-cart-arrow-down"></i>Enhancedを購入</a
+        >
+
+        <h1>2. Patreonアカウントのリンク</h1>
+
+        <p>
+          次のボタンをクリックして、Patreonアカウントをリンクしてください。<br />
+          既にリンクしている場合は、次のボタンが無効になります。代わりにリンク解除リンクをクリックしてください。
+        </p>
+
+        <article class="message is-danger is-hidden" id="patreonAlert">
+          <div class="message-body has-text-left">
+            <p>何らかのエラーが発生しました。もう一度お試しください。</p>
+          </div>
+        </article>
+
+        <a
+          class="button is-primary"
+          href="https://www.patreon.com/oauth2/authorize?response_type=code&client_id=yKTcSFN-9G6eAUiu31dOcpGPaCfzhgEulQZ8B8oVgCqTuz_n1K4JPTNy5VF0wY5i&redirect_uri=https://uplauncher.xyz/auth/fallback/patreon.html"
+          id="buttonLinkPatreon"
+          >Patreonアカウントをリンク</a
+        >
+        <p id="labelLinkInfo" class="is-hidden">
+          既にPatreonアカウントをリンクしています。リンクした後に購入した場合は、リンクしなおしてください。<br />
+          Patreonアカウントのリンクを解除しますか？<a href="javascript:void(0)" id="labelUnlinkPatreon">こちら</a
+          >をクリックしてください。
+        </p>
+      </div>
+    </section>
+
+    <dialog id="unlinkConfirm">
+      <div id="unlinkConfirm_modal" class="modal">
+        <div class="modal-background"></div>
+
+        <div class="modal-content">
+          <div class="box">
+            <h2>Patreonアカウントのリンクを解除しますか？</h2>
+            <p>
+              この機能はPatreonアカウントの連携にバグが発生した場合や、リンクした後にランクを購入したときに使ってください。<br />
+            </p>
+            <br />
+            <ul>
+              <li>・プレミアムの特典を利用できなくなります。</li>
+              <li>・オーナー権限を持っている場合、失います。</li>
+            </ul>
+            <button onclick="document.querySelector('#unlinkConfirm').close();" class="button is-dark">
+              キャンセル
+            </button>
+            <button id="buttonUnlinkPatreon" class="button is-danger">リンクを解除</button>
+          </div>
+        </div>
+
+        <button
+          onclick="document.querySelector('#unlinkConfirm').close();"
+          class="modal-close is-large"
+          aria-label="close"
+        ></button>
+      </div>
+    </dialog>
+
+    <footer></footer>
+
+    <script src="/js/loadSidebar.js" async defer></script>
+    <script src="/js/panel-patreon.js"></script>
+  </body>
+</html>

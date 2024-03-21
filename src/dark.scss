@@ -1,0 +1,138 @@
+/*
+    Rai Website, a powerful tools, fun!
+    ©2024 Rai and UpLauncher.
+
+    Description: Dark Mode for Bulma
+*/
+
+// <html>
+html {
+  background-color: #000000 !important;
+  color: #fff !important;
+}
+// <p>, <h1>, <h2>, <h3>, <h4>, <h5>, <h6>, <a>, <label>, <li>, <b> or <strong>
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a.navbar-item,
+li > a,
+label,
+li,
+b,
+strong {
+  color: #fff !important;
+}
+// <th>
+th {
+  color: #fff !important;
+}
+// <td>
+td {
+  color: #fff;
+}
+// <article>, <header>, <footer>, navbar notification, box, input, card
+article,
+header,
+footer,
+input,
+.navbar,
+.notification,
+.navbar-dropdown,
+.box,
+.card {
+  background-color: #333 !important;
+  color: #fff !important;
+}
+textarea {
+  background-color: #333 !important;
+  color: #fff !important;
+}
+
+/* デフォルトのチェックボックスを非表示に */
+input[type='checkbox'] {
+  display: none;
+}
+.checkbox {
+  position: relative;
+  padding: 5px 30px;
+  cursor: pointer;
+}
+.checkbox:before {
+  width: 16px; /* チェックボックスの幅 */
+  height: 16px; /* チェックボックスの高さ */
+  left: 5px;
+  border: 1px solid #ccc; /* チェックボックスの枠 */
+  border-radius: 3px;
+  margin-top: -8px;
+}
+.checkbox:after,
+.checkbox:before {
+  position: absolute;
+  content: '';
+  top: 50%;
+}
+.checkbox::after {
+  position: absolute;
+  width: 5px;
+  height: 9px;
+  top: 50%;
+  left: 10.5px;
+  border-right: 2px solid #0091e6; /* チェックマークの色 */
+  border-bottom: 3px solid #0091e6; /* チェックマークの色 */
+  content: '';
+  margin-top: -6px;
+  opacity: 0;
+  transform: rotate(45deg);
+}
+input[type='checkbox']:checked + .checkbox::after {
+  opacity: 1;
+}
+
+// a:hover, p.navbar-link
+a:hover:not(.button) {
+  background-color: #111 !important;
+}
+p.navbar-link {
+  background-color: #333 !important;
+}
+p.navbar-link:hover {
+  background-color: #111 !important;
+}
+p.navbar-link:active {
+  background-color: #111 !important;
+}
+// Change Footer is-link Color
+a {
+  color: #9dbcff !important;
+}
+a.is-link {
+  color: #9dbcff !important;
+}
+// Change Primary Color
+.is-primary {
+  background-color: #008874 !important;
+}
+// Change Primary Hover Color
+.is-primary:hover {
+  background-color: #006d5b !important;
+}
+// Fix Button Text Color
+.button {
+  color: #fff !important;
+}
+// No .is-light
+.is-light {
+  background-color: #000 !important;
+}
+
+.input::placeholder {
+  color: #888 !important;
+}
+
+li.disabled {
+  opacity: 0.5;
+}

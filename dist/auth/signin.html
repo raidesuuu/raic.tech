@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!--meta-->
+    <title>サインイン - 雷のサイト</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="このページは、雷のサイト会員のみがアクセスできます。" />
+    <link rel="canonical" href="https://uplauncher.xyz/" />
+
+    <meta content="サインイン - 雷のサイト" property="og:title" />
+    <meta content="このページは、雷のサイト会員のみがアクセスできます。" property="og:description" />
+    <meta content="https://uplauncher.xyz" property="og:url" />
+    <meta content="https://uplauncher.xyz/images/profile-image.png" property="og:image" />
+    <meta content="#43B581" data-react-helmet="true" name="theme-color" />
+
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="/css/index.css" />
+
+    <!--favicon-->
+    <link rel="icon" href="/images/profile-image.png" />
+
+    <!--JavaScript-->
+
+    <script src="/js/menu.js"></script>
+
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
+  </head>
+
+  <body style="display: none">
+    <header></header>
+
+    <section class="columns p-4 m-0">
+      <div class="submenu column is-4" id="settings-sidebar"></div>
+
+      <div class="content">
+        <h1>サインイン</h1>
+        <p>雷のサイトへサインインします。</p>
+
+        <br />
+
+        <label for="LoginEmail"><i class="fas fa-envelope"></i>メールアドレス</label><br />
+        <input
+          class="input"
+          id="LoginEmail"
+          type="email"
+          style="width: 25vw"
+          placeholder="email@example.com"
+        /><br /><br />
+
+        <label for="LoginPassword"><i class="fas fa-input-text"></i>パスワード</label><br />
+        <input
+          class="input"
+          id="LoginPassword"
+          type="password"
+          style="width: 25vw"
+          placeholder="*********"
+        /><br /><br />
+
+        <p id="SigninError" class="is-hidden"><i class="fas fa-info"></i><label></label></p>
+
+        <button id="SigninSubmit" class="button is-primary"><i class="fas fa-check"></i>サインイン</button><br /><br />
+
+        <p>アカウントをお持ちではありませんか？<a href="/auth/signup.html">サインアップ</a></p>
+      </div>
+    </section>
+
+    <footer></footer>
+
+    <script src="/js/signin.js"></script>
+    <script src="/js/signinLoadSidebar.js"></script>
+  </body>
+</html>

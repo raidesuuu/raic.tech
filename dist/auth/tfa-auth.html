@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!--meta-->
+    <title>2段階認証 - 雷のサイト</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="このページは、雷のサイト会員のみがアクセスできます。" />
+    <link rel="canonical" href="https://uplauncher.xyz/" />
+
+    <meta content="2段階認証 - 雷のサイト" property="og:title" />
+    <meta content="このページは、雷のサイト会員のみがアクセスできます。" property="og:description" />
+    <meta content="https://uplauncher.xyz" property="og:url" />
+    <meta content="https://uplauncher.xyz/images/profile-image.png" property="og:image" />
+    <meta content="#43B581" data-react-helmet="true" name="theme-color" />
+
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="/css/index.css" />
+
+    <!--favicon-->
+    <link rel="icon" href="/images/profile-image.png" />
+
+    <!--JavaScript-->
+    
+<script src="/js/menu.js"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3326621014935824"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      async
+      src="https://fundingchoicesmessages.google.com/i/pub-3326621014935824?ers=1"
+      nonce="JjY3TpBm7adUKnc_0D6PlA"
+    ></script>
+    <script nonce="JjY3TpBm7adUKnc_0D6PlA">
+      ;(function () {
+        function signalGooglefcPresent() {
+          if (!window.frames['googlefcPresent']) {
+            if (document.body) {
+              const iframe = document.createElement('iframe')
+              iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'
+              iframe.style.display = 'none'
+              iframe.name = 'googlefcPresent'
+              document.body.appendChild(iframe)
+            } else {
+              setTimeout(signalGooglefcPresent, 0)
+            }
+          }
+        }
+        signalGooglefcPresent()
+      })()
+    </script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
+  </head>
+
+  <body style="display: none">
+    <header></header>
+
+    <section class="columns p-4 m-0">
+      <div class="submenu column is-4" id="settings-sidebar"></div>
+      <div class="content">
+        <h1>2段階認証</h1>
+        <p>認証アプリを開き、2段階認証のコードを入力にします。</p>
+
+        <label for="tfaCode"><i class="fas fa-key"></i>認証コード</label><br />
+        <input class="input" id="tfaCode" type="number" min="0" max="999999" placeholder="000000" /><br /><br />
+
+        <p id="tfaError" class="is-hidden"><i class="fas fa-info"></i><label></label></p>
+
+        <button id="tfaSubmit" class="button is-primary"><i class="fas fa-check"></i>コードを確認</button>
+        <br /><br />
+      </div>
+    </section>
+
+    <footer></footer>
+
+    <script src="/js/tfa.js"></script>
+    <script src="/js/signinLoadSidebar.js"></script>
+  </body>
+</html>

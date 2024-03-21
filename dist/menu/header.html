@@ -1,0 +1,83 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a aria-label="ホーム/雷のサイト" class="navbar-item" href="/index.html" style="margin-right: 0px">
+      <img alt="雷のサイト" src="/images/profile-image.png" width="24" height="32" />
+      <p style="margin-left: 10px">雷のウェブサイト</p>
+    </a>
+
+    <a role="button" class="navbar-burger" data-target="navbar" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div class="navbar-menu" id="navbar" style="background: #333">
+    <a class="navbar-item" href="/index.html"> ホーム </a>
+
+    <a class="navbar-item" href="/product.html"> ソフトウェア </a>
+
+    <a class="navbar-item" href="/category/tools/"> ツール一覧 </a>
+
+    <a class="navbar-item" href="/category/infomation/patchnote.html"> パッチノート </a>
+
+    <a class="navbar-item" href="/category/infomation/ranks.html"> ランク </a>
+
+    <a class="navbar-item" href="/chat/"> チャット&nbsp; <div class="tag is-warning">NEW</div> </a>
+
+    <div class="navbar-item has-dropdown is-hoverable">
+      <p class="navbar-link">その他</p>
+
+      <div class="navbar-dropdown">
+        <p style="text-align: center; opacity: 0.5">WEBSITES</p>
+        <a class="navbar-item" href="/vencordjp/index.html"> VencordJP </a>
+        <a class="navbar-item" href="/rirefox/index.html"> Rirefox </a>
+        <a class="navbar-item" href="https://vistaupdater.net"> VistaUpdater </a>
+        <a class="navbar-item" href="https://solo.to/zna"> 自己紹介 </a>
+        <p style="text-align: center; opacity: 0.5">INFOMATION</p>
+        <hr class="navbar-divider" />
+        <a class="navbar-item" href="/category/infomation/program-creator.html"> プログラム作成依頼 </a>
+        <a class="navbar-item" href="/category/infomation/privacy-policy.html"> プライバシーポリシー </a>
+        <a class="navbar-item" href="/contact.html"> 連絡 </a>
+        <p style="text-align: center; opacity: 0.5">FUN</p>
+        <a class="navbar-item" href="/category/fun/2025-countdown.html"> 2025年まで </a>
+        <a class="navbar-item" href="/category/fun/april-fools.html"> エイプリルフールまで </a>
+        <hr class="navbar-divider" />
+        <a class="navbar-item" href="/category/infomation/follow-back.html"> フォロバ規約 </a>
+        <p style="text-align: center; opacity: 0.5">OTHER</p>
+        <hr class="navbar-divider" />
+        <p class="navbar-item">None!</p>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="SearchBarContainer navbar-item">
+        <div class="field has-addons">
+          <div class="control">
+            <input class="input" type="text" id="SearchBar" placeholder="検索" />
+          </div>
+          <div class="control">
+            <a class="button is-info" id="SearchBarSearch">検索</a>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-item">
+        <div class="buttons">
+          <a id="signup" href="/auth/signup.html" class="button is-primary has-text-black">
+            <strong>サインアップ</strong>
+          </a>
+          <a id="signin" href="/auth/signin.html" class="button is-light"> ログイン </a>
+          <a id="panel" href="/auth/panel.html" class="button is-primary has-text-black is-hidden">
+            <strong>パネル</strong>
+          </a>
+          <a id="newPanel" href="/auth/panel/home.html" class="button is-primary has-text-black is-hidden">
+            <strong>新しいパネルを試す</strong>
+          </a>
+          <button id="logout" class="button is-light is-hidden">ログアウト</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="navbar-divider" />
+</nav>

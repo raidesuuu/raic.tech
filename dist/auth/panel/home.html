@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!--meta-->
+    <title>ホーム(パネル) - 雷のサイト</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="このページは、雷のサイト会員のみがアクセスできます。" />
+    <link rel="canonical" href="https://uplauncher.xyz/" />
+
+    <meta content="ログイン - 雷のサイト" property="og:title" />
+    <meta content="このページは、雷のサイト会員のみがアクセスできます。" property="og:description" />
+    <meta content="https://uplauncher.xyz" property="og:url" />
+    <meta content="https://uplauncher.xyz/images/profile-image.png" property="og:image" />
+    <meta content="#43B581" data-react-helmet="true" name="theme-color" />
+
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="/css/index.css" />
+
+    <!--favicon-->
+    <link rel="icon" href="/images/profile-image.png" />
+
+    <!--JavaScript-->
+
+    <script src="/js/menu.js"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3326621014935824"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body style="display: none">
+    <header></header>
+    <br />
+
+    <section class="columns p-4 m-0">
+      <div class="submenu column is-4" id="settings-sidebar"></div>
+
+      <div class="content">
+        <h1 class="gradient" style="font-size: 7vh"><b id="helloSectionName">雷</b>さん、こんにちは！</h1>
+        <p>今は<b id="helloSectionDate">12:34</b>です。今日は何をしますか？</p>
+
+        <redirect id="rd_email" />
+        <h2><i class="fas fa-envelope"></i>メールアドレス</h2>
+        <p>メールアドレスは、アカウントにログインする際に必要です。</p>
+
+        <article class="message is-hidden" id="emailVerificationAlert">
+          <div class="message-body has-text-left">
+            <p>下のボタンをクリックして、メールアドレスを認証してください。</p>
+            <button class="button is-primary" id="emailVerificationButton">
+              <i class="fas fa-envelope"></i>リンクを送信
+            </button>
+          </div>
+        </article>
+
+        <div id="emailContainer" class="container">
+          <label for="ChangeEmailNew"><i class="fas fa-envelope"></i>新しいメールアドレス</label><br />
+          <input
+            class="input"
+            id="ChangeEmailNew"
+            type="email"
+            style="width: 40%"
+            placeholder="email@example.com"
+          /><br /><br />
+
+          <label for="ChangeEmailPassword"><i class="fas fa-input-text"></i>パスワード</label><br />
+          <input class="input" id="ChangeEmailPassword" type="password" style="width: 40%" /><br /><br />
+
+          <div class="is-hidden" id="ChangeEmailTFAContainer">
+            <label for="ChangeEmailTFA"><i class="fas fa-shield"></i>認証アプリのコード</label><br />
+            <input class="input" id="ChangeEmailTFA" type="number" style="width: 40%" /><br /><br />
+          </div>
+
+          <p id="ChangeEmailAlert" class="is-hidden"><i class="fas fa-info"></i><label></label><br /></p>
+          <br /><br />
+
+          <button class="button is-primary" id="ChangeEmailSubmit">
+            <i class="fas fa-check"></i>メールアドレスを変更</button
+          ><br /><br />
+        </div>
+
+        <redirect id="rd_displayName" />
+        <h2><i class="fas fa-signature"></i>表示名</h2>
+        <p>
+          Rai Chatやその他サービスなどで表示される名前。<br />
+          表示名を変更すると、チェックマークは審査が終わるまで削除されます。
+        </p>
+
+        <div id="displayNameContainer" class="container">
+          <label for="ChangeNameNewName"><i class="fas fa-signature"></i>新しい表示名</label><br />
+          <input class="input" id="ChangeNameNewName" type="text" style="width: 40%" required /><br /><br />
+          <p id="ChangeNameAlert" class="is-hidden"><i class="fas fa-info"></i><label></label><br /></p>
+          <button class="button is-dark" id="ChangeNameSubmit"><i class="fas fa-check"></i>表示名を変更</button
+          ><br /><br />
+        </div>
+      </div>
+    </section>
+
+    <footer></footer>
+
+    <script src="/js/loadSidebar.js" async defer></script>
+    <script src="/js/panel-home.js"></script>
+  </body>
+</html>

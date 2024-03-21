@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!--meta-->
+    <title>セキュリティ(パネル) - 雷のサイト</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="このページは、雷のサイト会員のみがアクセスできます。" />
+    <link rel="canonical" href="https://uplauncher.xyz/" />
+
+    <meta content="ログイン - 雷のサイト" property="og:title" />
+    <meta content="このページは、雷のサイト会員のみがアクセスできます。" property="og:description" />
+    <meta content="https://uplauncher.xyz" property="og:url" />
+    <meta content="https://uplauncher.xyz/images/profile-image.png" property="og:image" />
+    <meta content="#43B581" data-react-helmet="true" name="theme-color" />
+
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="/css/index.css" />
+
+    <!--favicon-->
+    <link rel="icon" href="/images/profile-image.png" />
+
+    <!--JavaScript-->
+    
+<script src="/js/menu.js"></script>
+  </head>
+
+  <body style="display: none">
+    <header></header>
+    <br />
+
+    <section class="columns p-4 m-0">
+      <div class="submenu column is-4" id="settings-sidebar"></div>
+
+      <div class="content">
+        <h1><i class="fas fa-shield"></i>アカウントセキュリティ</h1>
+        <p>アカウントをさらに安全にするには、下のチェックリストを見てそれを実行してみましょう！</p>
+
+        <div class="columns">
+          <div class="column card is-four-fifths">
+            <h3><i class="fas fa-check"></i>チェックリスト</h3>
+            <ul>
+              <li>パスワードを強くしましょう。(小文字、大文字、記号、数字を含む8文字以上のパスワード)</li>
+              <li>パスワードマネージャーでパスワードを生成して使うことを推奨します。</li>
+              <li>二段階認証を有効にしましょう。サインインにはあなたの電話番号が必要になります。</li>
+            </ul>
+          </div>
+        </div>
+
+        <redirect id="rd_password" />
+        <h2><i class="fas fa-lock"></i> パスワード</h2>
+        <p>
+          アカウントの安全のためにも、パスワードは<strong>誰にも公開しないでください。</strong><br />
+          パスワードを公開してしまった場合は、今すぐパスワードを変更してください。
+        </p>
+        <div id="ChangePasswordContainer">
+          <div style="text-align: left">
+            <label for="ChangePasswordCurrent"><i class="fas fa-input-text"></i> 現在のパスワード</label><br />
+          </div>
+          <input class="input" id="ChangePasswordCurrent" type="password" style="width: 40%" /><br /><br />
+
+          <label for="ChangePasswordNew"><i class="fas fa-input-pipe"></i> 新しいパスワード</label><br />
+          <input class="input" id="ChangePasswordNew" type="password" style="width: 40%" /><br /><br />
+
+          <label for="ChangePasswordCheck"><i class="fas fa-input-pipe"></i> 新しいパスワードを確認</label><br />
+          <input class="input" id="ChangePasswordCheck" type="password" style="width: 40%" /><br /><br />
+
+          <div class="is-hidden" id="ChangePasswordTFAContainer">
+            <label for="ChangePasswordTFA"><i class="fas fa-shield"></i> 2段階認証コードを入力</label><br />
+            <input class="input" id="ChangePasswordTFA" type="number" style="width: 40%" /><br /><br />
+          </div>
+
+          <p id="ChangePasswordAlert" class="is-hidden"><i class="fas fa-info"></i><label></label><br /></p>
+
+          <button class="button is-primary" id="ChangePasswordSubmit">
+            <i class="fas fa-check"></i>パスワードを変更</button
+          ><br /><br />
+        </div>
+
+        <redirect id="rd_2fa" />
+        <h2><i class="fas fa-shield"></i> 2段階認証</h2>
+        <p>
+          アカウントの安全のためにも、パスワードは<strong>誰にも公開しないでください。</strong><br />
+          パスワードを公開してしまった場合は、今すぐパスワードを変更してください。
+        </p>
+        <button class="button is-primary" id="TFAOpenDialog"><i class="fas fa-check"></i> 2段階認証を有効にする</button>
+      </div>
+
+    </section>
+
+    <dialog id="TFADialog">
+      <div id="TFADialog_modal" class="modal">
+        <div class="modal-background"></div>
+
+        <div class="modal-content">
+          <div class="box">
+            <h2>2段階認証を有効にする</h2>
+
+            <div id="TFAPasswordContainer">
+              <p>パスワードを入力して続行します。</p>
+
+              <label for="TFAPassword"><i class="fas fa-input-text"></i> パスワード</label><br />
+              <input class="input" id="TFAPassword" type="password" style="width: 40%" /><br />
+
+              <p id="TFAPasswordAlert" class="is-hidden"><i class="fas fa-info"></i><label></label><br /></p>
+
+              <button id="buttonTFAPasswordConfirm" class="button is-primary">続行</button>
+            </div>
+
+            <div id="TFAEnableContainer" class="is-hidden">
+              <p>
+                <a href="https://authy.com/">Authy</a>、<a href="https://support.google.com/accounts/answer/1066447">Google Authenticator</a>などの認証をアプリをインストールしてください。<br />
+                インストールしたら、QRコードをスキャン、またはシークレットキーを入力して、2段階認証を有効にしてください。<br />
+                <strong id="TFASecretKey">シークレットキー: </strong><br /><br />
+              </p>
+
+              <canvas id="TFAQRCode"></canvas><br /><br />
+
+              <p id="TFAEnableAlert" class="is-hidden"><i class="fas fa-info"></i><label></label><br /></p>
+              <input class="input" type="number" id="TFACode" /><br />
+
+              <button id="buttonEnableTFA" class="button is-primary">2段階認証を有効にする</button>
+            </div>
+          </div>
+        </div>
+
+        <button
+          onclick="document.querySelector('#TFADialog').close();"
+          class="modal-close is-large"
+          aria-label="close"
+        ></button>
+      </div>
+    </dialog>
+
+    <dialog id="TFADisableDialog">
+      <div id="TFADisableDialog_modal" class="modal">
+        <div class="modal-background"></div>
+
+        <div class="modal-content">
+          <div class="box">
+            <h2>2段階認証を無効にする</h2>
+              <p>パスワードと2段階認証のコードを入力して続行します。</p>
+
+              <label for="TFADisablePassword"><i class="fas fa-input-text"></i> パスワード</label><br />
+              <input class="input" id="TFADisablePassword" type="password" style="width: 40%" /><br />
+
+              <label for="TFADisableCode"><i class="fas fa-input-pipe"></i> 2段階認証のコード</label><br />
+              <input class="input" id="TFADisableCode" type="number" style="width: 40%" /><br />
+
+              <p id="TFADisableAlert" class="is-hidden"><i class="fas fa-info"></i><label></label><br /></p>
+
+              <button id="buttonDisableTFA" class="button is-danger">無効にする</button>
+            </div>
+
+          </div>
+        </div>
+
+        <button
+          onclick="document.querySelector('#TFADisableDialog').close();"
+          class="modal-close is-large"
+          aria-label="close"
+        ></button>
+      </div>
+    </dialog>
+
+    <footer></footer>
+
+    <script src="/js/loadSidebar.js" async defer></script>
+    <script src="/js/panel-security.js"></script>
+  </body>
+</html>

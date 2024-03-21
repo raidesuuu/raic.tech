@@ -1,0 +1,242 @@
+/*
+    Rai Website, a powerful tools, fun!
+    ©2024 Rai and UpLauncher.
+
+    Description: Main scss file for website.
+*/
+
+@charset "utf-8";
+@import '../node_modules/bulma/bulma.sass';
+
+// Dark mode for Bulma
+@import './dark.scss';
+
+// Dialog for HTML
+@import './dialog.scss';
+
+// Fireworks for HTML
+@import './fireworks.scss';
+
+// Font Awesome 6.5.1 Pro
+$fa-font-path: './FontAwesome/webfonts';
+@import './FontAwesome/scss/fontawesome.scss';
+@import './FontAwesome/scss/solid.scss';
+@import './FontAwesome/scss/duotone.scss';
+@import './FontAwesome/scss/brands.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
+
+// ===[START] Gradient Text [START]===//
+.gradient {
+  -webkit-animation: AnimationTitle 5s ease infinite;
+  background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
+  background: -webkit-linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
+  background-size: 400% 100%;
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes AnimationTitle {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+//===[END] Gradient Text [END]===//
+
+//===[START] Scroll Style [START]===//
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #111;
+}
+::-webkit-scrollbar-thumb {
+  background: #444;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+//===[END] Scroll Style [END]===//
+
+//===[START] Body Styling [START]===//
+body {
+  font-family: 'Noto Sans JP' !important;
+}
+//===[END] Body Styling [END]===//
+
+//===[START] Signin, Signup CSS [START]===//
+.auth_2fa_code_container {
+  display: flex;
+  justify-content: center;
+  button {
+    margin-left: 5px;
+  }
+}
+//===[END] Signin, Signup CSS [END]===//
+
+/* Table Title */
+.table-title {
+  font-weight: bold;
+  vertical-align: baseline;
+  text-align: left !important;
+}
+
+/* Tooltip */
+.tooltip {
+  position: relative; /* ツールチップの位置の基準に */
+  cursor: pointer; /* カーソルを当てたときにポインターに */
+}
+
+/* ツールチップのテキスト */
+.tooltip-text {
+  opacity: 0; /* はじめは隠しておく */
+  z-index: 100;
+  visibility: hidden; /* はじめは隠しておく */
+  position: absolute; /* 絶対配置 */
+  left: 50%; /* 親に対して中央配置 */
+  transform: translateX(-50%); /* 親に対して中央配置 */
+  bottom: -30px; /* 親要素下からの位置 */
+  display: inline-block;
+  padding: 5px; /* 余白 */
+  white-space: nowrap; /* テキストを折り返さない */
+  font-size: 0.8rem; /* フォントサイズ */
+  line-height: 1.3; /* 行間 */
+  background: #333; /* 背景色 */
+  color: #fff; /* 文字色 */
+  border-radius: 3px; /* 角丸 */
+  transition: 0.3s ease-in; /* アニメーション */
+}
+
+.tooltip-button {
+  position: relative; /* ツールチップの位置の基準に */
+  cursor: pointer; /* カーソルを当てたときにポインターに */
+
+  background: lightblue;
+  border-radius: 8px;
+  border: none;
+  color: black;
+}
+
+/* Roal.css for Rai Website */
+.rcs-code {
+  background-color: #333;
+  border-radius: 5px;
+  color: white;
+  text-align: left;
+
+  font-family: 'Noto Sans JP';
+}
+
+.rcs-center {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+/* Zoom */
+.zoom:hover {
+  transform: scale(1.7);
+}
+
+/* List */
+.center-left {
+  text-align: center;
+}
+
+.center-left ol {
+  text-align: left;
+  display: inline-block;
+}
+.center-left ul {
+  text-align: left;
+  display: inline-block;
+}
+.center-left p {
+  text-align: left;
+  display: inline-block;
+}
+label {
+  text-align: left;
+}
+.center-left input {
+  text-align: left;
+  display: inline-block;
+}
+
+.fa-solid,
+.fas,
+.fad {
+  margin-right: 10px;
+}
+
+.fals {
+  margin-left: 10px;
+}
+
+.content {
+  margin-left: 20px;
+}
+
+.info-text {
+  width: 50%;
+  margin: auto;
+}
+
+.tooltip-button:hover .tooltip-text {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu {
+  background: #fafafa;
+  height: 100vh;
+}
+
+/* Other */
+button {
+  width: auto;
+}
+
+input.input {
+  width: auto;
+}
+
+article {
+  width: 45%;
+}
+
+@media screen and (max-width: 430px) {
+  article {
+    width: 95%;
+  }
+}
+
+button.auth {
+  width: auto;
+
+  box-sizing: border-box;
+  padding: 15px 15px 15px 60px;
+  padding-top: auto;
+  text-align: center;
+}
+
+// <div class="content">
+div.content {
+  width: 100%;
+  padding-top: 20px !important;
+}
+
+/* Column */
+.products > .card {
+  margin-left: 15px;
+
+  width: 20%;
+}
