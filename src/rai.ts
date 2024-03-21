@@ -53,24 +53,24 @@ export function getCode() {
   }
 }
 
-export function getPaidStatus(data: { data: { currently_enabled_tiers: any, id: string } }) {
+export function getPaidStatus(data: { data: { currently_enabled_tiers: string; id: string } }) {
   //check if user is a patreon with{"data":{"attributes":{},"id":"120007504","relationships":{"memberships":{"data":[{"id":"5413b32a-2f7d-480a-8ca6-3ab20c9c618d","type":"member"}]}},"type":"user"},"included":[{"attributes":{},"id":"5413b32a-2f7d-480a-8ca6-3ab20c9c618d","relationships":{"currently_entitled_tiers":{"data":[{"id":"21880338","type":"tier"}]}},"type":"member"},{"attributes":{},"id":"21880338","type":"tier"}],"links":{"self":"https://www.patreon.com/api/oauth2/v2/user/120007504"}}
   try {
     const patreonData = JSON.stringify(data)
     if (patreonData.includes('"id":"21880338"')) {
-      return {"type": "enhanced", "id": data.data.id}
+      return { type: 'enhanced', id: data.data.id }
     } else if (patreonData.includes('"id": "10216194"')) {
-      return {"type": "premium", "id": data.data.id}
+      return { type: 'premium', id: data.data.id }
     } else if (patreonData.includes('"id": "21880320"')) {
-      return {"type": "standard", "id": data.data.id}
+      return { type: 'standard', id: data.data.id }
     } else {
-      console.log("free", patreonData   )
-      return {"type": "free", "id": data.data.id}
+      console.log('free', patreonData)
+      return { type: 'free', id: data.data.id }
     }
   } catch (e) {
     const patreonData = JSON.stringify(data)
-    console.log("free", patreonData, e )
-    return {"type": "free", "id": data.data.id}
+    console.log('free', patreonData, e)
+    return { type: 'free', id: data.data.id }
   }
 }
 

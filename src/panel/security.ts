@@ -14,6 +14,7 @@ import {
   TotpMultiFactorGenerator,
   onAuthStateChanged,
   getMultiFactorResolver,
+  TotpSecret,
 } from 'firebase/auth'
 import { NotLoggedError } from '../rai'
 import qrcode from 'qrcode'
@@ -59,7 +60,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const tfaDisableDialog = document.getElementById('TFADisableDialog') as HTMLDialogElement
   const tfaDisableDialogContainer = document.getElementById('TFADisableDialog_modal') as HTMLDivElement
 
-  let tfaSecret: any = null
+  let tfaSecret = {} as TotpSecret
 
   if (
     passwordOld === null ||
@@ -151,7 +152,6 @@ window.addEventListener('DOMContentLoaded', () => {
         })
         .catch((error) => {
           const errorCode = error.code
-          const errorMessage = error.message
 
           if (errorCode == 'auth/invalid-verification-code') {
             showNotice(tfaAlert, 'コードが無効です。もう一度お試しください。')
@@ -159,7 +159,7 @@ window.addEventListener('DOMContentLoaded', () => {
         })
     })
 
-    tfaPasswordConfirm.addEventListener('click', (e) => {
+    tfaPasswordConfirm.addEventListener('click', () => {
       if (tfaPassword.value === '') {
         showNotice(tfaPasswordAlert, '全てのフィールドを入力してください')
         return

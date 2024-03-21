@@ -117,14 +117,18 @@ onAuthStateChanged(auth, (user) => {
   }
 
   emailVerificationButton.addEventListener('click', () => {
-    sendEmailVerification(user).then(() => {
-      emailVerificationAlert.querySelector("p")!.innerHTML = '<p>下のボタンをクリックして、メールアドレスを認証してください。<br><i class="fas fa-check"></i>送信が完了しました。メールアドレスのメールボックスを確認してください。</p>'
-    }).catch((error) => {
-      const errorCode = error.code
-      if (errorCode === 'auth/too-many-requests') {
-        emailVerificationAlert.querySelector("p")!.innerHTML = '<p>下のボタンをクリックして、メールアドレスを認証してください。<br><i class="fas fa-circle-xmark"></i>短時間に多くのアクションを起こしています。後でお試しください。</p>'
-      }
-    })
+    sendEmailVerification(user)
+      .then(() => {
+        emailVerificationAlert.querySelector('p')!.innerHTML =
+          '<p>下のボタンをクリックして、メールアドレスを認証してください。<br><i class="fas fa-check"></i>送信が完了しました。メールアドレスのメールボックスを確認してください。</p>'
+      })
+      .catch((error) => {
+        const errorCode = error.code
+        if (errorCode === 'auth/too-many-requests') {
+          emailVerificationAlert.querySelector('p')!.innerHTML =
+            '<p>下のボタンをクリックして、メールアドレスを認証してください。<br><i class="fas fa-circle-xmark"></i>短時間に多くのアクションを起こしています。後でお試しください。</p>'
+        }
+      })
   })
 
   NameSubmit.addEventListener('click', () => {

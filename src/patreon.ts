@@ -11,7 +11,6 @@ import { getFirestore, setDoc, collection, getDocs, doc } from 'firebase/firesto
 import { getCode, getPaidStatus, moveToPanel, NotLoggedError } from './rai'
 import { InitApp } from './firebase'
 
-
 InitApp()
 const auth = getAuth()
 const db = getFirestore()
@@ -57,51 +56,50 @@ onAuthStateChanged(auth, async (user) => {
         body: JSON.stringify({
           accessToken: accessToken,
         }),
-      })
-        .then(async (res: Response) => {
-          if (res.status === 401) {
-            console.error('[patreon.ts] Error: ' + resToken.error)
+      }).then(async (res: Response) => {
+        if (res.status === 401) {
+          console.error('[patreon.ts] Error: ' + resToken.error)
 
-            window.location.href = '/auth/panel.html'
+          window.location.href = '/auth/panel.html'
 
-            throw new Error('[P3: ERROR (patreon.ts)] ' + resToken.error)
+          throw new Error('[P3: ERROR (patreon.ts)] ' + resToken.error)
+        }
+
+        // Get paid status
+        let count = 0
+        const bodyText = await res.text() // Extract the data from the ReadableStream
+        const paidStatus = getPaidStatus(JSON.parse(bodyText)) // Parse the extracted data
+        const docs = await getDocs(collection(db, 'patreonlinkstatus'))
+        if (docs.size === 0) {
+          await setDoc(doc(db, 'patreonlinkstatus', user?.uid), {
+            linked: true,
+            id: paidStatus.id,
+            plan: paidStatus.type,
+          }).then(() => {
+            moveToPanel()
+          })
+        }
+        docs.forEach(async (dataDoc) => {
+          if (dataDoc.data().id === paidStatus.id) {
+            window.location.href = '/auth/panel/patreon.html?error=already_linked'
+            throw new Error('[P3: ERROR (patreon.ts)] User is already linked')
           }
+          console.log(count, docs.size, dataDoc.data().id, paidStatus.id)
 
-          // Get paid status
-          let count = 0
-          const bodyText = await res.text() // Extract the data from the ReadableStream
-          const paidStatus = getPaidStatus(JSON.parse(bodyText)) // Parse the extracted data
-          const docs = await getDocs(collection(db, 'patreonlinkstatus'))
-          if (docs.size === 0) {
+          count++
+
+          // Check if user is the last user
+          if (docs.size === count) {
+            //Add user to database
             await setDoc(doc(db, 'patreonlinkstatus', user?.uid), {
               linked: true,
               id: paidStatus.id,
               plan: paidStatus.type,
             }).then(() => {
-              moveToPanel() 
+              moveToPanel()
             })
           }
-          docs.forEach(async (dataDoc) => {
-            if (dataDoc.data().id === paidStatus.id) {
-              window.location.href = '/auth/panel/patreon.html?error=already_linked'
-              throw new Error('[P3: ERROR (patreon.ts)] User is already linked')
-            }
-            console.log(count, docs.size, dataDoc.data().id, paidStatus.id)
-
-            count++
-
-            // Check if user is the last user
-            if (docs.size === count) {
-              //Add user to database
-              await setDoc(doc(db, 'patreonlinkstatus', user?.uid), {
-                linked: true,
-                id: paidStatus.id,
-                plan: paidStatus.type,
-              }).then(() => {
-                moveToPanel() 
-              })
-            }
-          })
         })
+      })
     })
 })

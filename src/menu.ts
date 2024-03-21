@@ -8,7 +8,6 @@
 import { getAuth, onAuthStateChanged, User } from '@firebase/auth'
 import { InitApp } from './firebase'
 
-
 InitApp()
 
 setTimeout(() => {

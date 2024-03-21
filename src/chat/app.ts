@@ -1,5 +1,5 @@
 import { getDatabase, ref, set, onChildAdded } from 'firebase/database'
-import { getFirestore, getDocs, setDoc, collection, addDoc } from 'firebase/firestore'
+import { getFirestore, getDocs, collection, addDoc } from 'firebase/firestore'
 import { User, getAuth, onAuthStateChanged } from 'firebase/auth'
 import { InitApp } from '../firebase'
 
@@ -26,7 +26,7 @@ if (window.localStorage.getItem('raichat-settings-available') === null) {
 
 const raiMarkdown = window.localStorage.getItem('raichat-markdown')
 
-const timeout = setTimeout(() => {
+setTimeout(() => {
   current_limit = 0
 }, 15000)
 ;(content as HTMLElement)!.style.display = 'none'
@@ -117,7 +117,7 @@ onAuthStateChanged(auth, async (user) => {
     sendMessage(message, user)
   })
 
-  let loopTime = 0
+  let loopTime = 0 // eslint-disable-line @typescript-eslint/no-unused-vars
 
   onChildAdded(fetchChat, async (snapshot) => {
     const messages = snapshot.val()
@@ -197,7 +197,7 @@ document.getElementById('searchInput')?.addEventListener('keyup', function () {
 })
 
 function auto_link(val: string) {
-  const exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi
+  const exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi // eslint-disable-line no-useless-escape
   if (val.includes('[url]')) {
     return val
   } else if (val.includes('img')) {

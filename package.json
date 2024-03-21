@@ -40,7 +40,7 @@
     "build": "webpack --mode production",
     "watch": "webpack --watch",
     "start": "webpack-cli serve --mode development",
-    "lint": "eslint --fix ./src/* && prettier --write ./src/*",
+    "lint": "eslint --fix ./src/**/*.ts && prettier --write ./src/**/*.ts",
     "lint:css": "stylelint --fix **/*.{css,scss,sass}",
     "test": "echo \"Error: no test specified\" && exit 1",
     "sass-watch": "sass --watch src/index.scss:dist/css/index.css"
