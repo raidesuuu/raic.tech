@@ -24,7 +24,7 @@ onAuthStateChanged(auth, async (user) => {
   }
 
   // Get access token
-  fetch('https://api.uplauncher.xyz/patreon/get-access-token', {
+  fetch('https://api.raic.tech/patreon/get-access-token', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ onAuthStateChanged(auth, async (user) => {
       const accessToken = resToken.access_token
 
       // Get user info
-      fetch('https://api.uplauncher.xyz/patreon/get-user-info', {
+      fetch('https://api.raic.tech/patreon/get-user-info', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,16 +71,13 @@ onAuthStateChanged(auth, async (user) => {
         const paidStatus = getPaidStatus(JSON.parse(bodyText)) // Parse the extracted data
         const docs = await getDocs(collection(db, 'patreonlinkstatus'))
         if (docs.size === 0) {
-          await setDoc(doc(db, 'patreonlinkstatus', user?.uid), {
-            linked: true,
-            id: paidStatus.id,
-            plan: paidStatus.type,
-          }).then(() => {
+          await setDoc(doc(db, 'patreonlinkstatus', user?.uid), docData(paidStatus)).then(() => {
             moveToPanel()
           })
         }
         docs.forEach(async (dataDoc) => {
           if (dataDoc.data().id === paidStatus.id) {
+            if (dataDoc.data().id === user.uid) return
             window.location.href = '/auth/panel/patreon.html?error=already_linked'
             throw new Error('[P3: ERROR (patreon.ts)] User is already linked')
           }
@@ -91,11 +88,7 @@ onAuthStateChanged(auth, async (user) => {
           // Check if user is the last user
           if (docs.size === count) {
             //Add user to database
-            await setDoc(doc(db, 'patreonlinkstatus', user?.uid), {
-              linked: true,
-              id: paidStatus.id,
-              plan: paidStatus.type,
-            }).then(() => {
+            await setDoc(doc(db, 'patreonlinkstatus', user?.uid), docData(paidStatus)).then(() => {
               moveToPanel()
             })
           }
@@ -103,3 +96,14 @@ onAuthStateChanged(auth, async (user) => {
       })
     })
 })
+
+function docData(paidStatus: any) {
+  // eslint-disable-line @typescript-eslint/no-explicit-any
+  return {
+    linked: true,
+    id: paidStatus.id,
+    isStudent: false,
+    lastChecked: new Date().toISOString(),
+    plan: paidStatus.type,
+  }
+}

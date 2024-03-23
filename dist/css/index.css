@@ -30300,11 +30300,13 @@ readers do not read off random characters that represent icons */
 }
 
 .gradient {
+  animation: AnimationTitle 5s ease infinite;
   -webkit-animation: AnimationTitle 5s ease infinite;
   background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
   background: -webkit-linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
   background-size: 400% 100%;
   color: transparent;
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -30337,7 +30339,7 @@ html {
 }
 
 body {
-  font-family: "Noto Sans JP" !important;
+  font-family: "Segoe UI", "Noto Sans JP" !important;
 }
 
 .auth_2fa_code_container {
@@ -30348,11 +30350,46 @@ body {
   margin-left: 5px;
 }
 
-/* Table Title */
 .table-title {
   font-weight: bold;
   vertical-align: baseline;
   text-align: left !important;
+}
+
+.color-gold {
+  color: #ffd700;
+}
+
+.color-blue {
+  color: lightblue;
+}
+
+.color-green {
+  color: lightgreen;
+}
+
+.color-red {
+  color: lightcoral;
+}
+
+.favorite {
+  transition: all 0.2s ease-out;
+}
+
+.favorite:hover {
+  color: #ff1f1f;
+}
+
+.has-text-right {
+  margin-left: 20px !important;
+}
+
+.has-text-right > h1, h2, h3, h4, h5, h6, p {
+  margin-right: 24px;
+}
+
+button, input {
+  font-family: "Segoe UI", "Noto Sans JP" !important;
 }
 
 /* Tooltip */

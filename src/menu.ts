@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       onAuthStateChanged(auth, (user: User | null) => {
         if (user !== null) {
           // User is signed in
+          window.localStorage.setItem('userId', user.uid)
 
           // Get the elements
           const signupElement = document.getElementById('signup')
@@ -67,6 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
           logoutElement.addEventListener('click', () => {
             // Sign out
             auth.signOut()
+            window.localStorage.removeItem('userId')
+            window.location.reload()
           })
         }
 

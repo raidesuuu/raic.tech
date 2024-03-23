@@ -4,6 +4,15 @@
     <!--meta-->
     <title>Rai Chat</title>
     <meta charset="utf-8" />
+    <!--responsive-->
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="新しいチャット体験ができます。" />
+    <link rel="canonical" href="https://raic.tech/" />
+    <meta content="Rai Chat" property="og:title" />
+    <meta content="新しいチャット体験ができます。" property="og:description" />
+    <meta content="https://raic.tech" property="og:url" />
+    <meta content="https://raic.tech/images/profile-image.png" property="og:image" />
+    <meta content="#43B581" data-react-helmet="true" name="theme-color" />
 
     <!--Stylesheet-->
     <link rel="stylesheet" href="/css/index.css" />
@@ -27,49 +36,78 @@
     <section class="columns p-4 m-0">
       <div class="submenu column is-4" id="settings-sidebar"></div>
       <div id="app-content" class="content">
+        <aside class="notification">
+          <div class="mb-2">
+            <span class="tag is-primary">COMING SOON</span>
+          </div>
+          <div>
+            <h2>機能の登場予定</h2>
+            <ul>
+              <li><i class="fas fa-forward color-blue"></i>時系列タイムライン (v0.1で)</li>
+              <li><i class="fas fa-check color-green"></i>学生限定特典 (v0.0.6で)</li>
+              <li><i class="fas fa-check color-green"></i>いいね (v0.0.6で)</li>
+              <li><i class="fas fa-check color-green"></i>検索フィルター (v0.0.6で)</li>
+              <li><i class="fas fa-check color-green"></i>チェックマーク (v0.0.6で)</li>
+            </ul>
+          </div>
+          <a href="/auth/panel/patreon.html" style="margin-top: 10px" class="button is-primary"
+            ><i class="fas fas fa-money-bill"></i>プレミアムにアップグレード</a
+          >
+        </aside>
         <h1>Rai Chat</h1>
         <p>
           今日も平和ですよ。Rai Chatへようこそ！ここでは、新しいチャット体験ができます。お楽しみください！<br />
           <small>※不適切ワードを検出した場合、即座にRai Chatから<strong>永久</strong>BANされます。</small><br /><br />
         </p>
-        <ul>
-          <li>
-            <i class="fas fa-check"></i>Rai Markdownをサポートしています。記述の詳細:<br />
-            [b]文字[/b]: 太文字<br />
-            [i]文字[/i]: イタリック文字<br />
-            [s]文字[/s]: 打ち消し線<br>
-            [u]文字[/u]: 下線<br>
-            [url]URL[/url]: リンク<br>
-            [icon]Font Awesomeのアイコン名[/icon]: アイコン<br>
-            [img]URL[/img]: 画像<br>
-            [color=色]文字[/color]: 文字色<br>
-          </li>
-          <li>
-            HTMLタグは使用できません。ただし、URLは自動的にリンクに変換されます。(XSS対策)
-          </li>
-          <li>
-            画像はアップロードできません。
-          </li>
-          <li>
-            一度に送信できるメッセージは最大100文字です。
-          </li>
-        </ul>
         <div class="field">
           <div class="control">
-            <textarea id="app-message" class="input" style="width: 500px; height: 100px" placeholder="メッセージ"></textarea><br><br>
+            <textarea
+              id="app-message"
+              class="input"
+              style="width: 500px; height: 100px"
+              placeholder="メッセージ"
+            ></textarea
+            ><br /><br />
             <button id="app-send-message" class="button is-primary">送信</button><br />
             <p id="app-message-alert" class="is-hidden"><i class="fas fa-info"></i><label></label></p>
           </div>
         </div>
 
         <h2>タイムライン</h2>
-        <input type="text" class="input" id="searchInput" placeholder="ワード、名前、時間で検索">
+        <input type="text" class="input" id="searchInput" placeholder="ワード、名前、時間で検索" />
         <ul id="app-timeline"></ul>
         <div id="searchResultNotFoundContainer" class="is-hidden">
           <p>検索結果が見つかりませんでした。</p>
         </div>
       </div>
     </section>
+
+    <dialog id="app-message-dialog">
+      <div id="app-message-dialog-content" class="modal">
+        <div class="modal-background"></div>
+
+        <div class="modal-content">
+          <div class="box">
+            <h2 id="app-message-dialog-title">2段階認証を無効にする</h2>
+            <p id="app-message-dialog-description">パスワードと2段階認証のコードを入力して続行します。</p>
+
+            <button
+              onclick="document.querySelector('#app-message-dialog').close();"
+              class="button is-primary"
+              aria-label="close"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+
+        <button
+          onclick="document.querySelector('#app-message-dialog').close();"
+          class="modal-close is-large"
+          aria-label="close"
+        ></button>
+      </div>
+    </dialog>
 
     <footer></footer>
 

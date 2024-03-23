@@ -28,11 +28,13 @@ $fa-font-path: './FontAwesome/webfonts';
 
 // ===[START] Gradient Text [START]===//
 .gradient {
+  animation: AnimationTitle 5s ease infinite;
   -webkit-animation: AnimationTitle 5s ease infinite;
   background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
   background: -webkit-linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
   background-size: 400% 100%;
   color: transparent;
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -68,26 +70,62 @@ html {
 
 //===[START] Body Styling [START]===//
 body {
-  font-family: 'Noto Sans JP' !important;
+  font-family: 'Segoe UI', 'Noto Sans JP' !important; // Font family
 }
 //===[END] Body Styling [END]===//
 
 //===[START] Signin, Signup CSS [START]===//
 .auth_2fa_code_container {
-  display: flex;
-  justify-content: center;
-  button {
-    margin-left: 5px;
+  display: flex; // Display flex
+  justify-content: center; // Justify content center
+  button { // Button
+    margin-left: 5px; // Margin left 5px
   }
 }
 //===[END] Signin, Signup CSS [END]===//
 
-/* Table Title */
+//===[START] Table CSS [START]===//
 .table-title {
-  font-weight: bold;
-  vertical-align: baseline;
-  text-align: left !important;
+  font-weight: bold; // Font weight bold
+  vertical-align: baseline; // Vertical align baseline
+  text-align: left !important; // Text align left
 }
+//===[END] Table CSS [END]===//
+
+//===[START] Rai Chat CSS [START]===//
+.color-gold {
+  color: #ffd700; // Gold
+}
+.color-blue {
+  color: lightblue; // #add8e6
+}
+.color-green {
+  color: lightgreen; // #90ee90
+}
+.color-red {
+  color: lightcoral; // #f08080
+}
+
+.favorite {
+  transition: all .2s ease-out; // Transition all .5s ease-out
+}
+.favorite:hover {
+  color: #ff1f1f; // Red
+}
+
+.has-text-right {
+  margin-left: 20px !important; // Margin left 20px
+}
+.has-text-right > h1, h2, h3, h4, h5, h6, p {
+  margin-right: 24px;
+}
+//===[END] Rai Chat CSS [END]===//
+
+//[START] Font Applier [START]//
+button, input {
+  font-family: 'Segoe UI', 'Noto Sans JP' !important; // Font Applier
+}
+//[END] Font Applier [END]//
 
 /* Tooltip */
 .tooltip {

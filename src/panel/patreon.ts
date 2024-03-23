@@ -56,9 +56,13 @@ onAuthStateChanged(auth, async (user) => {
       linkPatreon.textContent = 'Patreonと連携済み'
       break
   }
+  if (query.data().isStudent) {
+    linkPatreon.textContent = '学生プランはアクティブです'
+  }
   linkPatreon.setAttribute('disabled', 'true')
   linkPatreon.href = 'javascript:void(0)'
 
+  if (query.data().isStudent) return
   labelUnlinkInfo.classList.remove('is-hidden')
 
   labelUnlink.addEventListener('click', () => {

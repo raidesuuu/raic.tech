@@ -1,5 +1,5 @@
-import { getDatabase, ref, set, onChildAdded } from 'firebase/database'
-import { getFirestore, getDocs, collection, addDoc } from 'firebase/firestore'
+import { getDatabase, ref, set, onChildAdded, child, get } from 'firebase/database'
+import { getFirestore, getDocs, collection, addDoc, getDoc, doc, setDoc } from 'firebase/firestore'
 import { User, getAuth, onAuthStateChanged } from 'firebase/auth'
 import { InitApp } from '../firebase'
 
@@ -13,6 +13,7 @@ const messageAlert = document.getElementById('app-message-alert')
 const srnfc = document.getElementById('searchResultNotFoundContainer')
 let subscription = 'free'
 let current_limit = 0
+let isStudent = false
 
 const auth = getAuth()
 const db = getDatabase()
@@ -24,7 +25,12 @@ if (window.localStorage.getItem('raichat-settings-available') === null) {
   window.localStorage.setItem('raichat-ngwords', JSON.stringify(['死ね']))
 }
 
+if (window.localStorage.getItem('raichat-hide-checkmark') === undefined) {
+  window.localStorage.setItem('raichat-hide-checkmark', 'false')
+}
+
 const raiMarkdown = window.localStorage.getItem('raichat-markdown')
+const hideCheckmark = window.localStorage.getItem('raichat-hide-checkmark')
 
 setTimeout(() => {
   current_limit = 0
@@ -34,10 +40,10 @@ setTimeout(() => {
 document.querySelector('body')?.addEventListener('click', async function (e) {
   if (e.target instanceof HTMLAnchorElement) {
     if (
-      e.target.href.includes('https://raic.tech') ||
-      e.target.href.includes('http://10.249.176.251:8080') ||
-      e.target.href.includes('https://www.patreon.com') ||
-      e.target.href.includes('javascript:void(0)') ||
+      e.target.hostname == 'raic.tech' ||
+      e.target.hostname == '10.249.176.251' ||
+      e.target.hostname == 'www.patreon.com' ||
+      e.target.href === 'javascript:void(0)' ||
       e.target.href === ''
     )
       return
@@ -54,14 +60,10 @@ document.querySelector('body')?.addEventListener('click', async function (e) {
     ) && window.open(e.target.href, '_blank')
   }
 
-  console.log(subscription)
   if (subscription == 'owner') {
-    console.log('owner')
     if (e.target instanceof HTMLElement) {
-      console.log(e.target.classList.contains('ban'))
       if (e.target.classList.contains('ban')) {
         const userId = e.target.parentElement?.parentElement?.parentElement?.getAttribute('data-userId')
-        console.log(userId)
         if (userId) {
           if (confirm('このユーザーをBANしますか？')) {
             await addDoc(collection(dbF, 'raichat-user-status' + userId), {
@@ -74,10 +76,63 @@ document.querySelector('body')?.addEventListener('click', async function (e) {
   }
 
   if (e.target instanceof HTMLElement) {
+    if (e.target.classList.contains('favorite')) {
+      const messageId = e.target.parentElement?.parentElement?.parentElement?.getAttribute('data-messageId')
+      if (messageId) {
+        const fetchChat = ref(db)
+        const userId = document.getElementsByTagName('body')[0].dataset.user
+
+        await getDoc(doc(dbF, 'raichat-message-status', messageId, userId || 'null', 'data')).then(async (snapshot) => {
+          if (snapshot.exists()) {
+            if (snapshot.data().isFavorited) {
+              ShowAlert('いいね', 'このメッセージを既にいいねしています。')
+              return
+            }
+          } else {
+            get(child(fetchChat, 'messages/' + messageId)).then(async (snapshot) => {
+              set(ref(db, 'messages/' + messageId), {
+                username: snapshot.val().username,
+                paid: snapshot.val().paid,
+                uid: snapshot.val().uid,
+                id: snapshot.val().id,
+                time: snapshot.val().time,
+                message: snapshot.val().message,
+                favorite: snapshot.val().favorite ? snapshot.val().favorite + 1 : 1,
+              })
+
+              if (e.target instanceof HTMLElement) {
+                const favoriteText =
+                  e.target.parentElement?.parentElement?.parentElement?.querySelector('.favoriteText')
+                if (favoriteText) {
+                  favoriteText.textContent = snapshot.val().favorite ? snapshot.val().favorite + 1 : 1
+                }
+              }
+              await setDoc(doc(dbF, 'raichat-message-status', messageId, userId || 'null', 'data'), {
+                isFavorited: true,
+              })
+            })
+          }
+        })
+      }
+    }
+  }
+
+  if (e.target instanceof HTMLElement) {
     if (e.target.classList.contains('verified')) {
-      alert('このユーザーはStandard以上のプランを購入しているため、認証されています。')
+      ShowAlert(
+        '認証されたユーザー',
+        '<i class="fas fa-check color-blue"></i>このユーザーはStandard以上のプランを購入しているため、認証されています。',
+      )
     } else if (e.target.classList.contains('owner')) {
-      alert('このユーザーはUpLauncherの管理者なため、認証されています。')
+      ShowAlert(
+        '認証されたユーザー',
+        '<i class="fas fa-screwdriver-wrench color-gold"></i>このユーザーはオーナー権限を持っているため、認証されています。',
+      )
+    } else if (e.target.classList.contains('student')) {
+      ShowAlert(
+        '認証されたユーザー',
+        '<i class="fas fa-user color-green"></i>このユーザーは学生のため、認証されています。',
+      )
     }
   }
 })
@@ -92,23 +147,33 @@ onAuthStateChanged(auth, async (user) => {
     console.log('[NullCheck]: #timeline is null')
     return
   }
-  const userDoc = await getDocs(collection(dbF, 'raichat-user-status' + user.uid))
-  userDoc.forEach((doc) => {
-    if (doc.data().banned == true) {
-      window.location.href = '/chat/app/banned.html'
-    }
-  })
 
-  if (userDoc.empty) {
-    await addDoc(collection(dbF, 'raichat-user-status' + user?.uid), {
-      banned: false,
-    })
+  document.getElementsByTagName('body')[0].dataset.user = user.uid
+
+  const query = await getDoc(doc(dbF, 'patreonlinkstatus', user.uid))
+  if (query.exists()) {
+    subscription = query.data().plan
+    isStudent = query.data().isStudent
   }
 
-  const query = await getDocs(collection(dbF, 'patreonlinkstatus-' + user.uid))
-  query.forEach((doc) => {
-    subscription = doc.data().plan
-  })
+  const userDoc = await getDoc(doc(dbF, 'raichat-user-status', user.uid))
+
+  if (userDoc.exists() === false) {
+    await setDoc(doc(dbF, 'raichat-user-status', user?.uid), {
+      banned: false,
+    })
+  } else {
+    await setDoc(doc(dbF, 'raichat-user-status', user?.uid), {
+      username: user.displayName,
+      checkmarkState: hideCheckmark,
+      paid: subscription,
+      isStudent: isStudent,
+      banned: userDoc.data().banned,
+    })
+    if (userDoc.data().banned == true) {
+      window.location.href = '/chat/app/banned.html'
+    }
+  }
 
   const fetchChat = ref(db, 'messages/')
 
@@ -117,7 +182,7 @@ onAuthStateChanged(auth, async (user) => {
     sendMessage(message, user)
   })
 
-  let loopTime = 0 // eslint-disable-line @typescript-eslint/no-unused-vars
+  const loopTime = 0 // eslint-disable-line @typescript-eslint/no-unused-vars
 
   onChildAdded(fetchChat, async (snapshot) => {
     const messages = snapshot.val()
@@ -130,11 +195,11 @@ onAuthStateChanged(auth, async (user) => {
     const messageSpan = document.createElement('span')
     let message = messages.message
     //protect from xss
-    message = message.replace(/</g, '&lt;')
-    message = message.replace(/>/g, '&gt;')
     message = message.replace(/&/g, '&amp;')
     message = message.replace(/"/g, '&quot;')
     message = message.replace(/'/g, '&#x27;')
+    message = message.replace(/</g, '&lt;')
+    message = message.replace(/>/g, '&gt;')
     message = message.replace(/\n/g, '<br>')
     //support markdown
     if (raiMarkdown === 'true') {
@@ -152,43 +217,84 @@ onAuthStateChanged(auth, async (user) => {
       message = auto_link(message)
       message = message.replace(/\[url\]/g, '<a href="')
       message = message.replace(/\[\/url\]/g, '"><i style="color: white;" class="fa fa-globe">&nbsp;</i>URL</a>')
-      message = message.replace(/\[img\]/g, '<br><img src="')
-      message = message.replace(/\[\/img\]/g, '" onload="this.width=500;this.onload=null;">')
-      //color with hex = [color=#ff0000]text[/color]
-      message = message.replace(/\[color=#([0-9a-fA-F]{6})\]/g, '<span style="color: #$1 !important">')
-      message = message.replace(/\[\/color\]/g, '</span>')
+      if (messages.paid != 'free') {
+        message = message.replace(/\[img\]/g, '<br><img src="')
+        message = message.replace(/\[\/img\]/g, '" onload="this.width=500;this.onload=null;">')
+        message = message.replace(/\[color=#([0-9a-fA-F]{6})\]/g, '<span style="color: #$1 !important">')
+        message = message.replace(/\[\/color\]/g, '</span>')
+      }
     }
-    messageSpan.innerHTML = `<span>${messages.username} ${messages.paid != 'free' ? (messages.paid == 'owner' ? '<i style="color: gold" class="fas fa-screwdriver-wrench owner"></i>' : '<i style="color: gold" class="fas fa-check verified"></i>') : ''}(${messages.time})${subscription == 'owner' ? '&nbsp<i style="color: gold" class="far fa-hammer ban"></i>&nbsp' : ''}: ${message}</span>`
-    const userDoc = await getDocs(collection(dbF, 'raichat-user-status' + messages.uid))
-    console.log(messageSpan)
-    userDoc.forEach((doc) => {
-      if (doc.data().banned == true) {
-        console.log("Banned user's message")
-        console.log(messageSpan)
+    const userDoc = await getDoc(doc(dbF, 'raichat-user-status', messages.uid))
+    if (userDoc.exists() === true) {
+      const userDocData = userDoc.data()
+      if (userDoc.data().banned == true) {
         messageElement.remove()
+        ;(content as HTMLElement)!.style.display = ''
         return
       } else {
-        loopTime++
-        messageElement.appendChild(messageSpan)
-        timeline.insertBefore(messageElement, timeline.firstChild)
+        messageElement.classList.add(
+          isCheckmarker(userDocData)
+            ? userDocData.paid == 'owner'
+              ? 'owner'
+              : userDocData.isStudent
+                ? 'student'
+                : 'verified'
+            : 'free',
+        )
+
+        messageSpan.innerHTML = `<span>${userDocData.username} ${isCheckmarker(userDocData) ? (userDocData.paid == 'owner' ? '<i class="fas fa-screwdriver-wrench owner color-gold"></i>' : userDocData.isStudent ? '<i class="fas fa-user student color-green"></i>' : '<i class="fas fa-check verified color-blue"></i>') : ''}(${messages.time})${subscription == 'owner' ? '&nbsp;<i class="far fa-hammer ban color-gold"></i>&nbsp;' : ''} <i class="far fa-heart favorite color-red"></i>&nbsp; <span class="favoriteText">${messages.favorite}</span>: ${message}</span>`
       }
-    })
+    }
+
+    messageElement.appendChild(messageSpan)
+    timeline.insertBefore(messageElement, timeline.firstChild)
     ;(content as HTMLElement)!.style.display = ''
   })
 })
 
+function isCheckmarker(userData: any) {
+  // eslint-disable-line @typescript-eslint/no-explicit-any
+  const result = userData.paid != 'free' && userData.checkmarkState === 'false'
+  return result
+}
+
 document.getElementById('searchInput')?.addEventListener('keyup', function () {
-  const searchValue = (this as HTMLInputElement).value.toLowerCase()
+  let searchValue = (this as HTMLInputElement).value.toLowerCase()
   const listItems = document.getElementById('app-timeline')?.getElementsByTagName('li')
 
   if (listItems === undefined || listItems === null) return
 
+  const isPremiumSearch = searchValue.includes(' [premium]')
+  const isStudentSearch = searchValue.includes(' [student]')
+  if (isPremiumSearch) {
+    searchValue = searchValue.replace(' [premium]', '')
+  }
+  if (isStudentSearch) {
+    searchValue = searchValue.replace(' [student]', '')
+  }
   for (let i = 0; i < listItems.length; i++) {
     if (listItems[i] === null) return
     srnfc?.classList.add('is-hidden')
     const itemText = listItems[i]?.textContent?.toLowerCase()
+    itemText?.replace(/\&lt;/g, '') // eslint-disable-line no-useless-escape
+    itemText?.replace(/\&gt;/g, '') // eslint-disable-line no-useless-escape
     if (itemText && itemText.indexOf(searchValue) > -1) {
-      listItems[i].style.display = ''
+      if (isPremiumSearch) {
+        if (listItems[i].classList.contains('verified') || listItems[i].classList.contains('owner')) {
+          listItems[i].style.display = ''
+        } else {
+          listItems[i].style.display = 'none'
+        }
+      } else if (isStudentSearch) {
+        if (listItems[i].classList.contains('student')) {
+          listItems[i].style.display = ''
+        } else {
+          listItems[i].style.display = 'none'
+        }
+      } else {
+        listItems[i].style.display = ''
+        srnfc?.classList.add('is-hidden')
+      }
     } else {
       listItems[i].style.display = 'none'
       srnfc?.classList.remove('is-hidden')
@@ -269,12 +375,26 @@ async function sendMessage(message: string, user: User | null) {
 
   set(ref(db, 'messages/' + timestamp + '-' + user.uid), {
     username: user.displayName,
-    paid: subscription,
+    paid: hideCheckmark ? 'free' : isStudent ? 'student' : subscription,
     uid: user.uid,
-    id: user.uid + '-' + timestamp,
+    id: timestamp + '-' + user.uid,
     time: new Date().toLocaleString(),
     message,
+    favorite: 0,
   }).then(() => {
     current_limit++
   })
+}
+
+function ShowAlert(title: string, message: string) {
+  const messageAlertDialog = document.getElementById('app-message-dialog') as HTMLDialogElement
+  const dialogContent = document.getElementById('app-message-dialog-content')
+  const dialogTitle = document.getElementById('app-message-dialog-title')
+  const dialogDescription = document.getElementById('app-message-dialog-description')
+  if (messageAlertDialog === null || dialogContent === null || dialogTitle === null || dialogDescription === null)
+    return
+  dialogContent.classList.add('is-active')
+  dialogTitle.innerHTML = title
+  dialogDescription.innerHTML = message
+  messageAlertDialog.showModal()
 }

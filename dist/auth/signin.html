@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="このページは、雷のサイト会員のみがアクセスできます。" />
-    <link rel="canonical" href="https://uplauncher.xyz/" />
+    <link rel="canonical" href="https://raic.tech/" />
 
     <meta content="サインイン - 雷のサイト" property="og:title" />
     <meta content="このページは、雷のサイト会員のみがアクセスできます。" property="og:description" />
-    <meta content="https://uplauncher.xyz" property="og:url" />
-    <meta content="https://uplauncher.xyz/images/profile-image.png" property="og:image" />
+    <meta content="https://raic.tech" property="og:url" />
+    <meta content="https://raic.tech/images/profile-image.png" property="og:image" />
     <meta content="#43B581" data-react-helmet="true" name="theme-color" />
 
     <!--Stylesheet-->
@@ -35,28 +35,33 @@
       <div class="submenu column is-4" id="settings-sidebar"></div>
 
       <div class="content">
-        <h1>サインイン</h1>
+        <h1 id="LoginTitle">サインイン</h1>
         <p>雷のサイトへサインインします。</p>
 
         <br />
 
         <label for="LoginEmail"><i class="fas fa-envelope"></i>メールアドレス</label><br />
-        <input
-          class="input"
-          id="LoginEmail"
-          type="email"
-          style="width: 25vw"
-          placeholder="email@example.com"
-        /><br /><br />
+        <input class="input" id="LoginEmail" type="email" placeholder="email@example.com" /><br /><br />
 
         <label for="LoginPassword"><i class="fas fa-input-text"></i>パスワード</label><br />
-        <input
-          class="input"
-          id="LoginPassword"
-          type="password"
-          style="width: 25vw"
-          placeholder="*********"
-        /><br /><br />
+        <input class="input" id="LoginPassword" type="password" placeholder="*********" /><br /><br />
+
+        <div id="LoginTfaContainer">
+          <label for="LoginTfa"
+            ><i class="fas fa-input-pipe"></i>2段階認証のコード<br /><small
+              >2段階認証が有効な場合のみ入れてください</small
+            ></label
+          ><br />
+          <input
+            class="input"
+            max="999999"
+            min="0"
+            oninput="javascript: this.value = this.value.slice(0, 6);"
+            id="LoginTfa"
+            type="number"
+            placeholder="123456"
+          /><br /><br />
+        </div>
 
         <p id="SigninError" class="is-hidden"><i class="fas fa-info"></i><label></label></p>
 
@@ -69,6 +74,6 @@
     <footer></footer>
 
     <script src="/js/signin.js"></script>
-    <script src="/js/signinLoadSidebar.js"></script>
+    <script src="/js/loadSidebar.js"></script>
   </body>
 </html>

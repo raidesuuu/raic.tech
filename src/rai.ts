@@ -42,7 +42,11 @@ export function getHostname() {
 }
 
 export function getVersion() {
-  return '0.0.1-beta'
+  return '0.0.5-beta'
+}
+
+export function getUserId() {
+  return window.localStorage.getItem('userId')
 }
 
 export function getCode() {
@@ -82,4 +86,28 @@ export class NotLoggedError extends Error {
   constructor(message?: string) {
     super(message)
   }
+}
+
+declare global {
+  interface Window {
+    rai: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  }
+}
+
+window.rai = {
+  getURL,
+  getDomain,
+  getProtocol,
+  getUserId,
+  getPort,
+  getPath,
+  getHash,
+  getSearch,
+  getOrigin,
+  getHostname,
+  getVersion,
+  getCode,
+  getPaidStatus,
+  moveToPanel,
+  NotLoggedError,
 }

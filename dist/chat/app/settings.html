@@ -4,7 +4,6 @@
     <!--meta-->
     <title>設定 | Rai Chat</title>
     <meta charset="utf-8" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
 
     <!--Stylesheet-->
     <link rel="stylesheet" href="/css/index.css" />
@@ -28,30 +27,47 @@
     <section class="columns p-4 m-0">
       <div class="submenu column is-4" id="settings-sidebar"></div>
       <div id="app-content" class="content">
-        <h2>Rai Markdown</h2>
-        <p>
-          Rai Chatでは、Rai Markdownをサポートしています。Rai Markdownは、簡単な記述で装飾されたテキストを作成できるマークアップ言語です。以下に、Rai Markdownの記述方法を示します。
-        </p>
-        <ul>
-          <li>[b]文字[/b]: 太文字</li>
-          <li>[i]文字[/i]: イタリック文字</li>
-          <li>[s]文字[/s]: 打ち消し線</li>
-          <li>[u]文字[/u]: 下線</li>
-          <li>[url]URL[/url]: リンク</li>
-          <li>[icon]Font Awesomeのアイコン名[/icon]: アイコン</li>
-          <li>[img]URL[/img]: 画像</li>
-          <li>[color=色]文字[/color]: 文字色</li>
-        </ul>
-        <p>Rai Markdownを無効にすると、下記の機能が利用できなくなります。</p>
-        <ul>
-          <li>文字の装飾</li>
-          <li>リンクの自動変換</li>
-          <li>アイコンの表示</li>
-          <li>画像の表示</li>
-        </ul>
-        <p>また、Rai Markdownを無効にするとMarkdownの記述が表示されます。</p>
-        <input type="checkbox" id="rai-markdown" checked>
-        <label for="rai-markdown" class="checkbox">Rai Markdownを使用する</label>
+        <section>
+          <h2>Rai Markdown</h2>
+          <p>
+            Rai Chatでは、Rai Markdownをサポートしています。Rai
+            Markdownは、簡単な記述で装飾されたテキストを作成できるマークアップ言語です。以下に、Rai
+            Markdownの記述方法を示します。
+          </p>
+          <ul>
+            <li>[b]文字[/b]: 太文字</li>
+            <li>[i]文字[/i]: イタリック文字</li>
+            <li>[s]文字[/s]: 打ち消し線</li>
+            <li>[u]文字[/u]: 下線</li>
+            <li>[url]URL[/url]: リンク</li>
+            <li>[icon]Font Awesomeのアイコン名[/icon]: アイコン</li>
+            <li><i class="fas fa-check color-gold"></i>(プレミアムのみ)[color=色]文字[/color]: 文字色</li>
+            <li><i class="fas fa-check color-gold"></i>(プレミアムのみ)[img]URL[/img]: 画像</li>
+          </ul>
+          <p>Rai Markdownを無効にすると、下記の機能が利用できなくなります。</p>
+          <ul>
+            <li>文字の装飾</li>
+            <li>リンクの自動変換</li>
+            <li>アイコンの表示</li>
+            <li>画像の表示</li>
+          </ul>
+          <p>また、Rai Markdownを無効にするとMarkdownの記述が表示されます。</p>
+          <input type="checkbox" id="rai-markdown" checked />
+          <label for="rai-markdown" class="checkbox">Rai Markdownを使用する</label>
+        </section>
+
+        <section>
+          <h2>チェックマークを非表示にする</h2>
+          <p>
+            チェックマークを非表示にすると、プレミアムユーザーであることが他人からわからなくなります。<br />
+            ただし、一部の機能を使用するとプレミアムを所持していることがわかる可能性があります。<br><br>
+            
+            <strong>過去のポストには引き続きチェックマークが表示されます。</strong>
+          </p>
+          <input type="checkbox" id="hide-checkmark" />
+          <label for="hide-checkmark" class="checkbox">チェックマークを非表示にする</label>
+        </section>
+      </div>
     </section>
 
     <footer></footer>
