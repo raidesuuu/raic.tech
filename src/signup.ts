@@ -24,47 +24,45 @@ if (submit == null || error == null || email == null || password == null) {
   throw new Error('[P1: ERROR (signup.ts)] Element not found')
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  onAuthStateChanged(auth, (user) => {
-    if (user !== null) {
-      location.href = '/auth/panel.html'
-    }
-  })
+onAuthStateChanged(auth, (user) => {
+  if (user !== null) {
+    location.href = '/auth/panel.html'
+  }
+})
 
-  submit.addEventListener('click', () => {
-    if (email.value == '' || password.value == '') {
-      showNotice(error, '全てのフィールドを入力してください')
-      throw new Error('[P3: ERROR (signup.ts)] Email or password is not entered')
-    }
+submit.addEventListener('click', () => {
+  if (email.value == '' || password.value == '') {
+    showNotice(error, '全てのフィールドを入力してください')
+    throw new Error('[P3: ERROR (signup.ts)] Email or password is not entered')
+  }
 
-    createUserWithEmailAndPassword(auth, email.value, password.value)
-      .then(() => moveToPanel())
-      .catch((error) => {
-        const errorCode: string = error.code
-        let errorMessage: string = error.message
+  createUserWithEmailAndPassword(auth, email.value, password.value)
+    .then(() => moveToPanel())
+    .catch((error) => {
+      const errorCode: string = error.code
+      let errorMessage: string = error.message
 
-        // Remove 'Firebase: Error ' from the error message
-        errorMessage = errorMessage.replace('Firebase: Error ', '')
+      // Remove 'Firebase: Error ' from the error message
+      errorMessage = errorMessage.replace('Firebase: Error ', '')
 
-        // Set error message
+      // Set error message
 
-        if (errorCode == 'auth/email-already-in-use') {
-          showNotice(error, 'このメールアドレスは既に使用されています。')
-        } else if (errorCode == 'auth/invalid-email') {
-          showNotice(error, 'メールアドレスが無効です。')
-        } else if (errorCode == 'auth/weak-password') {
-          showNotice(error, 'パスワードが弱すぎます。(6文字以上が必要です)')
-        } else {
-          showNotice(error, errorMessage)
-        }
-      })
+      if (errorCode == 'auth/email-already-in-use') {
+        showNotice(error, 'このメールアドレスは既に使用されています。')
+      } else if (errorCode == 'auth/invalid-email') {
+        showNotice(error, 'メールアドレスが無効です。')
+      } else if (errorCode == 'auth/weak-password') {
+        showNotice(error, 'パスワードが弱すぎます。(6文字以上が必要です)')
+      } else {
+        showNotice(error, errorMessage)
+      }
+    })
 
-    function showNotice(element: HTMLElement, message: string) {
-      element.classList.remove('is-hidden')
+  function showNotice(element: HTMLElement, message: string) {
+    element.classList.remove('is-hidden')
 
-      const infoLabel = element.querySelector('label')
-      if (infoLabel === null) throw new Error('No icon found')
-      infoLabel.textContent = message
-    }
-  })
+    const infoLabel = element.querySelector('label')
+    if (infoLabel === null) throw new Error('No icon found')
+    infoLabel.textContent = message
+  }
 })
