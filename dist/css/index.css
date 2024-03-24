@@ -30340,6 +30340,7 @@ html {
 
 body {
   font-family: "Segoe UI", "Noto Sans JP" !important;
+  width: 100%;
 }
 
 .auth_2fa_code_container {
@@ -30374,21 +30375,33 @@ body {
 
 .favorite {
   transition: all 0.2s ease-out;
+  margin-right: 1px !important;
 }
 
 .favorite:hover {
   color: #ff1f1f;
 }
 
+.mr1px {
+  margin-right: 1px !important;
+}
+
 .has-text-right {
   margin-left: 20px !important;
 }
 
-.has-text-right > h1, h2, h3, h4, h5, h6, p {
+.has-text-right > h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin-right: 24px;
 }
 
-button, input {
+button,
+input {
   font-family: "Segoe UI", "Noto Sans JP" !important;
 }
 
@@ -30478,6 +30491,7 @@ label {
 
 .fa-solid,
 .fas,
+.far,
 .fad {
   margin-right: 10px;
 }
@@ -30540,6 +30554,88 @@ div.content {
 .products > .card {
   margin-left: 15px;
   width: 20%;
+}
+
+/* TODO: comment */
+button {
+  width: auto;
+}
+
+.products {
+  text-align: left;
+  width: 100%;
+}
+
+@media screen and (min-width: 430px) {
+  .products > .columns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+.products > .column {
+  margin-left: 15px;
+  width: 25%;
+}
+
+.products {
+  opacity: 0;
+}
+
+.anim {
+  animation: fadeIn 1s;
+  opacity: 1;
+  animation-timeline: scroll();
+  animation-range: 0% 75%;
+}
+
+.pfanim {
+  animation: pFfadeIn 1s;
+  opacity: 1;
+  border-radius: 50%;
+}
+
+.pfanim:hover {
+  animation: zoomAnim 1s;
+  transform: scale(0.6);
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0.3;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes pFfadeIn {
+  0% {
+    transform: scale(0.6);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+@keyframes zoomAnim {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.6);
+  }
 }
 
 /*# sourceMappingURL=index.css.map */

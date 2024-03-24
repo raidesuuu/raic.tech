@@ -1,11 +1,15 @@
 import { InitApp } from '../firebase'
 import { getAuth } from 'firebase/auth'
-import { collection, getDocs, getFirestore } from 'firebase/firestore'
+import { doc, getDoc, getFirestore } from 'firebase/firestore'
 
 InitApp()
 
 const dbF = getFirestore()
 const uidText = document.getElementById('app-uid') as HTMLSpanElement
+
+const content = document.getElementById('app-content') as HTMLDivElement
+
+;(content as HTMLElement)!.style.display = 'none'
 
 getAuth().onAuthStateChanged(async (user) => {
   // Check if user is logged in
@@ -16,21 +20,17 @@ getAuth().onAuthStateChanged(async (user) => {
   }
 
   // Check if user is banned
-  const userDoc = await getDocs(collection(dbF, 'raichat-user-status' + user.uid))
-  userDoc.forEach((doc) => {
-    if (doc.data().banned == 'false') {
+  const userDoc = await getDoc(doc(dbF, 'raichat-user-status', user.uid))
+  if (userDoc.exists()) {
+    if (userDoc.data().banned === false) {
       // User is not banned
       console.log('User is not banned')
       window.location.href = '/chat/'
     }
-  })
-  if (userDoc.empty) {
-    // User not found in database
-    console.log('User not found in database')
-    window.location.href = '/chat/'
   }
 
   // User is banned
   console.log('User is banned')
   uidText.textContent = user.uid
+  ;(content as HTMLElement)!.style.display = 'block'
 })

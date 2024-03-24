@@ -47,7 +47,7 @@
               <li><i class="fas fa-check color-green"></i>学生限定特典 (v0.0.6で)</li>
               <li><i class="fas fa-check color-green"></i>いいね (v0.0.6で)</li>
               <li><i class="fas fa-check color-green"></i>検索フィルター (v0.0.6で)</li>
-              <li><i class="fas fa-check color-green"></i>チェックマーク (v0.0.6で)</li>
+              <li><i class="fas fa-check color-green"></i>チェックマークを非表示にする (v0.0.6で)</li>
             </ul>
           </div>
           <a href="/auth/panel/patreon.html" style="margin-top: 10px" class="button is-primary"
@@ -67,7 +67,16 @@
               style="width: 500px; height: 100px"
               placeholder="メッセージ"
             ></textarea
-            ><br /><br />
+            ><br />
+            <p>
+              <i class="far fa-shield color-red"></i>メッセージを送信すると、<a
+                href="/chat/tos.html"
+                target="_blank"
+                noopener
+                noreferrer
+                >Rai Chatの利用規約</a
+              >に同意したとみなされます。
+            </p>
             <button id="app-send-message" class="button is-primary">送信</button><br />
             <p id="app-message-alert" class="is-hidden"><i class="fas fa-info"></i><label></label></p>
           </div>
@@ -91,8 +100,10 @@
             <h2 id="app-message-dialog-title">2段階認証を無効にする</h2>
             <p id="app-message-dialog-description">パスワードと2段階認証のコードを入力して続行します。</p>
 
+            <button id="app-message-dialog-button" class="is-hidden button is-danger"><i class="fas fa-check"></i>続行</button>
             <button
               onclick="document.querySelector('#app-message-dialog').close();"
+              id="app-message-dialog-close"
               class="button is-primary"
               aria-label="close"
             >
@@ -100,12 +111,6 @@
             </button>
           </div>
         </div>
-
-        <button
-          onclick="document.querySelector('#app-message-dialog').close();"
-          class="modal-close is-large"
-          aria-label="close"
-        ></button>
       </div>
     </dialog>
 

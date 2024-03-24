@@ -107,11 +107,11 @@ onAuthStateChanged(auth, async (user) => {
           break
         case 'premium':
           premiumUpsellText.textContent = 'おめでとうございます。あなたのプレミアムはアクティブです。'
-          premiumUpsellButton.textContent = 'Enhancedにアップグレード'
+          premiumUpsellButton.innerHTML = '<i class="fas fa-money-bill"></i>アップグレード'
           break
         case 'standard':
           premiumUpsellText.textContent = 'おめでとうございます。あなたのStandardはアクティブです。'
-          premiumUpsellButton.textContent = 'Enhancedにアップグレード'
+          premiumUpsellButton.textContent = '<i class="fas fa-money-bill"></i>アップグレード'
           break
         case 'free':
           break

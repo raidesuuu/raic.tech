@@ -42,7 +42,7 @@ export function getHostname() {
 }
 
 export function getVersion() {
-  return '0.0.5-beta'
+  return '0.0.7-beta'
 }
 
 export function getUserId() {

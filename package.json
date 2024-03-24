@@ -1,6 +1,6 @@
 {
   "name": "raic.dev",
-  "version": "0.0.6-beta",
+  "version": "0.0.7-beta",
   "description": "A personal website for Rai.",
   "main": "index.js",
   "devDependencies": {
