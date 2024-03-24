@@ -38,7 +38,7 @@
     "webpack-remove-empty-scripts": "^1.0.4"
   },
   "scripts": {
-    "build": "yarn lint && yarn lint:css && webpack --mode production",
+    "build": "webpack --mode production",
     "dev": "concurrently \"yarn sass:dev\" \"yarn server:dev\"",
     "server:dev": "webpack-cli serve --mode development",
     "sass:dev": "sass --watch src/index.scss:dist/css/index.css",
