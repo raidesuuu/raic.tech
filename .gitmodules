@@ -1,0 +1,3 @@
+[submodule "src/chat"]
+	path = src/chat
+	url = https://github.com/raidesuuu/Rai-Chat-Components.git
