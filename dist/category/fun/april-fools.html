@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
   <head>
     <!--meta-->
@@ -6,40 +6,29 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta
-      name="description"
-      content="エイプリルフールまでのカウントダウンです。"
-    />
+    <meta name="description" content="エイプリルフールまでのカウントダウンです。" />
     <link rel="canonical" href="https://raic.tech/" />
 
     <meta content="連絡 - 雷のサイト" property="og:title" />
-    <meta
-      content="エイプリルフールまでのカウントダウンです。"
-      property="og:description"
-    />
+    <meta content="エイプリルフールまでのカウントダウンです。" property="og:description" />
     <meta content="https://raic.tech" property="og:url" />
-    <meta
-      content="https://raic.tech/images/profile-image.png"
-      property="og:image"
-    />
+    <meta content="https://raic.tech/images/profile-image.png" property="og:image" />
     <meta content="#43B581" data-react-helmet="true" name="theme-color" />
 
     <!--Stylesheet-->
     <link rel="stylesheet" href="/css/index.css" />
 
-
     <!--favicon-->
     <link rel="icon" href="/images/profile-image.png" />
 
     <!--JavaScript-->
-    
-<script src="/js/menu.js"></script>
+
+    <script src="/js/menu.js"></script>
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3326621014935824"
       crossorigin="anonymous"
     ></script>
-
   </head>
 
   <body style="display: none">
@@ -60,88 +49,64 @@
 
       <h2 id="aprilfools-alert">あと〇日。</h2>
 
-      <span id="day"></span>日 <span id="hour"></span>時間
-      <span id="min"></span>分 <span id="sec"></span>秒
+      <span id="day"></span>日 <span id="hour"></span>時間 <span id="min"></span>分 <span id="sec"></span>秒
     </div>
 
     <footer></footer>
 
     <script>
       function countdown() {
-        const now = new Date();
-        let date = new Date(2024, 3, 1, 0, 0, 0);
+        const now = new Date()
+        let date = new Date(2024, 3, 1, 0, 0, 0)
 
-        let fkdiffer = date.getTime() - now.getTime();
-        let fksec = Math.floor(fkdiffer / 1000) % 60;
-        let differ = date.getTime() - now.getTime();
+        let fkdiffer = date.getTime() - now.getTime()
+        let fksec = Math.floor(fkdiffer / 1000) % 60
+        let differ = date.getTime() - now.getTime()
 
-        fkdiffer = 0;
+        fkdiffer = 0
 
-        const sec = Math.floor(differ / 1000) % 60;
-        const min = Math.floor(differ / 1000 / 60) % 60;
-        const hour = Math.floor(differ / 1000 / 60 / 60) % 24;
-        const day = Math.floor(differ / 1000 / 60 / 60 / 24);
+        const sec = Math.floor(differ / 1000) % 60
+        const min = Math.floor(differ / 1000 / 60) % 60
+        const hour = Math.floor(differ / 1000 / 60 / 60) % 24
+        const day = Math.floor(differ / 1000 / 60 / 60 / 24)
 
-        document.getElementById("day").textContent = String(day).padStart(
-          2,
-          "0"
-        );
-        document.getElementById("hour").textContent = String(hour).padStart(
-          2,
-          "0"
-        );
-        document.getElementById("min").textContent = String(min).padStart(
-          2,
-          "0"
-        );
-        document.getElementById("sec").textContent = String(sec).padStart(
-          2,
-          "0"
-        );
+        document.getElementById('day').textContent = String(day).padStart(2, '0')
+        document.getElementById('hour').textContent = String(hour).padStart(2, '0')
+        document.getElementById('min').textContent = String(min).padStart(2, '0')
+        document.getElementById('sec').textContent = String(sec).padStart(2, '0')
 
         if (day != 0) {
-          document.getElementById(
-            "aprilfools-alert"
-          ).textContent = `あと${day}日！`;
+          document.getElementById('aprilfools-alert').textContent = `あと${day}日！`
         } else if (hour != 0) {
           if (35 < min) {
-            document.getElementById("aprilfools-alert").textContent = `あと${
-              hour + 1
-            }時間！`;
+            document.getElementById('aprilfools-alert').textContent = `あと${hour + 1}時間！`
           } else {
-            document.getElementById(
-              "aprilfools-alert"
-            ).textContent = `あと${hour}時間！`;
+            document.getElementById('aprilfools-alert').textContent = `あと${hour}時間！`
           }
         } else if (min != 0) {
-          document.getElementById(
-            "aprilfools-alert"
-          ).textContent = `あと${min}分！`;
+          document.getElementById('aprilfools-alert').textContent = `あと${min}分！`
         } else {
-          document.getElementById(
-            "aprilfools-alert"
-          ).textContent = `あと${sec}秒！`;
+          document.getElementById('aprilfools-alert').textContent = `あと${sec}秒！`
         }
 
         if (Math.sign(fksec) == -1) {
-          console.log(fkdiffer);
-          document.getElementById("aprilfools-alert").textContent =
-            "2025年になりました！";
-          document.querySelectorAll(".c-firework").forEach((container) => {
-            console.log(container);
-            container.style.display = "";
-          });
-          document.getElementById("day").innerHTML = "0";
-          document.getElementById("hour").textContent = "0";
-          document.getElementById("min").textContent = "0";
-          document.getElementById("sec").textContent = "0";
-          return;
+          console.log(fkdiffer)
+          document.getElementById('aprilfools-alert').textContent = '2025年になりました！'
+          document.querySelectorAll('.c-firework').forEach((container) => {
+            console.log(container)
+            container.style.display = ''
+          })
+          document.getElementById('day').innerHTML = '0'
+          document.getElementById('hour').textContent = '0'
+          document.getElementById('min').textContent = '0'
+          document.getElementById('sec').textContent = '0'
+          return
         }
-        setTimeout(countdown, 1000);
+        setTimeout(countdown, 1000)
       }
-      countdown();
+      countdown()
     </script>
 
-    <script src="/js/firebase.js" ></script>
+    <script src="/js/index.js"></script>
   </body>
 </html>

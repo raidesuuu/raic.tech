@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
           )
             return
 
-          if (window.location.pathname === '/auth/panel.html') {
+          if (window.location.pathname === '/auth/panel/patreon.html') {
             // this is not used
             console.info('[EventHandler : INFO (menu.ts)]: Panel page detected, showing new panel button')
             newPanelElement.classList.remove('is-hidden')

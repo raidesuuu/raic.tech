@@ -26,7 +26,7 @@ if (submit == null || error == null || email == null || password == null) {
 
 onAuthStateChanged(auth, (user) => {
   if (user !== null) {
-    location.href = '/auth/panel.html'
+    location.href = '/auth/panel/patreon.html'
   }
 })
 

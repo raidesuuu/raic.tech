@@ -40,7 +40,7 @@ onAuthStateChanged(auth, async (user) => {
       if (resToken.status === 401) {
         console.error('[patreon.ts] Error: ' + resToken.error)
 
-        window.location.href = '/auth/panel.html'
+        window.location.href = '/auth/panel/patreon.html'
 
         throw new Error('[P3: ERROR (patreon.ts)] ' + resToken.error)
       }
@@ -60,7 +60,7 @@ onAuthStateChanged(auth, async (user) => {
         if (res.status === 401) {
           console.error('[patreon.ts] Error: ' + resToken.error)
 
-          window.location.href = '/auth/panel.html'
+          window.location.href = '/auth/panel/patreon.html'
 
           throw new Error('[P3: ERROR (patreon.ts)] ' + resToken.error)
         }

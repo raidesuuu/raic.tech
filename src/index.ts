@@ -15,4 +15,9 @@ window.addEventListener('DOMContentLoaded', () => {
   window.removeEventListener('DOMContentLoaded', () => {
     console.info('[EventHandler : INFO (index.ts)] Removed DOMContentLoaded event listener.')
   })
+  if (getURL() == 'https://raic.tech') {
+    document.querySelectorAll('a').forEach((element) => {
+      element.href = element.href.replace('.html', '')
+    })
+  }
 })

@@ -64,7 +64,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'dist/css/index.css',
     }),
-    new RemoveEmptyScriptsPlugin()
+    new RemoveEmptyScriptsPlugin(),
   ],
   optimization: {
     minimizer: [

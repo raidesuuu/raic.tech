@@ -32,7 +32,7 @@ const tfa = document.getElementById('LoginTfa') as HTMLInputElement
 
 onAuthStateChanged(auth, (user) => {
   if (user !== null) {
-    location.href = '/auth/panel.html'
+    location.href = '/auth/panel/patreon.html'
   }
 })
 const urlParams = new URLSearchParams(window.location.search)
