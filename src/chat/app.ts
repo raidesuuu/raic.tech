@@ -60,6 +60,43 @@ document.querySelector('body')?.addEventListener('click', async function (e) {
     ) && window.open(e.target.href, '_blank')
   }
 
+  //danger actions
+  if (e.target instanceof HTMLElement) {
+    if (e.target.classList.contains('remove')) {
+      const messageId = e.target.parentElement?.parentElement?.parentElement?.getAttribute('data-messageId')
+      if (messageId) {
+        await showConfirm('メッセージ', 'このメッセージを削除しますか？').then((result: any) => {
+          if (result) {
+            set(ref(db, 'messages/' + messageId), null)
+            if (e.target instanceof HTMLElement) {
+              e.target.parentElement?.parentElement?.parentElement?.remove()
+            }
+          }
+        })
+      }
+    } else if (e.target.classList.contains('report')) {
+      const messageId = e.target.parentElement?.parentElement?.parentElement?.getAttribute('data-messageId')
+      const userId = document.getElementsByTagName('body')[0].dataset.user
+      if (messageId) {
+        await showReportConfirm().then(async (result: any) => {
+          if (result != 'false') {
+            await setDoc(doc(dbF, 'raichat-report', messageId, 'user', userId || 'abc'), {
+              type: JSON.parse(result).type,
+              message: JSON.parse(result).message,
+            }).then(() => {
+              ShowAlert(
+                'メッセージを報告',
+                'このメッセージの報告が完了しました。<br>Rai Chatを貢献してくださり、ありがとうございます。<br><h2>注意事項</h2><ul><li>・メッセージは1回しか報告できません。</li><li>・BANされるまでに時間がかかります。</li><li>・BANされてもされなくてもお知らせはされません。</li></ul>',
+              )
+            })
+          } else {
+            console.log(result)
+          }
+        })
+      }
+    }
+  }
+
   if (subscription == 'owner') {
     if (e.target instanceof HTMLElement) {
       if (e.target.classList.contains('ban')) {
@@ -77,18 +114,6 @@ document.querySelector('body')?.addEventListener('click', async function (e) {
                   })
                 }
               })
-            }
-          })
-        }
-      } else if (e.target.classList.contains('remove')) {
-        const messageId = e.target.parentElement?.parentElement?.parentElement?.getAttribute('data-messageId')
-        if (messageId) {
-          await showConfirm('メッセージ', 'このメッセージを削除しますか？').then((result: any) => {
-            if (result) {
-              set(ref(db, 'messages/' + messageId), null)
-              if (e.target instanceof HTMLElement) {
-                e.target.parentElement?.parentElement?.parentElement?.remove()
-              }
             }
           })
         }
@@ -131,7 +156,10 @@ document.querySelector('body')?.addEventListener('click', async function (e) {
 
         const favoriteSystemCheck = e.target.parentElement?.parentElement?.parentElement?.querySelector('.system')
         if (favoriteSystemCheck) {
-          ShowAlert('メッセージ', 'このメッセージはシステムメッセージのため、いいねできません。')
+          ShowAlert(
+            'メッセージ',
+            '<i class="far fa-shield color-red"></i>このメッセージはシステムメッセージのため、いいねできません。',
+          )
           return
         }
 
@@ -193,22 +221,22 @@ document.querySelector('body')?.addEventListener('click', async function (e) {
     if (e.target.classList.contains('verified')) {
       ShowAlert(
         '認証されたユーザー',
-        '<i class="fas fa-check color-blue"></i>このユーザーはStandard以上のプランを購入しているため、認証されています。',
+        '<i class="fas fa-check color-blue"></i>このユーザーはStandard以上のプランを購入していて、本人であることが確認されているため認証されています。<a href="/chat/docs/verified.html" target="_blank" noreferrer noopener>詳細はこちら。</a>',
       )
     } else if (e.target.classList.contains('owner')) {
       ShowAlert(
         '認証されたユーザー',
-        '<i class="fas fa-screwdriver-wrench color-gold"></i>このユーザーはオーナー権限を持っているため、認証されています。',
+        '<i class="fas fa-screwdriver-wrench color-gold"></i>このユーザーはUpLauncherの管理者であるため、認証されています。<a href="/chat/docs/verified.html" target="_blank" noreferrer noopener>詳細はこちら。</a>',
       )
     } else if (e.target.classList.contains('student')) {
       ShowAlert(
         '認証されたユーザー',
-        '<i class="fas fa-user color-green"></i>このユーザーは学生のため、認証されています。',
+        '<i class="fas fa-user color-green"></i>このユーザーは学生のため、認証されています。<a href="/chat/docs/verified.html" target="_blank" noreferrer noopener>詳細はこちら。</a>',
       )
     } else if (e.target.classList.contains('system')) {
       ShowAlert(
-        'メッセージ',
-        '<i class="far fa-shield color-red"></i>このメッセージはRai Chatのシステムからのメッセージです。',
+        '認証されたユーザー',
+        '<i class="far fa-shield color-red"></i>このメッセージはRai Chatのシステムからのメッセージです。<a href="/chat/docs/verified.html" target="_blank" noreferrer noopener>詳細はこちら。</a>',
       )
     }
   }
@@ -243,6 +271,7 @@ onAuthStateChanged(auth, async (user) => {
     await setDoc(doc(dbF, 'raichat-user-status', user?.uid), {
       username: user.displayName,
       checkmarkState: hideCheckmark,
+      verified: userDoc.data().verified ? userDoc.data().verified : false,
       paid: subscription,
       isStudent: isStudent,
       banned: userDoc.data().banned,
@@ -305,7 +334,7 @@ onAuthStateChanged(auth, async (user) => {
     if (userDoc.exists() === true) {
       const userDocData = userDoc.data()
       if (userDoc.data().banned == true) {
-        messageSpan.innerHTML = `<span>Rai Chat System <i class="far fa-shield system color-red"></i> ${messages.time})${subscription == 'owner' ? '&nbsp;<i class="far fa-hammer remove-manually color-gold mr1px"></i> <i class="far fa-xmark remove color-gold"></i> ' : ''}: BANされているユーザーからのメッセージです。<a href="/chat/tos.html" target="_blank" noreferrer noopener>利用規約。</a></span>`
+        messageSpan.innerHTML = `<span>Rai Chat System <i class="far fa-shield system color-red"></i> ${messages.time})${subscription == 'owner' ? '&nbsp;<i class="far fa-hammer remove-manually color-gold mr1px"></i> <i class="far fa-xmark remove color-gold"></i> ' : ''}: BANされているユーザーからのメッセージです。<a href="/chat/docs/tos.html" target="_blank" noreferrer noopener>利用規約。</a></span>`
       } else {
         messageElement.classList.add(
           isCheckmarker(userDocData)
@@ -317,7 +346,7 @@ onAuthStateChanged(auth, async (user) => {
             : 'free',
         )
 
-        messageSpan.innerHTML = `<span>${userDocData.username} ${isCheckmarker(userDocData) ? (userDocData.paid == 'owner' ? '<i class="fas fa-screwdriver-wrench owner color-gold"></i>' : userDocData.isStudent ? '<i class="fas fa-user student color-green"></i>' : '<i class="fas fa-check verified color-blue"></i>') : ''}${messages.isSystemMessage ? '<i class="far fa-shield system color-red"></i>' : ''}(${messages.time})${subscription == 'owner' ? '&nbsp;<i class="far fa-ban ban color-red mr1px"></i> <i class="far fa-hammer remove-manually color-gold mr1px"></i> <i class="far fa-xmark remove color-gold"></i> ' : ''} ${messages.uid == user.uid ? '<i class="far fa-xmark remove color-red"></i>' : ''}<i class="far fa-heart favorite color-red"></i> <span class="favoriteText">${messages.favorite}</span>: ${message}</span>`
+        messageSpan.innerHTML = `<span>${userDocData.username} ${isCheckmarker(userDocData) ? (userDocData.paid == 'owner' ? '<i class="fas fa-screwdriver-wrench owner color-gold"></i>' : userDocData.isStudent ? '<i class="fas fa-user student color-green"></i>' : '<i class="fas fa-check verified color-blue"></i>') : ''}${messages.isSystemMessage ? '<i class="far fa-shield system color-red"></i>' : ''}(${messages.time})${subscription == 'owner' ? '&nbsp;<i class="far fa-ban ban color-red mr1px"></i> <i class="far fa-hammer remove-manually color-gold mr1px"></i> <i class="far fa-xmark remove color-gold"></i> ' : ''} ${messages.uid == user.uid ? '<i class="far fa-xmark remove color-red"></i>' : ''}<i class="far fa-flag color-red report mr1px"></i> <i class="far fa-heart favorite color-red"></i> <span class="favoriteText">${messages.favorite}</span>: ${message}</span>`
       }
     }
 
@@ -329,7 +358,7 @@ onAuthStateChanged(auth, async (user) => {
 
 function isCheckmarker(userData: any) {
   // eslint-disable-line @typescript-eslint/no-explicit-any
-  const result = userData.paid != 'free' && userData.checkmarkState === 'false'
+  const result = userData.paid != 'free' && userData.verified == true && userData.checkmarkState === 'false'
   return result
 }
 
@@ -430,15 +459,20 @@ async function sendMessage(message: string, user: User | null) {
     messageAlert.textContent = 'メッセージは100文字以内で入力してください'
     return
   }
-  if (ngWords.some((word) => message.includes(word))) {
+  if (
+    ngWords.some((word) => message.includes(word)) ||
+    ngWords.some((word) => user.displayName?.includes(word)) ||
+    user.displayName === 'Rai Chat System'
+  ) {
     messageAlert!.classList.remove('is-hidden')
-    messageAlert!.textContent = 'NGワードが含まれています'
+    messageAlert!.textContent = 'NGワードが含まれているか、使用できない名前が含まれています。'
     if (subscription != 'owner') {
       const timestamp = Date.now()
 
       set(ref(db, 'messages/' + timestamp + '-' + user.uid), {
         username: user.displayName,
         paid: hideCheckmark ? 'free' : isStudent ? 'student' : subscription,
+        verified: false,
         uid: user.uid,
         id: timestamp + '-' + user.uid,
         isSystemMessage: true,
@@ -467,9 +501,11 @@ async function sendMessage(message: string, user: User | null) {
   }
   const timestamp = Date.now()
 
+  const userDataDoc = await getDoc(doc(dbF, 'raichat-user-status', user.uid))
   set(ref(db, 'messages/' + timestamp + '-' + user.uid), {
     username: user.displayName,
     paid: hideCheckmark ? 'free' : isStudent ? 'student' : subscription,
+    verified: userDataDoc.exists() ? userDataDoc.data().verified : false,
     uid: user.uid,
     id: timestamp + '-' + user.uid,
     time: new Date().toLocaleString(),
@@ -545,6 +581,48 @@ const showConfirm = (title: string, message: string): Promise<boolean> => {
     cancelButton.addEventListener('click', () => {
       messageAlertDialog.close()
       resolve(false)
+    })
+  })
+}
+
+const showReportConfirm = (): Promise<string> => {
+  return new Promise((resolve) => {
+    const messageAlertDialog = document.getElementById('app-report-dialog') as HTMLDialogElement
+    const dialogContent = document.getElementById('app-report-dialog-content')
+    const dialogTitle = document.getElementById('app-report-dialog-title')
+    const dialogDescription = document.getElementById('app-report-dialog-description')
+    const confirmButton = document.getElementById('app-report-dialog-button')
+    const cancelButton = document.getElementById('app-report-dialog-close')
+    const dialogMessage = document.getElementById('app-report-dialog-message') as HTMLInputElement
+    const reportType = document.getElementById('app-report-dialog-type') as HTMLSelectElement
+    if (
+      messageAlertDialog === null ||
+      dialogContent === null ||
+      dialogTitle === null ||
+      dialogDescription === null ||
+      confirmButton === null ||
+      cancelButton === null ||
+      dialogMessage === null ||
+      reportType === null
+    ) {
+      console.log('Error: Element is null')
+      resolve('false')
+      return
+    }
+    dialogContent.classList.add('is-active')
+    confirmButton.classList.remove('is-hidden')
+    cancelButton.textContent = 'キャンセル'
+    messageAlertDialog.showModal()
+    confirmButton.addEventListener('click', () => {
+      messageAlertDialog.close()
+      const reportTypeInput = document.querySelector('input[name=report-type]:checked') as HTMLInputElement
+      const type = reportTypeInput ? reportTypeInput.value : ''
+      const message = dialogMessage.value
+      resolve(JSON.stringify({ result: true, type, message }))
+    })
+    cancelButton.addEventListener('click', () => {
+      messageAlertDialog.close()
+      resolve('false')
     })
   })
 }

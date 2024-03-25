@@ -38,9 +38,9 @@ submit.addEventListener('click', () => {
 
   createUserWithEmailAndPassword(auth, email.value, password.value)
     .then(() => moveToPanel())
-    .catch((error) => {
-      const errorCode: string = error.code
-      let errorMessage: string = error.message
+    .catch((errorInfo) => {
+      const errorCode: string = errorInfo.code
+      let errorMessage: string = errorInfo.message
 
       // Remove 'Firebase: Error ' from the error message
       errorMessage = errorMessage.replace('Firebase: Error ', '')

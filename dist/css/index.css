@@ -30578,15 +30578,16 @@ button {
   width: 25%;
 }
 
-.products {
-  opacity: 0;
+.products.anim {
+  opacity: 0.3;
 }
 
 .anim {
   animation: fadeIn 1s;
   opacity: 1;
+  transform: translateY(0);
   animation-timeline: scroll();
-  animation-range: 0% 75%;
+  animation-range: 10% 75%;
 }
 
 .pfanim {
@@ -30604,7 +30605,7 @@ button {
 @keyframes fadeIn {
   0% {
     opacity: 0.3;
-    transform: translateY(30px);
+    transform: translateY(100px);
   }
   100% {
     opacity: 1;

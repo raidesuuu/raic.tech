@@ -18,6 +18,31 @@ console.info('[loadSidebar.ts]: Loading Sidebar...')
 ;(document.querySelector('.p-4')! as HTMLElement).style.display = 'none'
 
 onAuthStateChanged(auth, async (user) => {
+  //check ie
+  if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
+    window.location.href = '/category/infomation/unsupported-browser.html'
+    return
+  }
+
+  if (
+    /Chrome/.test(navigator.userAgent) &&
+    /Google Inc/.test(navigator.vendor) &&
+    (navigator.userAgent.match(/Chrome\/(\d{3})/) ?? [])[1] &&
+    parseInt((navigator.userAgent.match(/Chrome\/(\d{3})/) ?? [])[1]) < 107
+  ) {
+    window.location.href = '/category/infomation/unsupported-browser.html'
+    return
+  } else if (Number.isNaN(parseInt((navigator.userAgent.match(/Chrome\/(\d{3})/) ?? [])[1]))) {
+    window.location.href = '/category/infomation/unsupported-browser.html'
+    return
+  }
+
+  //ie
+  if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
+    window.location.href = '/category/infomation/unsupported-browser.html'
+    return
+  } 
+
   if (user === null) {
     console.log('[loadSidebar.ts] User is not signed in')
 

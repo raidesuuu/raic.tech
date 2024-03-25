@@ -70,7 +70,7 @@
             ><br />
             <p>
               <i class="far fa-shield color-red"></i>メッセージを送信すると、<a
-                href="/chat/tos.html"
+                href="/chat/docs/tos.html"
                 target="_blank"
                 noopener
                 noreferrer
@@ -100,10 +100,68 @@
             <h2 id="app-message-dialog-title">2段階認証を無効にする</h2>
             <p id="app-message-dialog-description">パスワードと2段階認証のコードを入力して続行します。</p>
 
-            <button id="app-message-dialog-button" class="is-hidden button is-danger"><i class="fas fa-check"></i>続行</button>
+            <button id="app-message-dialog-button" class="is-hidden button is-danger">
+              <i class="fas fa-check"></i>続行
+            </button>
             <button
               onclick="document.querySelector('#app-message-dialog').close();"
               id="app-message-dialog-close"
+              class="button is-primary"
+              aria-label="close"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="app-report-dialog">
+      <div id="app-report-dialog-content" class="modal">
+        <div class="modal-background"></div>
+
+        <div class="modal-content">
+          <div class="box">
+            <h2 id="app-report-dialog-title">メッセージを通報</h2>
+            <p id="app-report-dialog-description">
+              このメッセージをどの理由で通報しますか？<br />
+              送信する前に、Rai Chatの利用規約を<a href="/chat/docs/tos.html" target="_blank" noreferrer noopener
+                >こちら</a
+              >からご覧ください。
+            </p>
+            <!--report type-->
+            <div class="field">
+              <div class="control" id="app-report-dialog-type">
+                <h2><input type="radio" name="report-type" value="spam" checked /> スパム</h2>
+                <p>
+                  スパム、広告、詐欺、不正なリンク、不正な画像、不正なファイルを送信している場合に選択してください。
+                </p>
+                <h2><input type="radio" name="report-type" value="harassment" /> 言葉と情報の発信</h2>
+                <p>
+                  他者を傷つける言葉、差別的な言葉、暴言、性的な言葉、人の気分を害する言葉、虚偽の情報を発信している場合に選択してください。
+                </p>
+                <h2><input type="radio" name="report-type" value="other" /> その他</h2>
+                <p>
+                  その他のRai Chatの利用規約に違反している場合に選択してください。<br />
+                  このオプションを選択した場合、報告の詳細を入力する必要があります。
+                </p>
+              </div>
+            </div>
+
+            <textarea
+              id="app-report-dialog-message"
+              class="input"
+              style="width: 500px; height: 100px"
+              placeholder="詳細"
+            ></textarea
+            ><br />
+
+            <button id="app-report-dialog-button" class="is-hidden button is-danger">
+              <i class="fas fa-check"></i>送信
+            </button>
+            <button
+              onclick="document.querySelector('#app-report-dialog').close();"
+              id="app-report-dialog-close"
               class="button is-primary"
               aria-label="close"
             >

@@ -7,9 +7,12 @@
 
 import {
   TotpMultiFactorGenerator,
+  browserLocalPersistence,
+  browserSessionPersistence,
   getAuth,
   getMultiFactorResolver,
   onAuthStateChanged,
+  setPersistence,
   signInWithEmailAndPassword,
 } from 'firebase/auth'
 import { moveToPanel } from './rai'
@@ -21,6 +24,7 @@ const auth = getAuth()
 
 const SigninButton = document.getElementById('SigninSubmit') as HTMLButtonElement
 const SigninError = document.getElementById('SigninError') as HTMLElement
+const SigninRemember = document.getElementById('SigninRemember') as HTMLInputElement
 
 const email = document.getElementById('LoginEmail') as HTMLInputElement
 const password = document.getElementById('LoginPassword') as HTMLInputElement
@@ -44,6 +48,18 @@ SigninButton.addEventListener('click', () => {
     return
   }
 
+  if (SigninRemember.checked) {
+    setPersistence(auth, browserLocalPersistence).then(() => {
+      login()
+    })
+  } else {
+    setPersistence(auth, browserSessionPersistence).then(() => {
+      login()
+    })
+  }
+})
+
+function login() {
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then(() => {
       if (state === 'student') {
@@ -87,7 +103,7 @@ SigninButton.addEventListener('click', () => {
         showNotice(SigninError, errorContent)
       }
     })
-})
+}
 
 function showNotice(element: HTMLElement, message: string) {
   element.classList.remove('is-hidden')
