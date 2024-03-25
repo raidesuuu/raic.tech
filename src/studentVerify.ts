@@ -9,10 +9,7 @@ const db = getFirestore()
 ;(function () {
   onAuthStateChanged(getAuth(), async (user) => {
     console.log('[StudentVerification_PageChecker : INFO (studentVerify.ts)] Checking page...')
-    if (
-      window.location.pathname === ('/student/app/' as string) ||
-      window.location.pathname === ('/student/app/index.html' as string)
-    ) {
+    if (window.location.pathname === ('/student/app/' as string)) {
       console.log(
         '[StudentVerification_PageChecker : INFO (studentVerify.ts)] Page: Student Verification Application Page.',
       )
