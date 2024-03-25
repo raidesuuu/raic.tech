@@ -15,9 +15,12 @@ window.addEventListener('DOMContentLoaded', () => {
   window.removeEventListener('DOMContentLoaded', () => {
     console.info('[EventHandler : INFO (index.ts)] Removed DOMContentLoaded event listener.')
   })
+
   if (getHostname() == 'raic.tech') {
-    document.querySelectorAll('a').forEach((element) => {
-      element.href = element.href.replace('.html', '')
-    })
+    setTimeout(() => {
+      document.querySelectorAll('a').forEach((element) => {
+        element.href = element.href.replace('.html', '')
+      })
+    }, 100)
   }
 })
