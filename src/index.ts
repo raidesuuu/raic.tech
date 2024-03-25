@@ -6,7 +6,7 @@
 */
 
 import './index.scss'
-import { getVersion, getURL } from './rai'
+import { getVersion, getURL, getHostname } from './rai'
 
 window.addEventListener('DOMContentLoaded', () => {
   console.info('[EventHandler : INFO (index.ts)] DOMContentLoaded event has been fired.')
@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
   window.removeEventListener('DOMContentLoaded', () => {
     console.info('[EventHandler : INFO (index.ts)] Removed DOMContentLoaded event listener.')
   })
-  if (getURL() == 'https://raic.tech') {
+  if (getHostname() == 'raic.tech') {
     document.querySelectorAll('a').forEach((element) => {
       element.href = element.href.replace('.html', '')
     })
