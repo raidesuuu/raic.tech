@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!--meta-->
+    <title>Rai APIとRai Chat APIについて | 雷のサイト</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Rai APIとRai ChatのAPIに関する情報。" />
+    <link rel="canonical" href="https://raic.tech/" />
+
+    <meta content="雷のサイト" property="og:title" />
+    <meta content="Rai APIとRai ChatのAPIに関する情報。" property="og:description" />
+    <meta content="https://raic.tech" property="og:url" />
+    <meta content="https://raic.tech/images/profile-image.png" property="og:image" />
+    <meta content="#43B581" data-react-helmet="true" name="theme-color" />
+
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="/css/index.css" />
+
+    <!--Favicon-->
+    <link rel="icon" href="/images/profile-image.png" />
+
+    <!--Script-->
+
+    <script src="/js/menu.js"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3326621014935824"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body style="display: none">
+    <header></header>
+    <section class="columns p-4 m-0">
+      <div class="submenu column is-4" id="settings-sidebar"></div>
+      <div class="content">
+        <h1 style="font-size: 5vh">Rai APIとRai Chat APIについて</h1>
+        <p>Rai APIとRai ChatのAPIに関する情報。</p>
+        <h3>最終更新日: 2024/03/26</h3>
+        <h2>Rai APIとは</h2>
+        <p>
+          雷のAPIへ自分でリクエストすることでサイトのアクションを実行できるのがRai APIです。<br />
+          現在、Rai APIにはRai Chat
+          APIのみが付属しています。今後から、アカウントの作成等のアクションも行えるようになります。
+        </p>
+        <h2>Rai Chat上でのAPIを使用して送信したポストの見た目</h2>
+        <div class="card">
+          <div class="card-content">
+            <p>
+              UpLauncher Automated <i class="fas fa-check color-blue mr1px"></i
+              ><i class="far fa-user bot color-red"></i>(2024/03/24 0:00:00)
+              <i class="far fa-heart mr1px color-red favorite"></i>1: Hello World!
+            </p>
+          </div>
+        </div>
+        <h2>Rai APIのプランについて</h2>
+        <p><small>※R=読み取り、W=書き込み</small></p>
+        <table style="width: 50vw">
+          <tr>
+            <th></th>
+            <th>Rai API Free</th>
+            <th>Rai API Basic</th>
+            <th>Rai API Pro</th>
+            <th>Rai API Pro+</th>
+          </tr>
+          <tr>
+            <td class="table-title">メッセージの読み取り</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td class="table-title">メッセージの書き込み</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td class="table-title">メッセージを削除</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td class="table-title">メッセージをいいね</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td class="table-title">
+              APIでのメッセージの検索<small><a href="#w-1">※1</a></small>
+            </td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td class="table-title">プレミアム機能の使用</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td class="table-title">URLを使用する</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td class="table-title">メッセージを通報</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td class="table-title">APIからの送信マークを削除</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td class="table-title">チェックマークを削除</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td class="table-title">レートリミット</td>
+            <td>3R/30s・1W/m</td>
+            <td>6R/30s・3W/m</td>
+            <td>16R/30s・12W/m</td>
+            <td>カスタム(20~60R・M/30s)</td>
+          </tr>
+          <tr>
+            <td class="table-title">ランクの価格</td>
+            <td>0円</td>
+            <td>
+              プレミアム以上に付属<br />
+              <small>約400円・約700円</small>
+            </td>
+            <td>約2,100円/月</td>
+            <td>
+              カスタム<br />
+              <small>0円、約2,500円～約5,000円</small>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <!--/auth/api/-->
+            <td><a class="button is-dark disabled" href="javascript:void(0)">準備中</a></td>
+            <td><a class="button is-primary" href="/auth/panel/patreon.html" target="_blank">購入する</a></td>
+            <td><a class="button is-primary" href="/auth/panel/patreon.html" target="_blank">購入する</a></td>
+            <td><a class="button is-primary" href="/api/sales.html" target="_blank">セールスへ</a></td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <footer></footer>
+
+    <script src="/js/api-sidebar.js"></script>
+    <script src="/js/index.js"></script>
+  </body>
+</html>

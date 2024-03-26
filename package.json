@@ -1,13 +1,13 @@
 {
   "name": "raic.dev",
-  "version": "0.0.7-beta",
+  "version": "0.0.8-beta",
   "description": "A personal website for Rai.",
   "main": "index.js",
   "devDependencies": {
     "@types/qrcode": "^1.5.5",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
-    "bulma": "^0.9.4",
+    "bulma": "^1.0.0",
     "concurrently": "^8.2.2",
     "css-loader": "^6.10.0",
     "eslint": "^8.56.0",

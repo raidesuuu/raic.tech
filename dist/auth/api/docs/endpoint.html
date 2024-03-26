@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!--meta-->
+    <title>Rai Chat APIのエンドポイント | 雷のサイト</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Rai Chat APIのエンドポイント一覧。" />
+    <link rel="canonical" href="https://raic.tech/" />
+
+    <meta content="雷のサイト" property="og:title" />
+    <meta content="Rai Chat APIのエンドポイント一覧。" property="og:description" />
+    <meta content="https://raic.tech" property="og:url" />
+    <meta content="https://raic.tech/images/profile-image.png" property="og:image" />
+    <meta content="#43B581" data-react-helmet="true" name="theme-color" />
+
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="/css/index.css" />
+
+    <!--Favicon-->
+    <link rel="icon" href="/images/profile-image.png" />
+
+    <!--Script-->
+
+    <script src="/js/menu.js"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3326621014935824"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body style="display: none">
+    <header></header>
+    <section class="columns p-4 m-0">
+      <div class="submenu column is-4" id="settings-sidebar"></div>
+      <div class="content">
+        <h1 style="font-size: 5vh">Rai Chat APIのエンドポイント</h1>
+        <p>Rai APIとRai ChatのAPIに関する情報。</p>
+        <h3>最終更新日: 2024/03/26</h3>
+        <h2>エンドポイント</h2>
+        <p>ベースのエンドポイントURL。<br /></p>
+        <div class="rcs-code">
+          <p style="margin-left: 10px">
+            Content-Type: application/json<br />
+            Authorization: Bearer YOUR_API_TOKEN<br />
+            X-UserId: YOUR_USER_ID
+          </p>
+        </div>
+        <ul>
+          <li>
+            メッセージの読み取り: POST・/chat/v1/[pro/]read<br />
+            レスポンス:
+            <div class="rcs-code">
+              <p style="margin-left: 10px">
+                200 OK.<br />
+                {<br />
+                &nbsp;&nbsp;"status": "success"<br />
+                &nbsp;&nbsp;"id": "1711354545489-dh1J8AmiGAP4bg70Fawe1Lhl3adw1",<br />
+                &nbsp;&nbsp;"message": "Hello World!",<br />
+                &nbsp;&nbsp;"timestamp": 1711354545489,<br />
+                &nbsp;&nbsp;"is_api": true,<br />
+                &nbsp;&nbsp;"likes": 0,<br />
+                &nbsp;&nbsp;"user": {<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;"id": "aokOO190912OKAspsldap10P012l0",<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;"name": "UpLauncher Automated",<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;"badge": "verified",<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;"color": "blue"<br />
+                &nbsp;&nbsp;}<br />
+                }
+              </p>
+            </div>
+          </li>
+          <li>
+            メッセージの書き込み: POST・/chat/v1/[pro/]write<br />
+            リクエストの内容(body):
+            <div class="rcs-code">
+              <p style="margin-left: 10px">
+                {<br />
+                &nbsp;&nbsp;"message": "Hello World!"<br />
+                &nbsp;&nbsp;//premium only<br />
+                &nbsp;&nbsp;"hide_api_label": false<br />
+                &nbsp;&nbsp;"hide_checkmark": false<br />
+                }
+              </p>
+            </div>
+            レスポンス:
+            <div class="rcs-code">
+              <p style="margin-left: 10px">
+                200 OK.<br />
+                {<br />
+                &nbsp;&nbsp;"status": "success"<br />
+                &nbsp;&nbsp;"id": "1711354545489-dh1J8AmiGAP4bg70Fawe1Lhl3adw1"<br />
+                }
+              </p>
+            </div>
+          </li>
+          <li>
+            メッセージの削除: POST・/chat/v1/[pro/]delete<br />
+            自分のメッセージのみを削除することができます。<br />
+            リクエストの内容(body):
+            <div class="rcs-code">
+              <p style="margin-left: 10px">
+                {<br />
+                &nbsp;&nbsp;"id": "1711354545489-dh1J8AmiGAP4bg70Fawe1Lhl3adw1"<br />
+                }
+              </p>
+            </div>
+            レスポンス:
+            <div class="rcs-code">
+              <p style="margin-left: 10px">
+                200 OK.<br />
+                {<br />
+                &nbsp;&nbsp;"status": "success" }
+              </p>
+            </div>
+          </li>
+          <li>
+            メッセージのいいね: POST・/chat/v1/[pro/]like<br />
+            リクエストの内容(body):
+            <div class="rcs-code">
+              <p style="margin-left: 10px">
+                {<br />
+                &nbsp;&nbsp;"id": "1711354545489-dh1J8AmiGAP4bg70Fawe1Lhl3adw1"<br />
+                }
+              </p>
+            </div>
+            レスポンス:
+            <div class="rcs-code">
+              <p style="margin-left: 10px">
+                200 OK.<br />
+                {<br />
+                &nbsp;&nbsp;"status": "success" }
+              </p>
+            </div>
+          </li>
+          <li>
+            メッセージの検索: POST・/chat/v1/[pro/]search<br />
+            リクエストの内容(body):
+            <div class="rcs-code">
+              <p style="margin-left: 10px">
+                {<br />
+                &nbsp;&nbsp;"query": "Hello World!"<br />
+                }
+              </p>
+            </div>
+            レスポンス:
+            <div class="rcs-code">
+              <p style="margin-left: 10px">
+                200 OK.<br />
+                {<br />
+                &nbsp;&nbsp;"status": "success"<br />
+                &nbsp;&nbsp;"id": "1711354545489-dh1J8AmiGAP4bg70Fawe1Lhl3adw1",<br />
+                &nbsp;&nbsp;"message": "Hello World!",<br />
+                &nbsp;&nbsp;"timestamp": 1711354545489,<br />
+                &nbsp;&nbsp;"is_api": true,<br />
+                &nbsp;&nbsp;"likes": 0,<br />
+                &nbsp;&nbsp;"user": {<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;"id": "aokOO190912OKAspsldap10P012l0",<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;"name": "UpLauncher Automated",<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;"badge": "verified",<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;"color": "blue"<br />
+                &nbsp;&nbsp;}<br />
+                }
+              </p>
+            </div>
+          </li>
+          <li>
+            メッセージを通報: POST・/chat/v1/[pro/]report<br />
+            リクエストの内容(body):
+            <div class="rcs-code">
+              <p style="margin-left: 10px">
+                {<br />
+                &nbsp;&nbsp;"id": "1711354545489-dh1J8AmiGAP4bg70Fawe1Lhl3adw1"<br />
+                }
+              </p>
+            </div>
+            レスポンス:
+            <div class="rcs-code">
+              <p style="margin-left: 10px">
+                200 OK.<br />
+                {<br />
+                &nbsp;&nbsp;"status": "success" }
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <footer></footer>
+
+    <script src="/js/api-sidebar.js"></script>
+    <script src="/js/index.js"></script>
+  </body>
+</html>

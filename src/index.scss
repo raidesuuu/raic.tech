@@ -6,10 +6,10 @@
 */
 
 @charset "utf-8";
-@import '../node_modules/bulma/bulma.sass';
+@import '../node_modules/bulma/bulma.scss';
 
-// Dark mode for Bulma
-@import './dark.scss';
+// REMOVED: Dark mode for Bulma
+//@import './dark.scss';
 
 // Dialog for HTML
 @import './dialog.scss';
@@ -226,6 +226,7 @@ label {
 .fa-solid,
 .fas,
 .far,
+.fab,
 .fad {
   margin-right: 10px;
 }
@@ -249,7 +250,6 @@ label {
 }
 
 .menu {
-  background: #fafafa;
   height: 100vh;
 }
 
@@ -295,6 +295,9 @@ div.content {
 }
 
 /* TODO: comment */
+header {
+  background-color: hsl(0, 0%, 98%);
+}
 // ボタンがコンテナからはみ出るのを修正
 button {
   width: auto;
@@ -328,7 +331,7 @@ button {
   transform: translateY(0);
   animation-timeline: scroll();
 
-  animation-range: 10% 75%;
+  animation-range: 0% 70%;
 }
 .pfanim {
   animation: pFfadeIn 1s;
