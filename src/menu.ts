@@ -5,14 +5,12 @@
     Description: Menu module for the Rai Website.
 */
 
-import { getAuth, onAuthStateChanged, User } from '@firebase/auth'
+import { getAuth, onAuthStateChanged } from '@firebase/auth'
 import { InitApp } from './firebase'
 
 InitApp()
 
-setTimeout(() => {
-  document.body.style.display = 'block'
-}, 1000)
+const isHeaderLoadingCompleted = false
 
 document.addEventListener('DOMContentLoaded', () => {
   console.info('[EventHandler : INFO (menu.ts)]: Loading menu... (header, footer)')
@@ -31,7 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const auth = getAuth()
-      onAuthStateChanged(auth, (user: User | null) => {
+      onAuthStateChanged(auth, (user) => {
+        console.info(user)
         if (user !== null) {
           // User is signed in
           window.localStorage.setItem('userId', user.uid)
@@ -41,23 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const signinElement = document.getElementById('signin')
           const panelElement = document.getElementById('panel')
           const logoutElement = document.getElementById('logout')
-          const newPanelElement = document.getElementById('newPanel')
 
           // Check if the elements exist
-          if (
-            signupElement == null ||
-            signinElement == null ||
-            panelElement == null ||
-            logoutElement == null ||
-            newPanelElement == null
-          )
-            return
+          if (signupElement == null || signinElement == null || panelElement == null || logoutElement == null) return
 
-          if (window.location.pathname === '/auth/panel/patreon.html') {
-            // this is not used
-            console.info('[EventHandler : INFO (menu.ts)]: Panel page detected, showing new panel button')
-            newPanelElement.classList.remove('is-hidden')
-          }
+          console.log('payphone')
 
           // If the elements exist, add or remove classes
           signupElement.classList.add('is-hidden')
@@ -71,6 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
             window.localStorage.removeItem('userId')
             window.location.reload()
           })
+
+          document.body.style.display = 'block'
+        } else {
+          document.body.style.display = 'block'
         }
 
         // Get the elements
@@ -79,8 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
           if (searchBar.value === '') return
           window.location.href = 'https://cse.google.com/cse?cx=3463a8dc396be47a7&q=' + searchBar.value
         })
-
-        document.body.style.display = 'block'
       })
 
       const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0)
@@ -117,7 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (element !== null) {
         // If the element exists, set the innerHTML to the response
         element.innerHTML = response
-        document.body.style.display = 'block'
       } else {
         // If the element does not exist, log an error
         console.error('[XHR : menu.ts : P1]: No footer element found')
