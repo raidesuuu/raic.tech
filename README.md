@@ -10,7 +10,7 @@
 
 `firebase.ts`に次のコードを追加してください。(APIキー等は編集してください)
 
-Firebaseのコンフィグ編集についてヘルプが必要ですか？[こちら](https://firebase.google.com/docs/auth/web/start?hl=ja)をご覧ください。
+Firebaseの構成についてヘルプが必要ですか？[こちら](https://firebase.google.com/docs/auth/web/start?hl=ja)をご覧ください。
 
 ```typescript
 import { initializeApp } from 'firebase/app'
