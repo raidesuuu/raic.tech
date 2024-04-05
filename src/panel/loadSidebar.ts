@@ -19,29 +19,27 @@ console.info('[loadSidebar.ts]: Loading Sidebar...')
 
 onAuthStateChanged(auth, async (user) => {
   //check ie
-  if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
-    window.location.href = '/category/infomation/unsupported-browser.html'
-    return
-  }
-
   if (
     /Chrome/.test(navigator.userAgent) &&
     /Google Inc/.test(navigator.vendor) &&
+    navigator.userAgent.includes('Chrome') &&
     (navigator.userAgent.match(/Chrome\/(\d{3})/) ?? [])[1] &&
     parseInt((navigator.userAgent.match(/Chrome\/(\d{3})/) ?? [])[1]) < 107
   ) {
     window.location.href = '/category/infomation/unsupported-browser.html'
     return
   } else if (Number.isNaN(parseInt((navigator.userAgent.match(/Chrome\/(\d{3})/) ?? [])[1]))) {
-    window.location.href = '/category/infomation/unsupported-browser.html'
-    return
+    if (navigator.userAgent.includes('Chrome')) {
+      window.location.href = '/category/infomation/unsupported-browser.html'
+      return
+    }
   }
 
   //ie
   if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
     window.location.href = '/category/infomation/unsupported-browser.html'
     return
-  } 
+  }
 
   if (user === null) {
     console.log('[loadSidebar.ts] User is not signed in')
@@ -78,6 +76,7 @@ onAuthStateChanged(auth, async (user) => {
       console.info('[loadSidebar.ts] Sidebar loaded')
 
       const premiumUpsellText = document.getElementById('premiumUpgradeUpsell_Text') as HTMLElement
+      const premiumUpsellContainer = document.getElementById('premiumUpgradeUpsell_Container') as HTMLElement
       const premiumUpsellButton = document.getElementById('premiumUpgradeUpsell_Button') as HTMLAnchorElement
       const query = await getDoc(doc(db, 'patreonlinkstatus', user.uid))
       if (!query.exists()) {
@@ -85,6 +84,7 @@ onAuthStateChanged(auth, async (user) => {
         return
       }
       //7d
+      console.log(query.data().lastChecked, Date.now())
       if (
         query.data().lastChecked + 604800000 < Date.now() &&
         query.data().plan !== 'free' &&
@@ -92,7 +92,7 @@ onAuthStateChanged(auth, async (user) => {
         query.data().isStudent === false
       ) {
         setDoc(doc(db, 'patreonlinkstatus', user.uid), {
-          linked: true,
+          linked: false,
           id: user?.uid,
           isStudent: false,
           isExpired: true,
@@ -103,7 +103,7 @@ onAuthStateChanged(auth, async (user) => {
       //1y student
       if (query.data().lastChecked + 31556952000 < Date.now() && query.data().isStudent) {
         setDoc(doc(db, 'patreonlinkstatus', user.uid), {
-          linked: true,
+          linked: false,
           id: 'student-' + user?.uid,
           isStudent: false,
           isExpired: true,
@@ -123,19 +123,19 @@ onAuthStateChanged(auth, async (user) => {
 
       switch (query.data().plan) {
         case 'owner':
-          premiumUpsellText.textContent = 'おめでとうございます。あなたのアカウントはオーナー権限を持っています。'
-          premiumUpsellButton.classList.add('is-hidden')
+          premiumUpsellText.textContent = "UpLauncherの管理者権限がアクティブです。プレミアムプラスの機能とRai Chatの管理機能が利用可能です。"
+          premiumUpsellButton.classList.add("is-hidden")
           break
-        case 'enhanced':
-          premiumUpsellText.textContent = 'おめでとうございます。あなたのEnhancedはアクティブです。'
-          premiumUpsellButton.classList.add('is-hidden')
+        case 'premiumplus':
+          premiumUpsellText.textContent = "プレミアムプラスへアップグレードしていただき、ありがとうございます。最高級プランをお楽しみください。"
+          premiumUpsellButton.classList.add("is-hidden")
           break
         case 'premium':
-          premiumUpsellText.textContent = 'おめでとうございます。あなたのプレミアムはアクティブです。'
+          premiumUpsellText.textContent = 'プレミアムプラスにアップグレードすると、メッセージが強調表示されたり、実験中の機能を利用できます。'
           premiumUpsellButton.innerHTML = '<i class="fas fa-money-bill"></i>アップグレード'
           break
         case 'standard':
-          premiumUpsellText.textContent = 'おめでとうございます。あなたのStandardはアクティブです。'
+          premiumUpsellText.textContent = 'プレミアムプラスにアップグレードすると、Rai API Basic、メッセージの強調表示、実験中の機能を利用できます。'
           premiumUpsellButton.textContent = '<i class="fas fa-money-bill"></i>アップグレード'
           break
         case 'free':
@@ -144,7 +144,7 @@ onAuthStateChanged(auth, async (user) => {
 
       if (query.data().isStudent) {
         premiumUpsellText.textContent =
-          'おめでとうございます。あなたのアカウントは学生プランを持っています。(学生の間、無料です)'
+          'あなたは、プレミアムプラスを無料で利用する資格を持っています。学生の間、無料です。'
         premiumUpsellButton.classList.add('is-hidden')
       }
       if (query.data().isExpired) {

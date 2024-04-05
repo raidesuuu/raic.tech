@@ -53,27 +53,19 @@
             こんにちは。この文章を読んでいるのは雷かソースコードを読んでいる方だけでしょう。<br />
             この機能は、ローカル環境(10.249.176.251:8080)からPatreonアカウントをリンクするためのものです。
           </p>
-          <a
-            class="button is-primary"
-            href="https://www.patreon.com/oauth2/authorize?response_type=code&client_id=yKTcSFN-9G6eAUiu31dOcpGPaCfzhgEulQZ8B8oVgCqTuz_n1K4JPTNy5VF0wY5i&redirect_uri=http://10.249.176.251:8080/auth/fallback/patreon.html"
-            >[LOCAL] Patreonアカウントをリンク</a
-          >
+          <a class="button is-primary" href="https://www.patreon.com/oauth2/authorize?response_type=code&client_id=yKTcSFN-9G6eAUiu31dOcpGPaCfzhgEulQZ8B8oVgCqTuz_n1K4JPTNy5VF0wY5i&redirect_uri=http://10.249.176.251:8080/auth/fallback/patreon.html">[LOCAL] Patreonアカウントをリンク</a>
         </div>
 
         <h1>1. プレミアムのサブスクリプションを購入</h1>
         <p>
           Patreonで、Standard以上のランクを購入してください。<br />
-          サブスクリプション(ランク)についての詳細は<a href="/category/infomation/ranks">こちら</a>をご覧ください。
+          サブスクリプション(ランク)についての詳細は<a href="/category/infomation/ranks">こちら</a>をご覧ください。<br><br>
+
+          サブスクリプションを購入すると、<a href="/category/infomation/purchaser-tos.html">購入者の利用規約</a>に同意したことになります。
         </p>
-        <a href="https://www.patreon.com/checkout/raisandesu?rid=21880320" class="button is-dark"
-          ><i class="fas fa-cart-arrow-down"></i>Standardを購入</a
-        >
-        <a href="https://www.patreon.com/checkout/raisandesu?rid=10216194" class="button is-primary"
-          ><i class="fas fa-cart-arrow-down"></i>Premiumを購入</a
-        >
-        <a href="https://www.patreon.com/checkout/raisandesu?rid=21880338" class="button is-dark"
-          ><i class="fas fa-cart-arrow-down"></i>Enhancedを購入</a
-        >
+        <a href="https://www.patreon.com/checkout/raisandesu?rid=21880320" class="button"><i class="fas fa-cart-arrow-down"></i>ベーシックを購入</a>
+        <a href="https://www.patreon.com/checkout/raisandesu?rid=10216194" class="button is-primary"><i class="fas fa-cart-arrow-down"></i>プレミアムを購入</a>
+        <a href="https://www.patreon.com/checkout/raisandesu?rid=21880338" class="button"><i class="fas fa-cart-arrow-down"></i>プレミアムプラスを購入</a>
 
         <h1>2. Patreonアカウントのリンク</h1>
 
@@ -88,16 +80,10 @@
           </div>
         </article>
 
-        <a
-          class="button is-primary"
-          href="https://www.patreon.com/oauth2/authorize?response_type=code&client_id=yKTcSFN-9G6eAUiu31dOcpGPaCfzhgEulQZ8B8oVgCqTuz_n1K4JPTNy5VF0wY5i&redirect_uri=https://raic.tech/auth/fallback/patreon.html"
-          id="buttonLinkPatreon"
-          >Patreonアカウントをリンク</a
-        >
+        <a class="button is-primary" href="https://www.patreon.com/oauth2/authorize?response_type=code&client_id=yKTcSFN-9G6eAUiu31dOcpGPaCfzhgEulQZ8B8oVgCqTuz_n1K4JPTNy5VF0wY5i&redirect_uri=https://raic.tech/auth/fallback/patreon.html" id="buttonLinkPatreon">Patreonアカウントをリンク</a>
         <p id="labelLinkInfo" class="is-hidden">
           既にPatreonアカウントをリンクしています。リンクした後に購入した場合は、リンクしなおしてください。<br />
-          Patreonアカウントのリンクを解除しますか？<a href="javascript:void(0)" id="labelUnlinkPatreon">こちら</a
-          >をクリックしてください。
+          Patreonアカウントのリンクを解除しますか？<a href="javascript:void(0)" id="labelUnlinkPatreon">こちら</a>をクリックしてください。
         </p>
       </div>
     </section>
@@ -109,26 +95,18 @@
         <div class="modal-content">
           <div class="box">
             <h2>Patreonアカウントのリンクを解除しますか？</h2>
-            <p>
-              この機能はPatreonアカウントの連携にバグが発生した場合や、リンクした後にランクを購入したときに使ってください。<br />
-            </p>
+            <p>この機能はPatreonアカウントの連携にバグが発生した場合や、リンクした後にランクを購入したときに使ってください。<br /></p>
             <br />
             <ul>
               <li>・プレミアムの特典を利用できなくなります。</li>
               <li>・オーナー権限を持っている場合、失います。</li>
             </ul>
-            <button onclick="document.querySelector('#unlinkConfirm').close();" class="button is-dark">
-              キャンセル
-            </button>
+            <button onclick="document.querySelector('#unlinkConfirm').close();" class="button is-dark">キャンセル</button>
             <button id="buttonUnlinkPatreon" class="button is-danger">リンクを解除</button>
           </div>
         </div>
 
-        <button
-          onclick="document.querySelector('#unlinkConfirm').close();"
-          class="modal-close is-large"
-          aria-label="close"
-        ></button>
+        <button onclick="document.querySelector('#unlinkConfirm').close();" class="modal-close is-large" aria-label="close"></button>
       </div>
     </dialog>
 

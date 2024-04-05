@@ -100,7 +100,7 @@ const db = getFirestore()
               id: user ? 'student-' + user.uid : '',
               isStudent: true,
               lastChecked: new Date().toISOString(),
-              plan: 'enhanced',
+              plan: 'premiumplus',
             }).then(() => {
               window.location.href = '/student/app?state=success'
             })

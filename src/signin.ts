@@ -6,6 +6,7 @@
 */
 
 import {
+  GoogleAuthProvider,
   TotpMultiFactorGenerator,
   browserLocalPersistence,
   browserSessionPersistence,
@@ -14,6 +15,7 @@ import {
   onAuthStateChanged,
   setPersistence,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from 'firebase/auth'
 import { moveToPanel } from './rai'
 import { InitApp } from './firebase'
@@ -23,6 +25,7 @@ InitApp()
 const auth = getAuth()
 
 const SigninButton = document.getElementById('SigninSubmit') as HTMLButtonElement
+const SigninGoogle = document.getElementById('SigninGoogle') as HTMLButtonElement
 const SigninError = document.getElementById('SigninError') as HTMLElement
 const SigninRemember = document.getElementById('SigninRemember') as HTMLInputElement
 
@@ -41,6 +44,22 @@ const title = document.getElementById('LoginTitle') as HTMLElement
 if (state === 'student') {
   title.textContent = 'ログインして学生連携を続行'
 }
+
+SigninGoogle.addEventListener('click', () => {
+  //google
+  const provider = new GoogleAuthProvider()
+  signInWithPopup(auth, provider)
+    .then(() => {
+      if (state === 'student') {
+        location.href = '/student/app/'
+        return
+      }
+      moveToPanel()
+    })
+    .catch((error) => {
+      showNotice(SigninError, error.message)
+    })
+})
 
 SigninButton.addEventListener('click', () => {
   if (email.value === '' || password.value === '') {
@@ -73,9 +92,9 @@ function login() {
       const errorContent = error.message
 
       if (errorCode == 'auth/user-not-found') {
-        showNotice(SigninError, 'ユーザーが見つかりませんでした。')
+        showNotice(SigninError, 'アカウントが見つかりませんでした。')
       } else if (errorCode == 'auth/invalid-password' || errorCode == 'auth/invalid-credential') {
-        showNotice(SigninError, 'パスワードが間違っています。')
+        showNotice(SigninError, 'メールアドレスがパスワードが間違っています。')
       } else if (errorCode == 'auth/multi-factor-auth-required') {
         const mfaResolver = getMultiFactorResolver(getAuth(), error)
 

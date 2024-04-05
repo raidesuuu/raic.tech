@@ -62,7 +62,7 @@ export function getPaidStatus(data: { data: { currently_enabled_tiers: string; i
   try {
     const patreonData = JSON.stringify(data)
     if (patreonData.includes('"id":"21880338"')) {
-      return { type: 'enhanced', id: data.data.id }
+      return { type: 'premiumplus', id: data.data.id }
     } else if (patreonData.includes('"id": "10216194"')) {
       return { type: 'premium', id: data.data.id }
     } else if (patreonData.includes('"id": "21880320"')) {

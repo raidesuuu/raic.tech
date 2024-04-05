@@ -22,8 +22,8 @@
     <link rel="icon" href="/images/profile-image.png" />
 
     <!--JavaScript-->
-    
-<script src="/js/menu.js"></script>
+
+    <script src="/js/menu.js"></script>
   </head>
 
   <body style="display: none">
@@ -39,14 +39,13 @@
 
         <redirect id="rd_remove" />
         <h2><i class="fas fa-xmark"></i> アカウントを削除</h2>
-        <p>
-          アカウントを削除すると、以下のデータが削除されます。<br />
-          <ul>
-            <li>アカウント情報</li>
-            <li>(将来)Rai Chatのすべてのデータ</li>
-            <li>プレミアムのリンク設定</li>
-          </ul>
-        </p>
+        <p>アカウントを削除すると、以下のデータが削除されます。<br /></p>
+        <ul>
+          <li>アカウント情報</li>
+          <li>(将来)Rai Chatのすべてのデータ</li>
+          <li>プレミアムのリンク設定</li>
+        </ul>
+        <div id="RemoveAccountPasswordProvider">
           <label for="RemoveAccountPassword"><i class="fas fa-input-text"></i> パスワード</label><br />
           <input class="input" id="RemoveAccountPassword" type="password" /><br /><br />
 
@@ -54,17 +53,22 @@
             <label for="RemoveAccountTFA"><i class="fas fa-shield"></i> 2段階認証コードを入力</label><br />
             <input class="input" id="RemoveAccountTFA" type="number" /><br /><br />
           </div>
+        </div>
 
-          <label class="checkbox">
-            <input type="checkbox" id="RemoveAccountVerify">
-            アカウントを削除するとすべてのデータが削除されて戻せないことを理解しました。
-          </label><br><br>
+        <button class="button is-danger is-hidden" id="RemoveAccountGoogle">
+          <i class="fab fa-google"></i>Googleでサインイン
+        </button><br>
 
-          <p id="RemoveAccountAlert" class="is-hidden"><i class="fas fa-info"></i><label></label><br /></p>
+        <label class="checkbox">
+          <input type="checkbox" id="RemoveAccountVerify" />
+          アカウントを削除するとすべてのデータが削除されて戻せないことを理解しました。 </label
+        ><br /><br />
 
-          <button class="button is-danger" disabled id="RemoveAccountSubmit">
-            <i class="fas fa-circle-xmark"></i>アカウントを削除</button
-          ><br /><br />
+        <p id="RemoveAccountAlert" class="is-hidden"><i class="fas fa-info"></i><label></label><br /></p>
+
+        <button class="button is-danger" disabled id="RemoveAccountSubmit">
+          <i class="fas fa-circle-xmark"></i>アカウントを削除</button
+        ><br /><br />
       </div>
     </section>
 

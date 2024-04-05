@@ -107,6 +107,13 @@ window.addEventListener('DOMContentLoaded', () => {
       passwordTfaContainer.classList.remove('is-hidden')
     }
 
+    if (user.providerData[0].providerId === 'google.com') {
+      showNotice(passwordAlert, 'Googleアカウントでログインしているため、パスワードを変更できません。')
+      passwordSubmit.disabled = true
+
+      tfaOpenDialog.disabled = true
+    }
+
     tfaOpenDialog.addEventListener('click', async () => {
       if (multiFactor(user).enrolledFactors.length > 0) {
         tfaDisableDialogContainer.classList.add('is-active')

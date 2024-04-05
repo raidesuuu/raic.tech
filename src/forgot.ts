@@ -15,7 +15,7 @@ const auth = getAuth()
 
 const ForgotSubmit = document.getElementById('ForgotSubmit') as HTMLButtonElement
 const ForgotError = document.getElementById('ForgotError') as HTMLElement
-const ForgotNotify = document.getElementById('ForgotNotify') as HTMLElement
+const ForgotNotify = document.getElementById('ForgotSuccess') as HTMLElement
 
 const email = document.getElementById('ForgotEmail') as HTMLInputElement
 
@@ -31,6 +31,7 @@ ForgotSubmit.addEventListener('click', () => {
     return
   }
 
+  console.log(email.value)
   sendPasswordResetEmail(auth, email.value).then(() => {
     ForgotNotify.classList.remove('is-hidden')
   }).catch((error) => {

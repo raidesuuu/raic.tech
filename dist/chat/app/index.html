@@ -23,11 +23,7 @@
     <!--Script-->
 
     <script src="/js/menu.js"></script>
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3326621014935824"
-      crossorigin="anonymous"
-    ></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3326621014935824" crossorigin="anonymous"></script>
   </head>
 
   <body style="display: none">
@@ -50,9 +46,7 @@
               <li><i class="fas fa-check color-green"></i>チェックマークを非表示にする (v0.0.6で)</li>
             </ul>
           </div>
-          <a href="/auth/panel/patreon.html" style="margin-top: 10px" class="button is-primary"
-            ><i class="fas fas fa-money-bill"></i>プレミアムにアップグレード</a
-          >
+          <a href="/auth/panel/patreon.html" style="margin-top: 10px" class="button is-primary"><i class="fas fas fa-money-bill"></i>プレミアムにアップグレード</a>
         </aside>
         <h1>Rai Chat</h1>
         <p>
@@ -61,22 +55,8 @@
         </p>
         <div class="field">
           <div class="control">
-            <textarea
-              id="app-message"
-              class="input"
-              style="width: 500px; height: 100px"
-              placeholder="メッセージ"
-            ></textarea
-            ><br />
-            <p>
-              <i class="far fa-shield color-red"></i>メッセージを送信すると、<a
-                href="/chat/docs/tos.html"
-                target="_blank"
-                noopener
-                noreferrer
-                >Rai Chatの利用規約</a
-              >に同意したとみなされます。
-            </p>
+            <textarea id="app-message" class="input" style="width: 500px; height: 100px" placeholder="メッセージ"></textarea><br />
+            <p><i class="far fa-shield color-red"></i>メッセージを送信すると、<a href="/chat/docs/tos.html" target="_blank">Rai Chatの利用規約</a>に同意したとみなされます。<br /></p>
             <button id="app-send-message" class="button is-primary">送信</button><br />
             <p id="app-message-alert" class="is-hidden"><i class="fas fa-info"></i><label></label></p>
           </div>
@@ -84,7 +64,9 @@
 
         <h2>タイムライン</h2>
         <input type="text" class="input" id="searchInput" placeholder="ワード、名前、時間で検索" />
-        <ul id="app-timeline"></ul>
+        <ul id="app-timeline">
+          <li style="display: none">Test</li>
+        </ul>
         <div id="searchResultNotFoundContainer" class="is-hidden">
           <p>検索結果が見つかりませんでした。</p>
         </div>
@@ -103,17 +85,8 @@
             <h2 id="app-message-dialog-title">2段階認証を無効にする</h2>
             <p id="app-message-dialog-description">パスワードと2段階認証のコードを入力して続行します。</p>
 
-            <button id="app-message-dialog-button" class="is-hidden button is-danger">
-              <i class="fas fa-check"></i>続行
-            </button>
-            <button
-              onclick="document.querySelector('#app-message-dialog').close();"
-              id="app-message-dialog-close"
-              class="button is-primary"
-              aria-label="close"
-            >
-              OK
-            </button>
+            <button id="app-message-dialog-button" class="is-hidden button is-danger"><i class="fas fa-check"></i>続行</button>
+            <button onclick="document.querySelector('#app-message-dialog').close();" id="app-message-dialog-close" class="button is-primary" aria-label="close">OK</button>
           </div>
         </div>
       </div>
@@ -128,48 +101,57 @@
             <h2 id="app-report-dialog-title">メッセージを通報</h2>
             <p id="app-report-dialog-description">
               このメッセージをどの理由で通報しますか？<br />
-              送信する前に、Rai Chatの利用規約を<a href="/chat/docs/tos.html" target="_blank" noreferrer noopener
-                >こちら</a
-              >からご覧ください。
+              送信する前に、Rai Chatの利用規約を<a href="/chat/docs/tos.html" target="_blank">こちら</a>からご覧ください。
             </p>
             <!--report type-->
             <div class="field">
               <div class="control" id="app-report-dialog-type">
                 <h2><input type="radio" name="report-type" value="spam" checked /> スパム</h2>
-                <p>
-                  スパム、広告、詐欺、不正なリンク、不正な画像、不正なファイルを送信している場合に選択してください。
-                </p>
+                <p>スパム、広告、詐欺、不正なリンク、不正な画像、不正なファイルを送信している場合に選択してください。</p>
                 <h2><input type="radio" name="report-type" value="harassment" /> 言葉と情報の発信</h2>
-                <p>
-                  他者を傷つける言葉、差別的な言葉、暴言、性的な言葉、人の気分を害する言葉、虚偽の情報を発信している場合に選択してください。
-                </p>
+                <p>他者を傷つける言葉、差別的な言葉、暴言、性的な言葉、人の気分を害する言葉、虚偽の情報を発信している場合に選択してください。</p>
                 <h2><input type="radio" name="report-type" value="other" /> その他</h2>
                 <p>
                   その他のRai Chatの利用規約に違反している場合に選択してください。<br />
                   このオプションを選択した場合、報告の詳細を入力する必要があります。
                 </p>
+                <h2><input type="radio" name="report-type" value="dmca" /> 著作権</h2>
+                <p>著作権を侵害している可能性があるメッセージを報告する</p>
               </div>
             </div>
 
-            <textarea
-              id="app-report-dialog-message"
-              class="input"
-              style="width: 500px; height: 100px"
-              placeholder="詳細"
-            ></textarea
-            ><br />
+            <div class="box">
+              <h2>自分が著作権者・著作権者の正式な代理人の場合</h2>
+              <p><a href="/chat/docs/dmca.html">このページ</a>を使って連絡してください。早急にUpLauncher スタッフが対応させていただきます。</p>
+            </div>
 
-            <button id="app-report-dialog-button" class="is-hidden button is-danger">
-              <i class="fas fa-check"></i>送信
-            </button>
-            <button
-              onclick="document.querySelector('#app-report-dialog').close();"
-              id="app-report-dialog-close"
-              class="button is-primary"
-              aria-label="close"
-            >
-              OK
-            </button>
+            <textarea id="app-report-dialog-message" class="input" style="width: 500px; height: 100px" placeholder="詳細"></textarea><br />
+
+            <button id="app-report-dialog-button" class="is-hidden button is-danger"><i class="fas fa-check"></i>送信</button>
+            <button onclick="document.querySelector('#app-report-dialog').close();" id="app-report-dialog-close" class="button is-primary" aria-label="close">OK</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="app-edit-dialog">
+      <div id="app-edit-dialog-content" class="modal">
+        <div class="modal-background"></div>
+
+        <div class="modal-content">
+          <div class="box">
+            <h2>メッセージを編集</h2>
+            <p>※メッセージを編集機能は、実験中の機能です。予期しない問題が発生することがあります。</p>
+
+            <div class="field">
+              <div class="control">
+                <textarea id="app-edit-content" class="input" style="width: 500px; height: 100px" placeholder="メッセージ"></textarea><br />
+                <p id="app-edit-alert" class="is-hidden"><i class="fas fa-info"></i><label></label></p>
+              </div>
+            </div>
+
+            <button id="app-edit-message" class="button is-primary">編集</button>
+            <button onclick="document.querySelector('#app-edit-dialog').close();" class="button" aria-label="close">閉じる</button>
           </div>
         </div>
       </div>

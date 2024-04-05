@@ -103,7 +103,7 @@ function docData(paidStatus: any) {
     linked: true,
     id: paidStatus.id,
     isStudent: false,
-    lastChecked: new Date().toISOString(),
+    lastChecked: Date.now(),
     plan: paidStatus.type,
   }
 }

@@ -6,7 +6,7 @@
     Description: Main scss file for website.
 */
 /* Bulma Utilities */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&display=swap");
 :root {
   --bulma-control-radius: var(--bulma-radius);
   --bulma-control-radius-small: var(--bulma-radius-small);
@@ -43220,8 +43220,74 @@ html {
 }
 
 body {
-  font-family: "Segoe UI", "Noto Sans JP" !important;
+  font-family: "Segoe UI", "Montserrat", "Noto Sans JP", sans-serif;
   width: 100%;
+}
+
+/* Font Apply */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold !important;
+}
+
+/* timeline highlighting */
+#app-timeline > .highlighted {
+  border-style: solid;
+  border-width: 1px;
+  border-color: gold;
+  border-radius: 12px;
+}
+#app-timeline > .highlighted div.message {
+  margin-left: 6px;
+}
+
+section.disabled {
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* デフォルトのチェックボックスを非表示に */
+input[type=checkbox] {
+  display: none;
+}
+
+.checkbox {
+  position: relative;
+  padding: 5px 30px;
+  cursor: pointer;
+}
+
+.checkbox:before {
+  width: 16px; /* チェックボックスの幅 */
+  height: 16px; /* チェックボックスの高さ */
+  left: 5px;
+  border: 1px solid #ccc; /* チェックボックスの枠 */
+  border-radius: 3px;
+  margin-top: -8px;
+}
+
+.checkbox:after,
+.checkbox:before {
+  position: absolute;
+  content: "";
+  top: 50%;
+}
+
+.checkbox::after {
+  position: absolute;
+  width: 5px;
+  height: 9px;
+  top: 50%;
+  left: 10.5px;
+  border-right: 2px solid #0091e6; /* チェックマークの色 */
+  border-bottom: 3px solid #0091e6; /* チェックマークの色 */
+  content: "";
+  margin-top: -6px;
+  opacity: 0;
+  transform: rotate(45deg);
+}
+
+input[type=checkbox]:checked + .checkbox::after {
+  opacity: 1;
 }
 
 .auth_2fa_code_container {

@@ -131,6 +131,11 @@ onAuthStateChanged(auth, (user) => {
       })
   })
 
+  if (user.providerData[0].providerId === 'google.com') {
+    showNotice(emailAlert, 'Googleアカウントでログインしているため、メールアドレスを変更できません。')
+    emailSubmit.disabled = true
+  }
+
   NameSubmit.addEventListener('click', () => {
     if (NameNew.value === '') {
       NameAlert.textContent = '新しい名前を入力してください'

@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     console.info('[EventHandler : INFO (index.ts)] Removed DOMContentLoaded event listener.')
   })
 
-  if (getHostname() == 'raic.tech') {
-    document.querySelectorAll('a').forEach((element) => {
+  document.querySelectorAll('a').forEach((element) => {
+    if (getHostname() == 'raic.tech') {
       element.href = element.href.replace('.html', '')
-    })
-  }
+    }
+  })
 })

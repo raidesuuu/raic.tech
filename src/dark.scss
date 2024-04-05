@@ -6,6 +6,7 @@
 */
 
 // <html>
+
 html.dark {
   background-color: #000000 !important;
   color: #fff !important;
@@ -52,46 +53,6 @@ html.dark {
   textarea {
     background-color: #333 !important;
     color: #fff !important;
-  }
-
-  /* デフォルトのチェックボックスを非表示に */
-  input[type='checkbox'] {
-    display: none;
-  }
-  .checkbox {
-    position: relative;
-    padding: 5px 30px;
-    cursor: pointer;
-  }
-  .checkbox:before {
-    width: 16px; /* チェックボックスの幅 */
-    height: 16px; /* チェックボックスの高さ */
-    left: 5px;
-    border: 1px solid #ccc; /* チェックボックスの枠 */
-    border-radius: 3px;
-    margin-top: -8px;
-  }
-  .checkbox:after,
-  .checkbox:before {
-    position: absolute;
-    content: '';
-    top: 50%;
-  }
-  .checkbox::after {
-    position: absolute;
-    width: 5px;
-    height: 9px;
-    top: 50%;
-    left: 10.5px;
-    border-right: 2px solid #0091e6; /* チェックマークの色 */
-    border-bottom: 3px solid #0091e6; /* チェックマークの色 */
-    content: '';
-    margin-top: -6px;
-    opacity: 0;
-    transform: rotate(45deg);
-  }
-  input[type='checkbox']:checked + .checkbox::after {
-    opacity: 1;
   }
 
   // a:hover, p.navbar-link

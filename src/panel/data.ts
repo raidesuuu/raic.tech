@@ -14,6 +14,9 @@ import {
   onAuthStateChanged,
   getMultiFactorResolver,
   TotpMultiFactorGenerator,
+  GoogleAuthProvider,
+  reauthenticateWithPopup,
+  UserCredential,
 } from 'firebase/auth'
 import { NotLoggedError } from '../rai'
 
@@ -24,11 +27,16 @@ const auth = getAuth()
 
 window.addEventListener('DOMContentLoaded', () => {
   const removePassword = document.getElementById('RemoveAccountPassword') as HTMLInputElement
+  const removeGoogle = document.getElementById('RemoveAccountGoogle') as HTMLButtonElement
   const removeAlert = document.getElementById('RemoveAccountAlert') as HTMLElement
   const removeCheck = document.getElementById('RemoveAccountVerify') as HTMLInputElement
   const removeSubmit = document.getElementById('RemoveAccountSubmit') as HTMLButtonElement
   const removeTfa = document.getElementById('RemoveAccountTFA') as HTMLButtonElement
   const removeTfaContainer = document.getElementById('RemoveAccountTFAContainer') as HTMLDivElement
+  const removePasswordContainer = document.getElementById('RemoveAccountPasswordProvider') as HTMLDivElement
+
+  let GoogleCredential = {} as UserCredential
+  let isGoogleSigned = false
 
   if (
     removePassword === null ||
@@ -36,7 +44,9 @@ window.addEventListener('DOMContentLoaded', () => {
     removeSubmit === null ||
     removeTfa === null ||
     removeTfaContainer === null ||
-    removeCheck === null
+    removeCheck === null ||
+    removePasswordContainer === null ||
+    removeGoogle === null
   ) {
     console.error('[data.ts : P1]: No Required element found')
 
@@ -53,7 +63,26 @@ window.addEventListener('DOMContentLoaded', () => {
       removeTfaContainer.classList.remove('is-hidden')
     }
 
-    removeCheck.addEventListener('change', () => {
+    if (user.providerData[0].providerId === 'google.com') {
+      removePasswordContainer.classList.add('is-hidden')
+      removeGoogle.classList.remove('is-hidden')
+
+      removeGoogle.addEventListener('click', () => {
+        const provider = new GoogleAuthProvider()
+        reauthenticateWithPopup(user, provider).then((cred: UserCredential) => {
+          GoogleCredential = cred // Update the type of GoogleCredential to Credential
+          removeGoogle.disabled = true
+
+          isGoogleSigned = true
+        })
+      })
+    }
+
+    removeCheck.addEventListener('change', (e) => {
+      if (user.providerData[0].providerId === 'google.com' && !isGoogleSigned) {
+        e.preventDefault()
+        removeCheck.checked = false
+      }
       if (removeCheck.checked) {
         removeSubmit.disabled = false
       } else {
@@ -62,13 +91,20 @@ window.addEventListener('DOMContentLoaded', () => {
     })
 
     removeSubmit.addEventListener('click', () => {
-      if (removePassword.value === '') {
-        showNotice(removeAlert, 'パスワードを入力してください。')
-        return
-      }
+      if (user.providerData[0].providerId != 'google.com') {
+        if (removePassword.value === '') {
+          showNotice(removeAlert, 'パスワードを入力してください。')
+          return
+        }
 
-      if (multiFactor(user).enrolledFactors.length > 0 && removeTfa.value === '') {
-        showNotice(removeAlert, 'すべてのフィールドを入力してください。')
+        if (multiFactor(user).enrolledFactors.length > 0 && removeTfa.value === '') {
+          showNotice(removeAlert, 'すべてのフィールドを入力してください。')
+          return
+        }
+      } else {
+        deleteUser(GoogleCredential.user).then(() => {
+          window.location.href = '/auth/signin.html?account_removed=1'
+        })
         return
       }
 
