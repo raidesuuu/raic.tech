@@ -40,3 +40,5 @@ IssuesとPull requestsを快適に使用するために、下記のルールに�
 ## クレジット
 
 最新のクレジットについては、[こちら](https://raic.tech)のフッター欄をご覧ください。
+
+This project is tested with BrowserStack.
