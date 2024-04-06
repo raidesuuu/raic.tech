@@ -5,11 +5,9 @@
     Description: Menu module for the Rai Website.
 */
 
-import { getAuth, onAuthStateChanged } from '@firebase/auth'
-import { InitApp } from './firebase'
-
-InitApp()
-
+import { onAuthStateChanged } from '@firebase/auth'
+import { auth } from './firebase'
+import { getURL } from './rai'
 const isHeaderLoadingCompleted = false
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -28,48 +26,51 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('[XHR : ERROR (menu.ts)]: No header element found')
       }
 
-      const auth = getAuth()
-      onAuthStateChanged(auth, (user) => {
-        console.info(user)
-        if (user !== null) {
-          // User is signed in
-          window.localStorage.setItem('userId', user.uid)
+      if (!getURL().includes('panel')) {
+        console.log("罪ha")
+        onAuthStateChanged(auth, (user) => {
+          if (user !== null) {
+            // User is signed in
+            window.localStorage.setItem('userId', user.uid)
 
-          // Get the elements
-          const signupElement = document.getElementById('signup')
-          const signinElement = document.getElementById('signin')
-          const panelElement = document.getElementById('panel')
-          const logoutElement = document.getElementById('logout')
+            // Get the elements
+            const signupElement = document.getElementById('signup')
+            const signinElement = document.getElementById('signin')
+            const panelElement = document.getElementById('panel')
+            const logoutElement = document.getElementById('logout')
 
-          // Check if the elements exist
-          if (signupElement == null || signinElement == null || panelElement == null || logoutElement == null) return
+            // Check if the elements exist
+            if (signupElement == null || signinElement == null || panelElement == null || logoutElement == null) return
 
-          console.log('payphone')
+            console.log('payphone')
 
-          // If the elements exist, add or remove classes
-          signupElement.classList.add('is-hidden')
-          signinElement.classList.add('is-hidden')
-          panelElement.classList.remove('is-hidden')
-          logoutElement.classList.remove('is-hidden')
-          // Add the event listener
-          logoutElement.addEventListener('click', () => {
-            // Sign out
-            auth.signOut()
-            window.localStorage.removeItem('userId')
-            window.location.reload()
-          })
+            // If the elements exist, add or remove classes
+            signupElement.classList.add('is-hidden')
+            signinElement.classList.add('is-hidden')
+            panelElement.classList.remove('is-hidden')
+            logoutElement.classList.remove('is-hidden')
+            // Add the event listener
+            logoutElement.addEventListener('click', () => {
+              // Sign out
+              auth.signOut()
+              window.localStorage.removeItem('userId')
+              window.location.reload()
+            })
 
-          document.body.style.display = 'block'
-        } else {
-          document.body.style.display = 'block'
-        }
-
-        // Get the elements
-        document.getElementById('SearchBarSearch')?.addEventListener('click', () => {
-          const searchBar = document.getElementById('SearchBar') as HTMLInputElement
-          if (searchBar.value === '') return
-          window.location.href = 'https://cse.google.com/cse?cx=3463a8dc396be47a7&q=' + searchBar.value
+            document.body.style.display = 'block'
+          } else {
+            document.body.style.display = 'block'
+          }
         })
+      } else {
+        console.log("罪")
+      }
+
+      // Get the elements
+      document.getElementById('SearchBarSearch')?.addEventListener('click', () => {
+        const searchBar = document.getElementById('SearchBar') as HTMLInputElement
+        if (searchBar.value === '') return
+        window.location.href = 'https://cse.google.com/cse?cx=3463a8dc396be47a7&q=' + searchBar.value
       })
 
       const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0)

@@ -19,13 +19,12 @@ import {
 
 import { NotLoggedError } from '../rai'
 import { verifyBeforeUpdateEmail } from 'firebase/auth'
-import { InitApp } from '../firebase'
+import { auth } from '../firebase'
 
 //Initialize Firebase
-InitApp()
-const auth = getAuth()
 
 onAuthStateChanged(auth, (user) => {
+  console.log("yay")
   if (user === null) {
     window.location.href = '/auth/signin.html'
     throw new NotLoggedError('User is not signed in')

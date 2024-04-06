@@ -7,12 +7,10 @@
 
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { getFirestore, getDoc, doc, setDoc } from 'firebase/firestore'
-import { InitApp } from '../firebase'
+import { getApp } from 'firebase/app'
+import { auth, firestore } from '../firebase'
 
 //Initialize Firebase
-InitApp()
-const auth = getAuth()
-const db = getFirestore()
 
 console.info('[loadSidebar.ts]: Loading Sidebar...')
 ;(document.querySelector('.p-4')! as HTMLElement).style.display = 'none'
@@ -66,6 +64,39 @@ onAuthStateChanged(auth, async (user) => {
     return
   }
 
+  if (user !== null) {
+    // User is signed in
+    window.localStorage.setItem('userId', user.uid)
+
+    // Get the elements
+    const signupElement = document.getElementById('signup')
+    const signinElement = document.getElementById('signin')
+    const panelElement = document.getElementById('panel')
+    const logoutElement = document.getElementById('logout')
+
+    // Check if the elements exist
+    if (signupElement == null || signinElement == null || panelElement == null || logoutElement == null) return
+
+    console.log('payphone')
+
+    // If the elements exist, add or remove classes
+    signupElement.classList.add('is-hidden')
+    signinElement.classList.add('is-hidden')
+    panelElement.classList.remove('is-hidden')
+    logoutElement.classList.remove('is-hidden')
+    // Add the event listener
+    logoutElement.addEventListener('click', () => {
+      // Sign out
+      auth.signOut()
+      window.localStorage.removeItem('userId')
+      window.location.reload()
+    })
+
+    document.body.style.display = 'block'
+  } else {
+    document.body.style.display = 'block'
+  }
+
   //loadSidebar
   const sidebarRequest = new XMLHttpRequest()
   sidebarRequest.open('GET', '/auth/panel/sidebar.html', true)
@@ -80,7 +111,7 @@ onAuthStateChanged(auth, async (user) => {
       const premiumUpsellText = document.getElementById('premiumUpgradeUpsell_Text') as HTMLElement
       const premiumUpsellContainer = document.getElementById('premiumUpgradeUpsell_Container') as HTMLElement
       const premiumUpsellButton = document.getElementById('premiumUpgradeUpsell_Button') as HTMLAnchorElement
-      const query = await getDoc(doc(db, 'patreonlinkstatus', user.uid))
+      const query = await getDoc(doc(firestore, 'patreonlinkstatus', user.uid))
       if (!query.exists()) {
         ;(document.querySelector('.p-4')! as HTMLElement).style.display = ''
         return
@@ -88,7 +119,7 @@ onAuthStateChanged(auth, async (user) => {
       //7d
       console.log(query.data().lastChecked, Date.now())
       if (query.data().lastChecked + 604800000 < Date.now() && query.data().plan !== 'free' && query.data().plan !== 'owner' && query.data().isStudent === false) {
-        setDoc(doc(db, 'patreonlinkstatus', user.uid), {
+        setDoc(doc(firestore, 'patreonlinkstatus', user.uid), {
           linked: false,
           id: user?.uid,
           isStudent: false,
@@ -99,7 +130,7 @@ onAuthStateChanged(auth, async (user) => {
       }
       //1y student
       if (query.data().lastChecked + 31556952000 < Date.now() && query.data().isStudent) {
-        setDoc(doc(db, 'patreonlinkstatus', user.uid), {
+        setDoc(doc(firestore, 'patreonlinkstatus', user.uid), {
           linked: false,
           id: 'student-' + user?.uid,
           isStudent: false,

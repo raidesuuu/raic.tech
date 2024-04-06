@@ -9,10 +9,8 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { getFirestore, setDoc, collection, getDocs, doc } from 'firebase/firestore'
 
 import { getCode, getPaidStatus, moveToPanel, NotLoggedError } from './rai'
-import { InitApp } from './firebase'
+import { auth } from './firebase'
 
-InitApp()
-const auth = getAuth()
 const db = getFirestore()
 
 onAuthStateChanged(auth, async (user) => {

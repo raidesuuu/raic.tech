@@ -1,13 +1,12 @@
 //import firestore
-import { InitApp } from './firebase'
+import { auth } from './firebase'
 import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
-InitApp()
 const db = getFirestore()
 
 ;(function () {
-  onAuthStateChanged(getAuth(), async (user) => {
+  onAuthStateChanged(auth, async (user) => {
     console.log('[StudentVerification_PageChecker : INFO (studentVerify.ts)] Checking page...')
     if (window.location.pathname === ('/student/app/' as string)) {
       console.log(

@@ -6,11 +6,7 @@
 */
 
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { InitApp } from '../firebase'
-
-//Initialize Firebase
-InitApp()
-const auth = getAuth()
+import { auth } from '../firebase'
 
 console.info('[api/loadSidebar.ts]: Loading Sidebar...')
 ;(document.querySelector('.p-4')! as HTMLElement).style.display = 'none'

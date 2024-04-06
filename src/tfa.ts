@@ -13,11 +13,7 @@ import {
   signInWithEmailAndPassword,
 } from '@firebase/auth'
 import { moveToPanel } from './rai'
-import { InitApp } from './firebase'
-
-// Initialize Firebase
-InitApp()
-const auth = getAuth()
+import { auth } from './firebase'
 
 const tfaCode = document.getElementById('tfaCode') as HTMLInputElement
 const tfaSubmit = document.getElementById('tfaSubmit') as HTMLButtonElement

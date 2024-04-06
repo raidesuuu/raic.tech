@@ -5,14 +5,11 @@
     Description: Patreon module for the Rai Website.
 */
 
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { onAuthStateChanged } from 'firebase/auth'
 import { getFirestore, getDoc, doc, deleteDoc } from 'firebase/firestore'
 import { NotLoggedError } from '../rai'
-import { InitApp } from '../firebase'
+import { auth } from '../firebase'
 
-//Initialize Firebase
-InitApp()
-const auth = getAuth()
 const db = getFirestore()
 
 onAuthStateChanged(auth, async (user) => {
@@ -32,8 +29,7 @@ onAuthStateChanged(auth, async (user) => {
   //url params "?error=already_linked"
   console.log(window.location.search)
   if (window.location.search.includes('error=already_linked')) {
-    patreonErrorText.innerHTML =
-      '<p>このPatreonアカウントは既に他のアカウントでリンクされています。<br>サポートが必要ですか？<a href="/contact">ご連絡ください。</a></p>'
+    patreonErrorText.innerHTML = '<p>このPatreonアカウントは既に他のアカウントでリンクされています。<br>サポートが必要ですか？<a href="/contact">ご連絡ください。</a></p>'
     patreonError.classList.remove('is-hidden')
   }
 

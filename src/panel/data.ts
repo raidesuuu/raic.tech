@@ -20,10 +20,7 @@ import {
 } from 'firebase/auth'
 import { NotLoggedError } from '../rai'
 
-import { InitApp } from '../firebase'
-
-InitApp()
-const auth = getAuth()
+import { auth } from '../firebase'
 
 window.addEventListener('DOMContentLoaded', () => {
   const removePassword = document.getElementById('RemoveAccountPassword') as HTMLInputElement

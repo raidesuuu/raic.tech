@@ -7,11 +7,7 @@
 
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/auth'
 import { moveToPanel } from './rai'
-import { InitApp } from './firebase'
-
-// Initialize Firebase
-InitApp()
-const auth = getAuth()
+import { auth } from './firebase'
 
 const submit = document.getElementById('signup') as HTMLButtonElement
 

@@ -18,11 +18,7 @@ import {
 } from 'firebase/auth'
 import { NotLoggedError } from '../rai'
 import qrcode from 'qrcode'
-import { InitApp } from '../firebase'
-
-//Initialize Firebase
-InitApp()
-const auth = getAuth()
+import { auth } from '../firebase'
 
 window.addEventListener('DOMContentLoaded', () => {
   const passwordOld = document.getElementById('ChangePasswordCurrent') as HTMLInputElement

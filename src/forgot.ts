@@ -7,11 +7,7 @@
 
 import { sendPasswordResetEmail, getAuth, onAuthStateChanged } from 'firebase/auth'
 import { moveToPanel } from './rai'
-import { InitApp } from './firebase'
-
-// Initialize Firebase
-InitApp()
-const auth = getAuth()
+import { auth } from './firebase'
 
 const ForgotSubmit = document.getElementById('ForgotSubmit') as HTMLButtonElement
 const ForgotError = document.getElementById('ForgotError') as HTMLElement

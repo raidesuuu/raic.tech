@@ -18,11 +18,7 @@ import {
   signInWithPopup,
 } from 'firebase/auth'
 import { moveToPanel } from './rai'
-import { InitApp } from './firebase'
-
-// Initialize Firebase
-InitApp()
-const auth = getAuth()
+import { auth } from './firebase'
 
 const SigninButton = document.getElementById('SigninSubmit') as HTMLButtonElement
 const SigninGoogle = document.getElementById('SigninGoogle') as HTMLButtonElement
