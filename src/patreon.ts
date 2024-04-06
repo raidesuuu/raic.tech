@@ -101,6 +101,7 @@ function docData(paidStatus: any) {
     linked: true,
     id: paidStatus.id,
     isStudent: false,
+    isStaff: false,
     lastChecked: Date.now(),
     plan: paidStatus.type,
   }
