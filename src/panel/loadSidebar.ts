@@ -154,7 +154,7 @@ onAuthStateChanged(auth, async (user) => {
           premiumUpsellText.textContent = 'プレミアムプラスにアップグレードすると、メッセージが強調表示されたり、実験中の機能を利用できます。'
           premiumUpsellButton.innerHTML = '<i class="fas fa-money-bill"></i>アップグレード'
           break
-        case 'standard':
+        case 'basic':
           premiumUpsellText.textContent = 'プレミアムプラスにアップグレードすると、Rai API Basic、メッセージの強調表示、実験中の機能を利用できます。'
           premiumUpsellButton.textContent = '<i class="fas fa-money-bill"></i>アップグレード'
           break

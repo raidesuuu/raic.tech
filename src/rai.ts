@@ -42,7 +42,7 @@ export function getHostname() {
 }
 
 export function getVersion() {
-  return '0.0.8-beta'
+  return '0.1-beta'
 }
 
 export function getUserId() {
@@ -65,14 +65,12 @@ export function getPaidStatus(data: { data: { currently_enabled_tiers: string; i
     } else if (patreonData.includes('"id": "10216194"')) {
       return { type: 'premium', id: data.data.id }
     } else if (patreonData.includes('"id": "21880320"')) {
-      return { type: 'standard', id: data.data.id }
+      return { type: 'basic', id: data.data.id }
     } else {
-      console.log('free', patreonData)
       return { type: 'free', id: data.data.id }
     }
   } catch (e) {
     const patreonData = JSON.stringify(data)
-    console.log('free', patreonData, e)
     return { type: 'free', id: data.data.id }
   }
 }

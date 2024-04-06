@@ -45,8 +45,8 @@ onAuthStateChanged(auth, async (user) => {
     case 'premium':
       linkPatreon.textContent = 'プレミアムはアクティブです'
       break
-    case 'standard':
-      linkPatreon.textContent = 'Standardはアクティブです'
+    case 'basic':
+      linkPatreon.textContent = 'ベーシックはアクティブです'
       break
     case 'free':
       linkPatreon.textContent = 'Patreonと連携済み'
