@@ -34,12 +34,12 @@
       <div id="app-content" class="content">
         <h1>プロフィール</h1>
         <div class="box">
-          <img id="app-profile-picture" src="https://pics.prcm.jp/a508a977c6fa9/84540173/png/84540173.png" width="256">
+          <img id="app-profile-picture" src="https://pics.prcm.jp/a508a977c6fa9/84540173/png/84540173.png" width="256" />
           <h3 id="app-profile-username">ユーザー名</h3>
           <p id="app-profile-info">自己紹介</p>
-          <div id="app-profile-edit" class="button">
-            <p></p><i class="far fa-edit"></i>プロフィールを編集</p>
-          </div>
+          <small id="app-profile-followers"></small><br />
+          <button id="app-profile-edit" class="button"><i class="far fa-edit"></i>プロフィールを編集</button>
+          <button id="app-profile-follow" class="button"><i class="far fa-plus"></i>ユーザーをフォロー</button>
         </div>
       </div>
     </section>
@@ -72,14 +72,16 @@
             <div class="field">
               <div class="control">
                 <h4>プロフィール画像</h4>
-                <input id="app-edit-picture" class="input" type="url" placeholder="画像のURL"><br><br>
+                <input id="app-edit-picture" class="input" type="url" placeholder="画像のURL" /><br /><br />
 
                 <h4>名前</h4>
-                <input id="app-edit-name" class="input" type="text" placeholder="あなたの名前"><br>
-                <small>名前かプロフィール画像を変更すると、審査が終了するまでチェックマークが非表示になります。</small><br><br>
+                <input id="app-edit-name" class="input" type="text" placeholder="あなたの名前" /><br />
+                <small>名前かプロフィール画像を変更すると、審査が終了するまでチェックマークが非表示になります。</small><br /><br />
 
-
-                <h4>自己紹介 <div class="tag is-warning">プレミアム</div></h4>
+                <h4>
+                  自己紹介
+                  <div class="tag is-warning">プレミアム</div>
+                </h4>
                 現在、自己紹介はプレミアムユーザーのみ使用できます。
                 <textarea id="app-edit-bio" disabled class="input" style="width: 500px; height: 100px" placeholder="自己紹介"></textarea><br />
                 <p id="app-edit-alert" class="is-hidden"><i class="fas fa-info"></i><label></label></p>

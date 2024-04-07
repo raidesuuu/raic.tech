@@ -114,6 +114,8 @@ function login() {
         showNotice(SigninError, 'リクエストが多すぎます。しばらくしてから再度お試しください。')
       } else if (errorCode == 'auth/invalid-email') {
         showNotice(SigninError, 'メールアドレスが無効です。')
+      } else if (errorCode == 'auth/user-disabled') {
+        showNotice(SigninError, 'このユーザーは、UpLauncherの管理者によって停止されました。')
       } else {
         showNotice(SigninError, errorContent)
       }

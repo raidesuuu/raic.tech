@@ -43240,6 +43240,11 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 6px;
 }
 
+li.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 section.disabled {
   opacity: 0.05;
   pointer-events: none;
