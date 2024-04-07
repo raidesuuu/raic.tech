@@ -91,6 +91,12 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+//li disabled
+li.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 //section disabled
 section.disabled {
   opacity: 0.05;
