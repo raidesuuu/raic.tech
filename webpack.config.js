@@ -18,6 +18,7 @@ module.exports = {
     'js/firebase': './src/firebase.ts',
     'js/patreon': './src/patreon.ts',
     'js/chat-app': './src/chat/app.ts',
+    'js/chat-profile': './src/chat/profile.ts',
     'js/studentVerify': './src/studentVerify.ts',
     'js/chat-settings': './src/chat/settings.ts',
     'js/chat-banned': './src/chat/banned.ts',

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja" class="theme-dark">
+<html lang="ja">
   <head>
     <!--meta-->
     <title>設定 | Rai Chat</title>
@@ -56,26 +56,47 @@
         </section>
         <br />
 
-        <div class="box" id="premiumUpsell">
+        <div class="box" id="basicUpsell">
           <h3>プレミアムプラスにアップグレードして、チェックマーク等の機能を利用しましょう！</h3>
-          <p>プレミアムプラスにアップグレードすると、チェックマーク、メッセージの強調表示や実験中の機能を利用できます。<br>
-          <small>チェックマークはベーシック、プレミアムでも使用可能です。</small></p>
+          <p>
+            プレミアムプラスにアップグレードすると、チェックマーク、メッセージの強調表示や実験中の機能を利用できます。<br />
+            <small>チェックマークはベーシック、プレミアムでも使用可能です。</small>
+          </p>
         </div>
-        <section class="disabled" id="premiumFeatures">
-          <h2>プレミアムの機能</h2>
+        <section class="disabled" id="basicFeatures">
+          <h2>ベーシックの機能</h2>
           <h4>
             <input type="checkbox" id="hide-checkmark" />
             <label for="hide-checkmark" class="checkbox"> チェックマークを非表示にする </label>
-            <div class="tag is-warning">プレミアム</div>
+            <div class="tag is-warning">ベーシック</div>
           </h4>
           <p>
-            チェックマークを非表示にすると、プレミアムを所持しているアカウントであることが他人からわからなくなります。<br />
-            ただし、一部の機能を使用するとプレミアムを所持していることがわかる可能性があります。<br /><br />
+            チェックマークを非表示にすると、メッセージからチェックマークが非表示になります。<br />
+            ただし、一部の機能を使用すると有効なサブスクリプションを所持していることがわかる可能性があります。<br /><br />
 
             あなたがチェックマークを所持していない場合、このオプションは影響しません。<br />
             別のブラウザでこの設定がオフになっていると、チェックマークが再び表示されます。<br /><br />
 
             この設定は、学生、金のチェックマーク、管理者バッジも非表示になります。
+          </p>
+        </section>
+        <br />
+
+        <div class="box" id="premiumUpsell">
+          <h3>プレミアムプラスにアップグレードして、メッセージの強調表示等の機能を利用しましょう！</h3>
+          <p>プレミアムプラスにアップグレードすると、メッセージの強調表示や実験中の機能を利用できます。</p>
+        </div>
+        <section class="disabled" id="premiumFeatures">
+          <h2>プレミアムの機能</h2>
+          <h4>
+            <input type="checkbox" id="edit-message" />
+            <label for="edit-message" class="checkbox"> メッセージの編集 </label>
+            <div class="tag is-warning">ロールアウト済み</div>
+            <div class="tag is-warning">プレミアム</div>
+          </h4>
+          <p>
+            この機能を有効にすると、自分の送信したメッセージを編集することができます。<br />
+            メッセージを編集すると、メッセージに <i class="far fa-edit mr1px"></i>(編集マーク)が表示されます。
           </p>
         </section>
         <br />
@@ -87,24 +108,13 @@
         <section class="disabled" id="premiumPlusFeatures">
           <h2>プレミアムプラスの機能</h2>
           <h4>
-            <input type="checkbox" id="test-highlight" />
-            <label for="test-highlight" class="checkbox"> メッセージの強調表示 </label>
-            <div class="tag is-warning">実験中の機能</div>
+            <input type="checkbox" id="highlight" />
+            <label for="highlight" class="checkbox"> メッセージの強調表示 </label>
             <div class="tag is-warning">プレミアムプラス</div>
           </h4>
           <p>
             メッセージの枠を金にし、メッセージを目立たせてみましょう。<br />
             この設定はすべてのメッセージ(過去のメッセージも)に影響を与えます。
-          </p>
-          <h4>
-            <input type="checkbox" id="edit-message" />
-            <label for="edit-message" class="checkbox"> メッセージの編集 </label>
-            <div class="tag is-warning">実験中の機能</div>
-            <div class="tag is-warning">プレミアムプラス</div>
-          </h4>
-          <p>
-            この機能を有効にすると、自分の送信したメッセージを編集することができます。<br />
-            メッセージを編集すると、メッセージに <i class="far fa-edit mr1px"></i>(編集マーク)が表示されます。
           </p>
         </section>
         <br />

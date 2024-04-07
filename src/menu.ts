@@ -26,8 +26,24 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('[XHR : ERROR (menu.ts)]: No header element found')
       }
 
+      const lightDarkSwitch = document.getElementById("lightDarkSwitch");
+      lightDarkSwitch?.addEventListener("click", () => {
+        if (!document.querySelector("html")?.classList.contains("theme-dark") && !document.querySelector("html")?.classList.contains("theme-light")) {
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.querySelector("html")?.classList.add("theme-light")
+          } else {
+            document.querySelector("html")?.classList.add("theme-dark")
+          }
+        } else if (document.querySelector("html")?.classList.contains("theme-dark")) {
+          document.querySelector("html")?.classList.remove("theme-dark")
+          document.querySelector("html")?.classList.add("theme-light")
+        } else {
+          document.querySelector("html")?.classList.remove("theme-light")
+          document.querySelector("html")?.classList.add("theme-dark")
+        }
+      })
+
       if (!getURL().includes('panel')) {
-        console.log("罪ha")
         onAuthStateChanged(auth, (user) => {
           if (user !== null) {
             // User is signed in
@@ -41,8 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Check if the elements exist
             if (signupElement == null || signinElement == null || panelElement == null || logoutElement == null) return
-
-            console.log('payphone')
 
             // If the elements exist, add or remove classes
             signupElement.classList.add('is-hidden')
@@ -62,8 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.display = 'block'
           }
         })
-      } else {
-        console.log("罪")
       }
 
       // Get the elements

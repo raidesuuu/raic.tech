@@ -43329,6 +43329,14 @@ input[type=checkbox]:checked + .checkbox::after {
   color: #ff1f1f;
 }
 
+.no-deco {
+  text-decoration: none !important;
+}
+
+.no-deco:hover {
+  text-decoration: solid !important;
+}
+
 .mr1px {
   margin-right: 1px !important;
 }

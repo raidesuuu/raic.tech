@@ -5,6 +5,8 @@
     Description: Rai module for the Rai Website.
 */
 
+import { UserDataInterface } from "./chat/raiChatTypes"
+
 export function getURL() {
   return window.location.href
 }
@@ -55,6 +57,29 @@ export function getCode() {
   } catch (e) {
     return null
   }
+}
+
+export function isCheckmarker(userData: UserDataInterface) {
+  const result = userData.paid != 'free' && userData.verified == true && userData.checkmarkState === false
+  return result
+}
+
+/**
+ *
+ * @param element noticeElement型（i、labelが入っているp要素)
+ * @param message (オプション)表示するメッセージ。指定されていない場合、要素を非表示にします。
+ * @returns
+ */
+export function showNotice(element: HTMLElement, message?: string) {
+  if (message == '' || message == null) {
+    element.classList.add('is-hidden')
+    return
+  }
+  element.classList.remove('is-hidden')
+
+  const infoLabel = element.querySelector('label')
+  if (infoLabel === null) throw new Error('No icon found')
+  infoLabel.textContent = message
 }
 
 export function getPaidStatus(data: { data: { currently_enabled_tiers: string; id: string } }) {
