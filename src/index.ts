@@ -5,6 +5,11 @@
     Description: Main module for the Rai Website.
 */
 
+// @ts-ignore
+if (window.document.documentMode) {
+  window.location.href = "/unsupported-browser-fallback.html"
+}
+
 import './index.scss'
 import { getVersion, getURL, getHostname } from './rai'
 

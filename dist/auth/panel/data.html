@@ -42,9 +42,13 @@
         <p>アカウントを削除すると、以下のデータが削除されます。<br /></p>
         <ul>
           <li>アカウント情報</li>
-          <li>(将来)Rai Chatのすべてのデータ</li>
+          <li>Rai Chatの一部のデータ※</li>
           <li>プレミアムのリンク設定</li>
         </ul>
+        <p>
+          ※Rai Chatのメッセージデータは完全には削除されません。また、プロフィールは削除されません。<br />
+          ※プレミアムを登録している場合、アカウントを削除してもサブスクリプションは継続されます。継続したくない場合は、キャンセルしてください。<br>
+        </p>
         <div id="RemoveAccountPasswordProvider">
           <label for="RemoveAccountPassword"><i class="fas fa-input-text"></i> パスワード</label><br />
           <input class="input" id="RemoveAccountPassword" type="password" /><br /><br />
@@ -55,9 +59,7 @@
           </div>
         </div>
 
-        <button class="button is-danger is-hidden" id="RemoveAccountGoogle">
-          <i class="fab fa-google"></i>Googleでサインイン
-        </button><br>
+        <button class="button is-danger is-hidden" id="RemoveAccountGoogle"><i class="fab fa-google"></i>Googleでサインイン<br></button>
 
         <label class="checkbox">
           <input type="checkbox" id="RemoveAccountVerify" />
@@ -66,9 +68,7 @@
 
         <p id="RemoveAccountAlert" class="is-hidden"><i class="fas fa-info"></i><label></label><br /></p>
 
-        <button class="button is-danger" disabled id="RemoveAccountSubmit">
-          <i class="fas fa-circle-xmark"></i>アカウントを削除</button
-        ><br /><br />
+        <button class="button is-danger" disabled id="RemoveAccountSubmit"><i class="fas fa-circle-xmark"></i>アカウントを削除</button><br /><br />
       </div>
     </section>
 

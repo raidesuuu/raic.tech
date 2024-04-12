@@ -39,7 +39,7 @@
   },
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "concurrently \"yarn sass:dev\" \"yarn server:dev\"",
+    "dev": "concurrently \"npm run sass:dev\" \"npm run server:dev\"",
     "server:dev": "webpack-cli serve --mode development",
     "sass:dev": "sass --watch src/index.scss:dist/css/index.css",
     "lint": "eslint --fix ./src/**/*.ts && prettier --write ./src/**/*.ts",

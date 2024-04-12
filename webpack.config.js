@@ -24,6 +24,7 @@ module.exports = {
     'js/chat-settings': './src/chat/settings.ts',
     'js/chat-banned': './src/chat/banned.ts',
     'js/panel-home': './src/panel/home.ts',
+    'js/chat-trend': './src/chat/trend.ts',
     'js/panel-data': './src/panel/data.ts',
     'js/chat-sidebar': './src/chat/loadSidebar.ts',
     'js/api-sidebar': './src/api/loadSidebar.ts',
@@ -36,6 +37,9 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'), // "__dirname"はファイルが存在するディレクトリ
     filename: '[name].js', // [name]はentryで記述した名前（この設定ならbundle）
+    environment: {
+      arrowFunction: false,
+    },
   },
   // import文でファイル拡張子を書かずに名前解決するための設定
   // 例...「import World from './world'」と記述すると"world.ts"という名前のファイルをモジュールとして探す
