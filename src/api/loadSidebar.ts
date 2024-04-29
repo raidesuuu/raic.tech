@@ -11,7 +11,7 @@ import { auth } from '../firebase'
 console.info('[api/loadSidebar.ts]: Loading Sidebar...')
 ;(document.querySelector('.p-4')! as HTMLElement).style.display = 'none'
 
-onAuthStateChanged(auth, async (user) => {
+auth.onAuthStateChanged(async (user) => {
   if (user === null) {
     window.location.href = '/auth/signin.html'
     console.error('[loadSidebar.ts] User is not signed in')

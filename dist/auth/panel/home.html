@@ -49,9 +49,7 @@
         <article class="message is-hidden" id="emailVerificationAlert">
           <div class="message-body has-text-left">
             <p>下のボタンをクリックして、メールアドレスを認証してください。</p>
-            <button class="button is-primary" id="emailVerificationButton">
-              <i class="fas fa-envelope"></i>リンクを送信
-            </button>
+            <button class="button is-primary" id="emailVerificationButton"><i class="fas fa-envelope"></i>リンクを送信</button>
           </div>
         </article>
 
@@ -59,33 +57,24 @@
           <label for="ChangeEmailNew"><i class="fas fa-envelope"></i>新しいメールアドレス</label><br />
           <input class="input" id="ChangeEmailNew" type="email" placeholder="email@example.com" /><br />
 
-          <br><label for="ChangeEmailPassword"><i class="fas fa-input-text"></i>パスワード</label><br />
+          <br /><label for="ChangeEmailPassword"><i class="fas fa-input-text"></i>パスワード</label><br />
           <input class="input" id="ChangeEmailPassword" type="password" /><br /><br />
 
           <div class="is-hidden" id="ChangeEmailTFAContainer">
             <label for="ChangeEmailTFA"><i class="fas fa-shield"></i>認証アプリのコード</label><br />
-            <input class="input" id="ChangeEmailTFA" type="number" /><br /><br />
+            <input
+              id="ChangeEmailTFA"
+              class="input"
+              max="999999"
+              min="0"
+              type="number"
+              oninput="javascript: this.value = this.value.slice(0, 6);"
+            /><br /><br />
           </div>
 
           <p id="ChangeEmailAlert" class="is-hidden"><i class="fas fa-info"></i><label></label><br /></p>
 
-          <button class="button is-primary" id="ChangeEmailSubmit">
-            <i class="fas fa-check"></i>メールアドレスを変更</button
-          ><br /><br />
-        </div>
-
-        <redirect id="rd_displayName" />
-        <h2><i class="fas fa-signature"></i>表示名</h2>
-        <p>
-          Rai Chatやその他サービスなどで表示される名前。<br />
-          表示名を変更すると、チェックマークは審査が終わるまで削除されます。
-        </p>
-
-        <div id="displayNameContainer" class="container">
-          <label for="ChangeNameNewName"><i class="fas fa-signature"></i>新しい表示名</label><br />
-          <input class="input" id="ChangeNameNewName" type="text" required /><br /><br />
-          <p id="ChangeNameAlert" class="is-hidden"><i class="fas fa-info"></i><label></label><br /></p>
-          <button class="button is-dark" id="ChangeNameSubmit"><i class="fas fa-check"></i>表示名を変更</button
+          <button class="button is-primary" id="ChangeEmailSubmit"><i class="fas fa-check"></i>メールアドレスを変更</button
           ><br /><br />
         </div>
       </div>

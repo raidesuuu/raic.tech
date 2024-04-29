@@ -75,6 +75,11 @@ body {
 }
 //===[END] Body Styling [END]===//
 
+/* .half */
+.half {
+  width: 75%
+}
+
 /* Font Apply */
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold !important;
@@ -82,6 +87,38 @@ h1, h2, h3, h4, h5, h6 {
 
 /* timeline highlighting */
 #app-timeline > .highlighted {
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightblue;
+  border-radius: 12px;
+  div.message {
+    margin-left: 6px;
+  }
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  flex: 0.1;
+  border-bottom: 1px solid var(--bulma-hr-background-color);
+}
+
+.separator:not(:empty)::before {
+  margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+  margin-left: .25em;
+}
+
+/* timeline highlighting */
+#app-timeline > .more-highlighted {
   border-style: solid;
   border-width: 1px;
   border-color: gold;

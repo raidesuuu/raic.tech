@@ -5,7 +5,6 @@
     Description: Menu module for the Rai Website.
 */
 
-import { onAuthStateChanged } from '@firebase/auth'
 import { auth } from './firebase'
 import { getURL } from './rai'
 const isHeaderLoadingCompleted = false
@@ -44,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
 
       if (!getURL().includes('panel')) {
-        onAuthStateChanged(auth, (user) => {
+        auth.onAuthStateChanged((user) => {
           if (user !== null) {
             // User is signed in
             window.localStorage.setItem('userId', user.uid)
@@ -76,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.display = 'block'
           }
         })
+        document.body.style.display = 'block'
       }
 
       // Get the elements

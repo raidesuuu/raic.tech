@@ -5,17 +5,16 @@
     Description: Load Sidebar module for the Rai Website.
 */
 
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { getFirestore, getDoc, doc, setDoc } from 'firebase/firestore'
-import { getApp } from 'firebase/app'
+import { getDoc, doc, setDoc } from 'firebase/firestore'
 import { auth, firestore } from '../firebase'
+import { SubscriptionDataInterface } from 'chat/raiChatTypes'
 
 //Initialize Firebase
 
 console.info('[loadSidebar.ts]: Loading Sidebar...')
 ;(document.querySelector('.p-4')! as HTMLElement).style.display = 'none'
 
-onAuthStateChanged(auth, async (user) => {
+auth.onAuthStateChanged((user) => {
   //check ie
   if (
     /Chrome/.test(navigator.userAgent) &&
@@ -65,6 +64,7 @@ onAuthStateChanged(auth, async (user) => {
   }
 
   if (user !== null) {
+    console.log(user.uid)
     // User is signed in
     window.localStorage.setItem('userId', user.uid)
 
@@ -111,41 +111,26 @@ onAuthStateChanged(auth, async (user) => {
       const premiumUpsellText = document.getElementById('premiumUpgradeUpsell_Text') as HTMLElement
       const premiumUpsellContainer = document.getElementById('premiumUpgradeUpsell_Container') as HTMLElement
       const premiumUpsellButton = document.getElementById('premiumUpgradeUpsell_Button') as HTMLAnchorElement
-      const query = await getDoc(doc(firestore, 'patreonlinkstatus', user.uid))
+      const query = await getDoc(doc(firestore, 'subscription-state', user.uid))
+      const userData = query.data() as SubscriptionDataInterface
       if (!query.exists()) {
         ;(document.querySelector('.p-4')! as HTMLElement).style.display = ''
         return
       }
       //7d
-      console.log(query.data().lastChecked, Date.now())
-      if (query.data().lastChecked + 604800000 < Date.now() && query.data().plan !== 'free' && query.data().plan !== 'owner' && query.data().isStudent === false) {
-        setDoc(doc(firestore, 'patreonlinkstatus', user.uid), {
-          linked: false,
-          id: user?.uid,
-          isStudent: false,
-          isExpired: true,
-          lastChecked: new Date().toISOString(),
-          plan: 'free',
-        })
+      if (userData.lastChecked + 604800000 < Date.now() && userData.plan !== 'free' && !userData.isStudent) {
+        userData.isExpired = true
+        userData.plan = 'free'
+        setDoc(doc(firestore, 'subscription-state', user.uid), userData)
       }
       //1y student
-      if (query.data().lastChecked + 31556952000 < Date.now() && query.data().isStudent) {
-        setDoc(doc(firestore, 'patreonlinkstatus', user.uid), {
-          linked: false,
-          id: 'student-' + user?.uid,
-          isStudent: false,
-          isExpired: true,
-          lastChecked: new Date().toISOString(),
-          plan: 'free',
-        })
+      if (userData.lastChecked + 31556952000 < Date.now() && userData.isStudent) {
+        userData.isExpired = true
+        userData.plan = 'free'
+        setDoc(doc(firestore, 'subscription-state', user.uid), userData)
       }
-      console.log('[loadSidebar.ts] User is signed in', '\nUser Plan:', query.data().plan, '\nisStudent (old linked user is undefined): ', query.data().isStudent, '\nisExpired (undefined in not expired): ', query.data().isExpired)
 
-      switch (query.data().plan) {
-        case 'owner':
-          premiumUpsellText.textContent = 'UpLauncherの管理者権限がアクティブです。プレミアムプラスの機能とRai Chatの管理機能が利用可能です。'
-          premiumUpsellButton.classList.add('is-hidden')
-          break
+      switch (userData.plan) {
         case 'premiumplus':
           premiumUpsellText.textContent = 'プレミアムプラスへアップグレードしていただき、ありがとうございます。最高級プランをお楽しみください。'
           premiumUpsellButton.classList.add('is-hidden')
@@ -154,25 +139,21 @@ onAuthStateChanged(auth, async (user) => {
           premiumUpsellText.textContent = 'プレミアムプラスにアップグレードすると、メッセージが強調表示されたり、実験中の機能を利用できます。'
           premiumUpsellButton.innerHTML = '<i class="fas fa-money-bill"></i>アップグレード'
           break
-        case 'basic':
-          premiumUpsellText.textContent = 'プレミアムプラスにアップグレードすると、Rai API Basic、メッセージの強調表示、実験中の機能を利用できます。'
-          premiumUpsellButton.textContent = '<i class="fas fa-money-bill"></i>アップグレード'
-          break
         case 'free':
           break
       }
 
-      if (query.data().isStudent) {
+      if (userData.isStudent) {
         premiumUpsellText.textContent = 'あなたは、プレミアムプラスを無料で利用する資格を持っています。学生の間、無料です。'
         premiumUpsellButton.classList.add('is-hidden')
       }
-      if (query.data().isExpired) {
-        premiumUpsellText.textContent = 'あなたのプランを再確認する必要があります。Patreonアカウントを再リンクしてください。再確認するまで、一時的にプレミアムの特典は利用できなくなります。'
+      if (userData.isExpired) {
+        premiumUpsellText.textContent = 'あなたのプランを再確認する必要があります。サブスクリプションを終了した場合はもう一度決済し、雷へ連絡すると継続できます。'
         premiumUpsellButton.classList.remove('is-hidden')
-        premiumUpsellButton.textContent = 'Patreonアカウントを再リンク'
-        if (query.data().id.includes('student-')) {
+        premiumUpsellButton.textContent = 'サブスクリプションについて'
+        if (userData.id.startsWith('student-')) {
           premiumUpsellText.innerHTML =
-            'あなたが学生であることを再確認する必要があります。再確認するまで、一時的にプレミアムの特典は利用できなくなります。<br>もう学生ではありませんか？<a href="/auth/panel/patreon.html">こちら</a>をクリックしてプレミアムへアップグレードしてください。'
+            'あなたが学生であることを再確認する必要があります。再確認するまで、一時的にプレミアムの特典は利用できなくなります。<br>もう学生ではありませんか？<a href="/auth/panel/subscriptions.html">こちら</a>をクリックしてプレミアムへアップグレードしてください。'
           premiumUpsellButton.textContent = '学生確認へ'
           premiumUpsellButton.href = '/student/'
         }

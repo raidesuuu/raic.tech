@@ -36,9 +36,7 @@
 
       <div class="content">
         <div class="box is-primary">
-          <h3>
-            ログイン機能でGoogle連携が利用できるようになりました。
-          </h3>
+          <h3>ログイン機能でGoogle連携が利用できるようになりました。</h3>
           <p>ただし、メールアドレスの変更・パスワードの変更・二段階認証は使用できません。</p>
         </div>
 
@@ -75,13 +73,18 @@
         <!--Google-->
         <p id="SigninError" class="is-hidden"><i class="fas fa-info"></i><label></label></p>
 
-        <button id="SigninSubmit" class="button is-primary"><i class="fas fa-check"></i>サインイン</button>
-        <button class="button is-danger" id="SigninGoogle"><i class="fab fa-google"></i><div class="tag is-warning">ベータ</div>&nbsp;Googleでサインイン</button
-        ><br /><br />
+        <button id="SigninSubmit" class="button is-primary"><i class="fas fa-check"></i>サインイン</button><br>
+        <div class="separator">Next section</div>
+
+        <button class="button is-success" style="margin-bottom: 10px;" id="SigninGoogle"><i class="fab fa-google"></i>Googleでサインイン</button><br>
+        <button class="button is-danger" style="margin-bottom: 10px;" id="SigninMicrosoft"><i class="fab fa-microsoft" style="font-size: large"></i>Microsoftでサインイン</button><br>
+        <button class="button is-dark" style="margin-bottom: 10px;" id="SigninGitHub"><i class="fab fa-github"></i>GitHubでサインイン</button>
+
 
         <p>
-          パスワードを忘れた場合は<a href="/auth/forgot.html">こちら</a><br />
-          アカウントをお持ちではありませんか？<a href="/auth/signup.html">サインアップ</a>
+          パスワードを忘れた場合は、<a href="/auth/forgot.html">こちら</a>へ。<br />
+          メールリンクでログインする場合は、<a href="/auth/link.html">こちら</a>へ。<br>
+          アカウントをお持ちではありませんか？<a href="/auth/signup.html">サインアップ</a>へ。
         </p>
       </div>
     </section>

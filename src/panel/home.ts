@@ -22,9 +22,8 @@ import { verifyBeforeUpdateEmail } from 'firebase/auth'
 import { auth } from '../firebase'
 
 //Initialize Firebase
-
-onAuthStateChanged(auth, (user) => {
-  console.log("yay")
+auth.onAuthStateChanged((user) => {
+  console.log('yay')
   if (user === null) {
     window.location.href = '/auth/signin.html'
     throw new NotLoggedError('User is not signed in')
@@ -77,21 +76,13 @@ onAuthStateChanged(auth, (user) => {
 
   const emailTFAContainer = document.getElementById('ChangeEmailTFAContainer') as HTMLDivElement
 
-  const NameNew = document.getElementById('ChangeNameNewName') as HTMLInputElement
-  const NameAlert = document.getElementById('ChangeNameAlert') as HTMLElement
-  const NameSubmit = document.getElementById('ChangeNameSubmit') as HTMLButtonElement
-
   emailNew.value = email || 'メールアドレスがありません'
-  NameNew.value = displayName || '名前がありません'
 
   if (
     emailNew === null ||
     emailPassword === null ||
     emailAlert === null ||
     emailSubmit === null ||
-    NameNew === null ||
-    NameAlert === null ||
-    NameSubmit === null ||
     emailTFA === null ||
     helloName === null ||
     helloDate === null ||
@@ -130,34 +121,10 @@ onAuthStateChanged(auth, (user) => {
       })
   })
 
-  if (user.providerData[0].providerId === 'google.com') {
-    showNotice(emailAlert, 'Googleアカウントでログインしているため、メールアドレスを変更できません。')
+  if (user.providerData[0].providerId != 'password') {
+    showNotice(emailAlert, 'メールアドレスとパスワード以外でログインしているため、メールアドレスを変更できません。')
     emailSubmit.disabled = true
   }
-
-  NameSubmit.addEventListener('click', () => {
-    if (NameNew.value === '') {
-      NameAlert.textContent = '新しい名前を入力してください'
-      return
-    }
-
-    updateProfile(user, {
-      displayName: NameNew.value,
-    })
-      .then(() => {
-        showNotice(NameAlert, '名前が変更されました！')
-      })
-      .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-
-        if (errorCode === 'auth/too-many-requests') {
-          showNotice(NameAlert, '短時間に多くのアクションを起こしています。後でお試しください。')
-        } else {
-          NameAlert.textContent = 'エラー: ' + errorMessage
-        }
-      })
-  })
 
   emailSubmit.addEventListener('click', () => {
     if (emailNew.value === '' || emailPassword.value === '') {
@@ -208,7 +175,10 @@ onAuthStateChanged(auth, (user) => {
           try {
             verifyBeforeUpdateEmail(cred.user, emailNew.value)
               .then(() => {
-                showNotice(emailAlert, 'メールアドレスが変更されました！')
+                showNotice(
+                  emailAlert,
+                  'メールアドレスの変更を完了するには、新しいメールアドレスを認証する必要があります。\n新しいメールアドレスのメールボックスを確認してください。',
+                )
               })
               .catch((error) => {
                 if (error.code === 'auth/email-already-in-use') {
@@ -229,7 +199,6 @@ onAuthStateChanged(auth, (user) => {
       })
   })
 })
-
 function makeRandomText(length: number) {
   let result = ''
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'

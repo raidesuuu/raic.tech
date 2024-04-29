@@ -14,7 +14,11 @@
     <!--Script-->
 
     <script src="/js/menu.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3326621014935824" crossorigin="anonymous"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3326621014935824"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body style="display: none">
@@ -27,7 +31,11 @@
         <p>注意: この設定は、このブラウザでのみ適用されます。他のブラウザ、他のデバイスでもう一度設定する必要があります。</p>
         <section>
           <h2>Rai Markdown</h2>
-          <p>Rai Chatでは、Rai Markdownをサポートしています。Rai Markdownは、簡単な記述で装飾されたテキストを作成できるマークアップ言語です。以下に、Rai Markdownの記述方法を示します。</p>
+          <p>
+            Rai Chatでは、Rai Markdownをサポートしています。Rai
+            Markdownは、簡単な記述で装飾されたテキストを作成できるマークアップ言語です。
+          </p>
+          <h4>記述方法</h4>
           <ul>
             <li>[b]文字[/b]: 太文字</li>
             <li>[i]文字[/i]: イタリック文字</li>
@@ -37,13 +45,6 @@
             <li>[icon]Font Awesomeのアイコン名[/icon]: アイコン</li>
             <li><i class="fas fa-check color-gold"></i>(プレミアムのみ)[color=色]文字[/color]: 文字色</li>
             <li><i class="fas fa-check color-gold"></i>(プレミアムのみ)[img]URL[/img]: 画像</li>
-          </ul>
-          <p>Rai Markdownを無効にすると、下記の機能が利用できなくなります。</p>
-          <ul>
-            <li>文字の装飾</li>
-            <li>リンクの自動変換</li>
-            <li>アイコンの表示</li>
-            <li>画像の表示</li>
           </ul>
           <h4>
             <input type="checkbox" id="rai-markdown" checked />
@@ -56,35 +57,12 @@
         </section>
         <br />
 
-        <div class="box" id="basicUpsell">
+        <div class="box" id="premiumUpsell">
           <h3>プレミアムプラスにアップグレードして、チェックマーク等の機能を利用しましょう！</h3>
           <p>
             プレミアムプラスにアップグレードすると、チェックマーク、メッセージの強調表示や実験中の機能を利用できます。<br />
             <small>チェックマークはベーシック、プレミアムでも使用可能です。</small>
           </p>
-        </div>
-        <section class="disabled" id="basicFeatures">
-          <h2>ベーシックの機能</h2>
-          <h4>
-            <input type="checkbox" id="hide-checkmark" />
-            <label for="hide-checkmark" class="checkbox"> チェックマークを非表示にする </label>
-            <div class="tag is-warning">ベーシック</div>
-          </h4>
-          <p>
-            チェックマークを非表示にすると、メッセージからチェックマークが非表示になります。<br />
-            ただし、一部の機能を使用すると有効なサブスクリプションを所持していることがわかる可能性があります。<br /><br />
-
-            あなたがチェックマークを所持していない場合、このオプションは影響しません。<br />
-            別のブラウザでこの設定がオフになっていると、チェックマークが再び表示されます。<br /><br />
-
-            この設定は、学生、金のチェックマーク、管理者バッジも非表示になります。
-          </p>
-        </section>
-        <br />
-
-        <div class="box" id="premiumUpsell">
-          <h3>プレミアムプラスにアップグレードして、メッセージの強調表示等の機能を利用しましょう！</h3>
-          <p>プレミアムプラスにアップグレードすると、メッセージの強調表示や実験中の機能を利用できます。</p>
         </div>
         <section class="disabled" id="premiumFeatures">
           <h2>プレミアムの機能</h2>
@@ -97,6 +75,21 @@
           <p>
             この機能を有効にすると、自分の送信したメッセージを編集することができます。<br />
             メッセージを編集すると、メッセージに <i class="far fa-edit mr1px"></i>(編集マーク)が表示されます。
+          </p>
+
+          <h4>
+            <input type="checkbox" id="hide-checkmark" />
+            <label for="hide-checkmark" class="checkbox"> チェックマークを非表示にする </label>
+            <div class="tag is-warning">プレミアム</div>
+          </h4>
+          <p>
+            チェックマークを非表示にすると、メッセージからチェックマークが非表示になります。<br />
+            ただし、一部の機能を使用すると有効なサブスクリプションを所持していることがわかる可能性があります。<br /><br />
+
+            あなたがチェックマークを所持していない場合、このオプションは影響しません。<br />
+            別のブラウザでこの設定がオフになっていると、チェックマークが再び表示されます。<br /><br />
+
+            この設定は、学生、金のチェックマーク、管理者バッジも非表示になります。
           </p>
         </section>
         <br />
@@ -113,7 +106,7 @@
             <div class="tag is-warning">プレミアムプラス</div>
           </h4>
           <p>
-            メッセージの枠を金にし、メッセージを目立たせてみましょう。<br />
+            メッセージの枠を青にし、メッセージを目立たせてみましょう。<br />
             この設定はすべてのメッセージ(過去のメッセージも)に影響を与えます。
           </p>
         </section>

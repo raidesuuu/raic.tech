@@ -45,7 +45,7 @@ const db = getFirestore()
       }
 
       if (user) {
-        const query = await getDoc(doc(db, 'patreonlinkstatus', user.uid))
+        const query = await getDoc(doc(db, 'subscription-state', user.uid))
         if (query.exists()) {
           if (query.data().isStudent) {
             const studentLinked = document.getElementById('studentVerificationSuccess')
@@ -94,7 +94,7 @@ const db = getFirestore()
         .then((response) => response.json())
         .then(async (data) => {
           if (data.status === 'success') {
-            await setDoc(doc(db, 'patreonlinkstatus', user?.uid ?? ''), {
+            await setDoc(doc(db, 'subscription-state', user?.uid ?? ''), {
               linked: true,
               id: user ? 'student-' + user.uid : '',
               isStudent: true,

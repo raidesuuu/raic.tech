@@ -2,6 +2,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 const TerserPlugin = require('terser-webpack-plugin')
+const fs = require("fs")
 const obfuscator = require('webpack-obfuscator')
 
 module.exports = {
@@ -16,7 +17,8 @@ module.exports = {
     'js/forgot': './src/forgot.ts',
     'js/tfa': './src/tfa.ts',
     'js/firebase': './src/firebase.ts',
-    'js/patreon': './src/patreon.ts',
+    'js/link': './src/link.ts',
+    'js/finishLink': './src/finishLink.ts',
     'js/chat-app': './src/chat/app.ts',
     'js/chat-profile': './src/chat/profile.ts',
     'js/chat-request': './src/chat/request.ts',
@@ -51,7 +53,14 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'dist'),
     }, // webpack-dev-serverの公開フォルダ
-    open: true, // サーバー起動時にブラウザを開く
+    server: {
+      type: 'https',
+      options: {
+        key: fs.readFileSync('cert.key'),
+        cert: fs.readFileSync('cert.crt'),
+        ca: fs.readFileSync('ca.crt'),
+      },
+    }
   },
   // モジュールに適用するルールの設定（ローダーの設定を行う事が多い）
   module: {

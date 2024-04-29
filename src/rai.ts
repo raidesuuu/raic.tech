@@ -64,6 +64,19 @@ export function isCheckmarker(userData: UserDataInterface) {
   return result
 }
 
+export function xssProtectedText(text: string) {
+  text = text.replace(/&/g, '&amp;')
+  text = text.replace(/"/g, '&quot;')
+  text = text.replace(/'/g, '&#x27;')
+  text = text.replace(/</g, '&lt;')
+  text = text.replace(/>/g, '&gt;')
+  text = text.replace(/\n/g, '<br>')
+
+  console.log(text)
+
+  return text;
+}
+
 /**
  *
  * @param element noticeElement型（i、labelが入っているp要素)

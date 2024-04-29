@@ -17,6 +17,7 @@ import {
   GoogleAuthProvider,
   reauthenticateWithPopup,
   UserCredential,
+  OAuthProvider,
 } from 'firebase/auth'
 import { NotLoggedError } from '../rai'
 
@@ -25,6 +26,8 @@ import { auth } from '../firebase'
 window.addEventListener('DOMContentLoaded', () => {
   const removePassword = document.getElementById('RemoveAccountPassword') as HTMLInputElement
   const removeGoogle = document.getElementById('RemoveAccountGoogle') as HTMLButtonElement
+  const removeMicrosoft = document.getElementById('RemoveAccountMicrosoft') as HTMLButtonElement
+  const removeGitHub = document.getElementById('RemoveAccountGitH') as HTMLButtonElement
   const removeAlert = document.getElementById('RemoveAccountAlert') as HTMLElement
   const removeCheck = document.getElementById('RemoveAccountVerify') as HTMLInputElement
   const removeSubmit = document.getElementById('RemoveAccountSubmit') as HTMLButtonElement
@@ -33,7 +36,11 @@ window.addEventListener('DOMContentLoaded', () => {
   const removePasswordContainer = document.getElementById('RemoveAccountPasswordProvider') as HTMLDivElement
 
   let GoogleCredential = {} as UserCredential
+  let MicrosoftCredential = {} as UserCredential
+  let GitHubCredential = {} as UserCredential
   let isGoogleSigned = false
+  let isMicrosoftSigned = false
+  let isGitHubSigned = false
 
   if (
     removePassword === null ||
@@ -43,7 +50,9 @@ window.addEventListener('DOMContentLoaded', () => {
     removeTfaContainer === null ||
     removeCheck === null ||
     removePasswordContainer === null ||
-    removeGoogle === null
+    removeGoogle === null ||
+    removeMicrosoft === null ||
+    removeGitHub === null
   ) {
     console.error('[data.ts : P1]: No Required element found')
 
@@ -75,8 +84,48 @@ window.addEventListener('DOMContentLoaded', () => {
       })
     }
 
+    if (user.providerData[0].providerId === 'microsoft.com') {
+      removePasswordContainer.classList.add('is-hidden')
+      removeMicrosoft.classList.remove('is-hidden')
+
+      removeMicrosoft.addEventListener('click', () => {
+        const provider = new OAuthProvider("microsoft.com")
+        reauthenticateWithPopup(user, provider).then((cred: UserCredential) => {
+          MicrosoftCredential = cred // Update the type of GoogleCredential to Credential
+          removeMicrosoft.disabled = true
+
+          isMicrosoftSigned = true
+        })
+      })
+    }
+
+    if (user.providerData[0].providerId === 'github.com') {
+      removePasswordContainer.classList.add('is-hidden')
+      removeGitHub.classList.remove('is-hidden')
+
+      removeGitHub.addEventListener('click', () => {
+        const provider = new OAuthProvider("github.com")
+        reauthenticateWithPopup(user, provider).then((cred: UserCredential) => {
+          GitHubCredential = cred // Update the type of GoogleCredential to Credential
+          removeGitHub.disabled = true
+
+          isGitHubSigned = true
+        })
+      })
+    }
+
+
     removeCheck.addEventListener('change', (e) => {
       if (user.providerData[0].providerId === 'google.com' && !isGoogleSigned) {
+        e.preventDefault()
+        removeCheck.checked = false
+      }
+      if (user.providerData[0].providerId === 'microsoft.com' && !isMicrosoftSigned) {
+        e.preventDefault()
+        removeCheck.checked = false
+      }
+
+      if (user.providerData[0].providerId === 'github.com' && !isGitHubSigned) {
         e.preventDefault()
         removeCheck.checked = false
       }
@@ -88,7 +137,22 @@ window.addEventListener('DOMContentLoaded', () => {
     })
 
     removeSubmit.addEventListener('click', () => {
-      if (user.providerData[0].providerId != 'google.com') {
+      if (user.providerData[0].providerId == 'microsoft.com') {
+        deleteUser(MicrosoftCredential.user).then(() => {
+          window.location.href = '/auth/signin.html?account_removed=1'
+        })
+        return
+      } else if (user.providerData[0].providerId == 'google.com') {
+        deleteUser(GoogleCredential.user).then(() => {
+          window.location.href = '/auth/signin.html?account_removed=1'
+        })
+        return
+      } else if (user.providerData[0].providerId == 'github.com') {
+        deleteUser(GitHubCredential.user).then(() => {
+          window.location.href = '/auth/signin.html?account_removed=1'
+        })
+        return  
+      } else {
         if (removePassword.value === '') {
           showNotice(removeAlert, 'パスワードを入力してください。')
           return
@@ -98,11 +162,6 @@ window.addEventListener('DOMContentLoaded', () => {
           showNotice(removeAlert, 'すべてのフィールドを入力してください。')
           return
         }
-      } else {
-        deleteUser(GoogleCredential.user).then(() => {
-          window.location.href = '/auth/signin.html?account_removed=1'
-        })
-        return
       }
 
       reauthenticateWithCredential(

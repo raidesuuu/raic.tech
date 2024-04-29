@@ -23,7 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('a').forEach((element) => {
     if (getHostname() == 'raic.tech') {
+      console.log(element.href)
       element.href = element.href.replace('.html', '')
+      console.log(element.href)
     }
   })
 })

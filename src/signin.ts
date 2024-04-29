@@ -7,6 +7,7 @@
 
 import {
   GoogleAuthProvider,
+  OAuthProvider,
   TotpMultiFactorGenerator,
   browserLocalPersistence,
   browserSessionPersistence,
@@ -22,6 +23,8 @@ import { auth } from './firebase'
 
 const SigninButton = document.getElementById('SigninSubmit') as HTMLButtonElement
 const SigninGoogle = document.getElementById('SigninGoogle') as HTMLButtonElement
+const SigninGitHub = document.getElementById('SigninGitHub') as HTMLButtonElement
+const SigninMicrosoft = document.getElementById('SigninMicrosoft') as HTMLButtonElement
 const SigninError = document.getElementById('SigninError') as HTMLElement
 const SigninRemember = document.getElementById('SigninRemember') as HTMLInputElement
 
@@ -42,19 +45,15 @@ if (state === 'student') {
 }
 
 SigninGoogle.addEventListener('click', () => {
-  //google
-  const provider = new GoogleAuthProvider()
-  signInWithPopup(auth, provider)
-    .then(() => {
-      if (state === 'student') {
-        location.href = '/student/app/'
-        return
-      }
-      moveToPanel()
-    })
-    .catch((error) => {
-      showNotice(SigninError, error.message)
-    })
+  loginWithProvider("google.com")
+})
+
+SigninMicrosoft.addEventListener('click', () => {
+  loginWithProvider("microsoft.com")
+})
+
+SigninGitHub.addEventListener('click', () => {
+  loginWithProvider("github.com")
 })
 
 SigninButton.addEventListener('click', () => {
@@ -73,6 +72,21 @@ SigninButton.addEventListener('click', () => {
     })
   }
 })
+
+function loginWithProvider(providerId: string) {
+  const provider = new OAuthProvider(providerId)
+  signInWithPopup(auth, provider)
+    .then(() => {
+      if (state === 'student') {
+        location.href = '/student/app/'
+        return
+      }
+      moveToPanel()
+    })
+    .catch((error) => {
+      showNotice(SigninError, error.message)
+    })
+}
 
 function login() {
   signInWithEmailAndPassword(auth, email.value, password.value)

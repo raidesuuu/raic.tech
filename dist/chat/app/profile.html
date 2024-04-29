@@ -35,7 +35,8 @@
         <h1>プロフィール</h1>
         <div class="box">
           <img id="app-profile-picture" src="https://pics.prcm.jp/a508a977c6fa9/84540173/png/84540173.png" width="256" />
-          <h3 id="app-profile-username">ユーザー名</h3>
+          <h3 style="margin-bottom: 0px;"id="app-profile-username">ユーザー名</h3>
+          <p style="margin-top: 0px; color: gray" id="app-profile-handle">ハンドル</p>
           <p id="app-profile-info">自己紹介</p>
           <small id="app-profile-followers"></small><br />
           <button id="app-profile-edit" class="button"><i class="far fa-edit"></i>プロフィールを編集</button>
@@ -67,7 +68,6 @@
         <div class="modal-content">
           <div class="box">
             <h2>プロフィールを編集</h2>
-            <p>ここでのプロフィール編集はベータ版です。</p>
 
             <div class="field">
               <div class="control">
@@ -75,8 +75,11 @@
                 <input id="app-edit-picture" class="input" type="url" placeholder="画像のURL" /><br /><br />
 
                 <h4>名前</h4>
-                <input id="app-edit-name" class="input" type="text" placeholder="あなたの名前" /><br />
-                <small>名前かプロフィール画像を変更すると、審査が終了するまでチェックマークが非表示になります。</small><br /><br />
+                <input id="app-edit-name" class="input" type="text" placeholder="あなたの名前" /><br /><br>
+
+                <h4>ハンドル</h4>
+                <input id="app-edit-handle" class="input" type="text" placeholder="あなたのハンドル" /><br />
+                <small>名前を変更すると、審査が終了するまでチェックマークが非表示になります。</small><br /><br />
 
                 <h4>
                   自己紹介

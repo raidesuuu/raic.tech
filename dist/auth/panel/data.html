@@ -47,7 +47,7 @@
         </ul>
         <p>
           ※Rai Chatのメッセージデータは完全には削除されません。また、プロフィールは削除されません。<br />
-          ※プレミアムを登録している場合、アカウントを削除してもサブスクリプションは継続されます。継続したくない場合は、キャンセルしてください。<br>
+          ※プレミアムを登録している場合、アカウントを削除してもサブスクリプションは継続されます。継続したくない場合は、キャンセルしてください。<br />
         </p>
         <div id="RemoveAccountPasswordProvider">
           <label for="RemoveAccountPassword"><i class="fas fa-input-text"></i> パスワード</label><br />
@@ -59,16 +59,34 @@
           </div>
         </div>
 
-        <button class="button is-danger is-hidden" id="RemoveAccountGoogle"><i class="fab fa-google"></i>Googleでサインイン<br></button>
+        <div class="is-hidden" id="RemoveAccountGoogle">
+          <button class="button is-danger">
+            <i class="fab fa-google"></i>Googleでサインイン</button
+          ><br /><br>
+        </div>
 
-        <label class="checkbox">
-          <input type="checkbox" id="RemoveAccountVerify" />
-          アカウントを削除するとすべてのデータが削除されて戻せないことを理解しました。 </label
-        ><br /><br />
+        <div class="is-hidden" id="RemoveAccountMicrosoft">
+          <button class="button is-danger">
+            <i class="fab fa-microsoft"></i>Microsoftでサインイン</button
+          ><br /><br>
+        </div>
+
+        <div class="is-hidden" id="RemoveAccountGitHub">
+          <button class="button is-danger">
+            <i class="fab fa-github"></i>GitHubでサインイン</button
+          ><br /><br>
+        </div>
+
+        <input type="checkbox" id="RemoveAccountVerify" />
+        <label class="checkbox" for="RemoveAccountVerify"
+          >アカウントを削除するとすべてのデータが削除されて戻せないことを理解しました。 </label
+        ><br />
 
         <p id="RemoveAccountAlert" class="is-hidden"><i class="fas fa-info"></i><label></label><br /></p>
 
-        <button class="button is-danger" disabled id="RemoveAccountSubmit"><i class="fas fa-circle-xmark"></i>アカウントを削除</button><br /><br />
+        <button class="button is-danger" disabled id="RemoveAccountSubmit">
+          <i class="fas fa-circle-xmark"></i>アカウントを削除</button
+        ><br /><br />
       </div>
     </section>
 
