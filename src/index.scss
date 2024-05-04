@@ -6,7 +6,7 @@
 */
 
 @charset "utf-8";
-@import '../node_modules/bulma/bulma.scss';
+@import '../node_modules/bulma/css/bulma';
 
 // REMOVED: Dark mode for Bulma
 //@import './dark.scss';
@@ -94,6 +94,10 @@ h1, h2, h3, h4, h5, h6 {
   div.message {
     margin-left: 6px;
   }
+}
+
+textarea {
+  field-sizing: content !important;  
 }
 
 .separator {
