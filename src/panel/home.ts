@@ -66,7 +66,7 @@ auth.onAuthStateChanged((user) => {
   }, 1000)
 
   const emailVerificationAlert = document.getElementById('emailVerificationAlert') as HTMLElement
-  const emailVerificationButton = document.getElementById('emailVerificationButton') as HTMLButtonElement
+  const emailVerificationbutton = document.getElementById('emailVerificationbutton') as HTMLButtonElement
 
   const emailNew = document.getElementById('ChangeEmailNew') as HTMLInputElement
   const emailPassword = document.getElementById('ChangeEmailPassword') as HTMLInputElement
@@ -87,7 +87,7 @@ auth.onAuthStateChanged((user) => {
     helloName === null ||
     helloDate === null ||
     emailVerificationAlert === null ||
-    emailVerificationButton === null ||
+    emailVerificationbutton === null ||
     emailTFAContainer === null
   ) {
     console.error('[security.ts : P1]: No Required element found')
@@ -106,7 +106,7 @@ auth.onAuthStateChanged((user) => {
     console.info('[EmailVerifiedChecker : (home.ts)] Email is verified.')
   }
 
-  emailVerificationButton.addEventListener('click', () => {
+  emailVerificationbutton.addEventListener('click', () => {
     sendEmailVerification(user)
       .then(() => {
         emailVerificationAlert.querySelector('p')!.innerHTML =
@@ -120,6 +120,7 @@ auth.onAuthStateChanged((user) => {
         }
       })
   })
+
 
   if (user.providerData[0].providerId != 'password') {
     showNotice(emailAlert, 'メールアドレスとパスワード以外でログインしているため、メールアドレスを変更できません。')

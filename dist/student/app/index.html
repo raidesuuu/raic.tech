@@ -41,7 +41,17 @@
       <div class="content">
         <h1 style="font-size: 5vh" class="gradient">GitHubで認証</h1>
         <p>メールアドレスを確認するために、GitHubで認証してください。</p>
-        <a href="javascript:void(0)" id="studentVerify" class="button is-primary"><i class="fab fa-github"></i>認証</a
+
+        <article class="message is-warning" id="studentVerificationMaintenance">
+          <div class="message-body has-text-left">
+            <h2><i class="fas fa-xmark"></i>注意</h2>
+            <p>
+              現在、学生認証は利用できません。
+            </p>
+          </div>
+        </article>
+
+        <a href="javascript:void(0)" id="studentVerify" class="button is-primary" disabled><i class="fab fa-github"></i>認証</a
         ><br><br>
         <p>GitHubアカウントの作成について、ヘルプが必要ですか？<a href="https://docs.github.com/ja/get-started/start-your-journey/creating-an-account-on-github">アカウント作成の方法</a></p>
         <br /><br />

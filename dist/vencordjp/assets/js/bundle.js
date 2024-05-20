@@ -158,15 +158,15 @@ const ARIA_PROPERTIES=["ariaAtomic","ariaAutoComplete","ariaBusy","ariaChecked",
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: Apache-2.0
- */const buttonBaseClass=mixinElementInternals(s$1);class Button extends buttonBaseClass{get name(){return this.getAttribute("name")??""}set name(e){this.setAttribute("name",e)}get form(){return this[internals].form}constructor(){super(),this.disabled=!1,this.href="",this.target="",this.trailingIcon=!1,this.hasIcon=!1,this.type="submit",this.value="",this.handleActivationClick=e=>{isActivationClick(e)&&this.buttonElement&&(this.focus(),dispatchActivationClick(this.buttonElement))},this.addEventListener("click",this.handleActivationClick)}focus(){this.buttonElement?.focus()}blur(){this.buttonElement?.blur()}render(){const e=this.disabled&&!this.href,t=this.href?this.renderLink():this.renderButton(),r=this.href?"link":"button";return x`
+ */const buttonBaseClass=mixinElementInternals(s$1);class button extends buttonBaseClass{get name(){return this.getAttribute("name")??""}set name(e){this.setAttribute("name",e)}get form(){return this[internals].form}constructor(){super(),this.disabled=!1,this.href="",this.target="",this.trailingIcon=!1,this.hasIcon=!1,this.type="submit",this.value="",this.handleActivationClick=e=>{isActivationClick(e)&&this.buttonElement&&(this.focus(),dispatchActivationClick(this.buttonElement))},this.addEventListener("click",this.handleActivationClick)}focus(){this.buttonElement?.focus()}blur(){this.buttonElement?.blur()}render(){const e=this.disabled&&!this.href,t=this.href?this.renderLink():this.renderbutton(),r=this.href?"link":"button";return x`
       ${this.renderElevationOrOutline?.()}
       <div class="background"></div>
       <md-focus-ring part="focus-ring" for=${r}></md-focus-ring>
       <md-ripple for=${r} ?disabled="${e}"></md-ripple>
       ${t}
-    `}renderButton(){const{ariaLabel:e,ariaHasPopup:t,ariaExpanded:r}=this;return x`<button
+    `}renderbutton(){const{ariaLabel:e,ariaHasPopup:t,ariaExpanded:r}=this;return x`<button
       id="button"
-      class="button"
+      class="button is-secondary"
       ?disabled=${this.disabled}
       aria-label="${e||T}"
       aria-haspopup="${t||T}"
@@ -174,7 +174,7 @@ const ARIA_PROPERTIES=["ariaAtomic","ariaAutoComplete","ariaBusy","ariaChecked",
       ${this.renderContent()}
     </button>`}renderLink(){const{ariaLabel:e,ariaHasPopup:t,ariaExpanded:r}=this;return x`<a
       id="link"
-      class="button"
+      class="button is-secondary"
       aria-label="${e||T}"
       aria-haspopup="${t||T}"
       aria-expanded="${r||T}"
@@ -188,13 +188,13 @@ const ARIA_PROPERTIES=["ariaAtomic","ariaAutoComplete","ariaBusy","ariaChecked",
       ${this.trailingIcon?T:e}
       <span class="label"><slot></slot></span>
       ${this.trailingIcon?e:T}
-    `}handleSlotChange(){this.hasIcon=this.assignedIcons.length>0}}requestUpdateOnAriaChange(Button),setupFormSubmitter(Button),Button.formAssociated=!0,Button.shadowRootOptions={mode:"open",delegatesFocus:!0},__decorate([n$4({type:Boolean,reflect:!0})],Button.prototype,"disabled",void 0),__decorate([n$4()],Button.prototype,"href",void 0),__decorate([n$4()],Button.prototype,"target",void 0),__decorate([n$4({type:Boolean,attribute:"trailing-icon",reflect:!0})],Button.prototype,"trailingIcon",void 0),__decorate([n$4({type:Boolean,attribute:"has-icon",reflect:!0})],Button.prototype,"hasIcon",void 0),__decorate([n$4()],Button.prototype,"type",void 0),__decorate([n$4()],Button.prototype,"value",void 0),__decorate([e$5(".button")],Button.prototype,"buttonElement",void 0),__decorate([o$3({slot:"icon",flatten:!0})],Button.prototype,"assignedIcons",void 0);
+    `}handleSlotChange(){this.hasIcon=this.assignedIcons.length>0}}requestUpdateOnAriaChange(button),setupFormSubmitter(button),button.formAssociated=!0,button.shadowRootOptions={mode:"open",delegatesFocus:!0},__decorate([n$4({type:Boolean,reflect:!0})],button.prototype,"disabled",void 0),__decorate([n$4()],button.prototype,"href",void 0),__decorate([n$4()],button.prototype,"target",void 0),__decorate([n$4({type:Boolean,attribute:"trailing-icon",reflect:!0})],button.prototype,"trailingIcon",void 0),__decorate([n$4({type:Boolean,attribute:"has-icon",reflect:!0})],button.prototype,"hasIcon",void 0),__decorate([n$4()],button.prototype,"type",void 0),__decorate([n$4()],button.prototype,"value",void 0),__decorate([e$5(".button")],button.prototype,"buttonElement",void 0),__decorate([o$3({slot:"icon",flatten:!0})],button.prototype,"assignedIcons",void 0);
 /**
  * @license
  * Copyright 2021 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
-class FilledButton extends Button{renderElevationOrOutline(){return x`<md-elevation></md-elevation>`}}
+class Filledbutton extends button{renderElevationOrOutline(){return x`<md-elevation></md-elevation>`}}
 /**
   * @license
   * Copyright 2022 Google LLC
@@ -217,13 +217,13 @@ class FilledButton extends Button{renderElevationOrOutline(){return x`<md-elevat
  * @license
  * Copyright 2021 Google LLC
  * SPDX-License-Identifier: Apache-2.0
- */;let MdFilledButton=class extends FilledButton{};MdFilledButton.styles=[styles$j,styles$k,styles$l],MdFilledButton=__decorate([t$3("md-filled-button")],MdFilledButton);
+ */;let MdFilledbutton=class extends Filledbutton{};MdFilledbutton.styles=[styles$j,styles$k,styles$l],MdFilledbutton=__decorate([t$3("md-filled-button")],MdFilledbutton);
 /**
  * @license
  * Copyright 2021 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
-class OutlinedButton extends Button{renderElevationOrOutline(){return x`<div class="outline"></div>`}}
+class Outlinedbutton extends button{renderElevationOrOutline(){return x`<div class="outline"></div>`}}
 /**
   * @license
   * Copyright 2022 Google LLC
@@ -234,13 +234,13 @@ class OutlinedButton extends Button{renderElevationOrOutline(){return x`<div cla
  * @license
  * Copyright 2021 Google LLC
  * SPDX-License-Identifier: Apache-2.0
- */;let MdOutlinedButton=class extends OutlinedButton{};MdOutlinedButton.styles=[styles$j,styles$i],MdOutlinedButton=__decorate([t$3("md-outlined-button")],MdOutlinedButton);
+ */;let MdOutlinedbutton=class extends Outlinedbutton{};MdOutlinedbutton.styles=[styles$j,styles$i],MdOutlinedbutton=__decorate([t$3("md-outlined-button")],MdOutlinedbutton);
 /**
  * @license
  * Copyright 2021 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
-class TextButton extends Button{}
+class Textbutton extends button{}
 /**
   * @license
   * Copyright 2022 Google LLC
@@ -251,7 +251,7 @@ class TextButton extends Button{}
  * @license
  * Copyright 2021 Google LLC
  * SPDX-License-Identifier: Apache-2.0
- */;let MdTextButton=class extends TextButton{};MdTextButton.styles=[styles$j,styles$h],MdTextButton=__decorate([t$3("md-text-button")],MdTextButton);
+ */;let MdTextbutton=class extends Textbutton{};MdTextbutton.styles=[styles$j,styles$h],MdTextbutton=__decorate([t$3("md-text-button")],MdTextbutton);
 /**
  * @license
  * Copyright 2023 Google LLC
@@ -343,7 +343,7 @@ const isFocusable=Symbol("isFocusable"),privateIsFocusable=Symbol("privateIsFocu
  * Copyright 2023 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */var _a;const INDICATOR=Symbol("indicator"),ANIMATE_INDICATOR=Symbol("animateIndicator"),tabBaseClass=mixinFocusable(s$1);class Tab extends tabBaseClass{get selected(){return this.active}set selected(e){this.active=e}constructor(){super(),this.isTab=!0,this.active=!1,this.hasIcon=!1,this.iconOnly=!1,this.fullWidthIndicator=!1,this.internals=this.attachInternals(),this.internals.role="tab",this.addEventListener("keydown",this.handleKeydown.bind(this))}render(){const e=x`<div class="indicator"></div>`;return x`<div
-      class="button"
+      class="button is-secondary"
       role="presentation"
       @click=${this.handleContentClick}>
       <md-focus-ring part="focus-ring" inward .control=${this}></md-focus-ring>
@@ -589,7 +589,7 @@ const styles$7=i$4`:host{--_container-color: var(--md-fab-container-color, var(-
   * @license
   * Copyright 2022 Google LLC
   * SPDX-License-Identifier: Apache-2.0
-  */,styles$6=i$4`@media(forced-colors: active){.fab{border:1px solid ButtonText}.fab.extended{padding-inline-start:15px;padding-inline-end:19px}md-focus-ring{--md-focus-ring-outward-offset: 3px}}/*# sourceMappingURL=forced-colors-styles.css.map */
+  */,styles$6=i$4`@media(forced-colors: active){.fab{border:1px solid buttonText}.fab.extended{padding-inline-start:15px;padding-inline-end:19px}md-focus-ring{--md-focus-ring-outward-offset: 3px}}/*# sourceMappingURL=forced-colors-styles.css.map */
 `
 /**
   * @license

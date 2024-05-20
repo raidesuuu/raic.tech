@@ -6,13 +6,16 @@
 */
 
 @charset "utf-8";
-@import '../node_modules/bulma/css/bulma';
+@import '../node_modules/bulma/bulma.scss';
 
 // REMOVED: Dark mode for Bulma
 //@import './dark.scss';
 
 // Dialog for HTML
 @import './dialog.scss';
+
+// Rales Header
+@import './header-rales.scss';
 
 // Fireworks for HTML
 @import './fireworks.scss';
@@ -70,18 +73,23 @@ html {
 
 //===[START] Body Styling [START]===//
 body {
-  font-family: "Segoe UI", "Montserrat", "Noto Sans JP", sans-serif;
+  font-family: 'Segoe UI', 'Montserrat', 'Noto Sans JP', sans-serif;
   width: 100%; // Width 100%
 }
 //===[END] Body Styling [END]===//
 
 /* .half */
 .half {
-  width: 75%
+  width: 75%;
 }
 
 /* Font Apply */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: bold !important;
 }
 
@@ -97,7 +105,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 textarea {
-  field-sizing: content !important;  
+  field-sizing: content !important;
 }
 
 .separator {
@@ -114,11 +122,11 @@ textarea {
 }
 
 .separator:not(:empty)::before {
-  margin-right: .25em;
+  margin-right: 0.25em;
 }
 
 .separator:not(:empty)::after {
-  margin-left: .25em;
+  margin-left: 0.25em;
 }
 
 /* timeline highlighting */
@@ -130,6 +138,10 @@ textarea {
   div.message {
     margin-left: 6px;
   }
+}
+
+.message {
+  overflow-wrap: break-word;
 }
 
 //li disabled
@@ -190,7 +202,7 @@ input[type='checkbox']:checked + .checkbox::after {
   display: flex; // Display flex
   justify-content: center; // Justify content center
   button {
-    // Button
+    // button
     margin-left: 5px; // Margin left 5px
   }
 }
@@ -260,39 +272,62 @@ input {
 //[END] Font Applier [END]//
 
 /* Tooltip */
-.tooltip {
-  position: relative; /* ツールチップの位置の基準に */
-  cursor: pointer; /* カーソルを当てたときにポインターに */
+.c-tooltip {
+	display: inline-block;
+	position: relative;
 }
 
-/* ツールチップのテキスト */
-.tooltip-text {
-  opacity: 0; /* はじめは隠しておく */
-  z-index: 100;
-  visibility: hidden; /* はじめは隠しておく */
-  position: absolute; /* 絶対配置 */
-  left: 50%; /* 親に対して中央配置 */
-  transform: translateX(-50%); /* 親に対して中央配置 */
-  bottom: -30px; /* 親要素下からの位置 */
-  display: inline-block;
-  padding: 5px; /* 余白 */
-  white-space: nowrap; /* テキストを折り返さない */
-  font-size: 0.8rem; /* フォントサイズ */
-  line-height: 1.3; /* 行間 */
-  background: #333; /* 背景色 */
-  color: #fff; /* 文字色 */
-  border-radius: 3px; /* 角丸 */
-  transition: 0.3s ease-in; /* アニメーション */
+.c-tooltip::before,
+.c-tooltip::after {
+	-webkit-transition: all 0.2s;
+	opacity: 0;
+	position: absolute;
+	transition: all 0.2s;
+	visibility: hidden;
+	z-index: 11;
 }
 
-.tooltip-button {
-  position: relative; /* ツールチップの位置の基準に */
-  cursor: pointer; /* カーソルを当てたときにポインターに */
+.c-tooltip::before {
+	-webkit-transform: translateY(-50%);
+	border-color: transparent #5f6368 transparent transparent;
+	border-style: solid;
+	border-width: 3px 7px 3px 0;
+	content: "";
+	height: 0;
+	left: calc(100% + 6px);
+	top: 50%;
+	transform: translateY(-50%);
+	width: 0;
+}
 
-  background: lightblue;
-  border-radius: 8px;
-  border: none;
-  color: black;
+.c-tooltip::after {
+	-webkit-transform: translateY(-50%);
+	background: #5f6368;
+	border-radius: 3px;
+	color: #fff;
+	content: attr(data-tooltip);
+	display: block;
+	font-size: 11px;
+	font-weight: 600;
+	left: calc(100% + 13px);
+	padding: 5px 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	white-space: nowrap;
+}
+
+.c-tooltip:hover {
+	cursor: pointer;
+}
+
+.c-tooltip:hover::before {
+	opacity: 1;
+	visibility: visible;
+}
+
+.c-tooltip:hover::after {
+	opacity: 1;
+	visibility: visible;
 }
 
 /* Roal.css for Rai Website */
@@ -301,8 +336,27 @@ input {
   border-radius: 5px;
   color: white;
   text-align: left;
+  overflow-y: hidden;
+}
 
-  font-family: 'Noto Sans JP';
+.rcs-code-blue {
+  color: lightskyblue;
+}
+
+.rcs-code-input {
+  width: 95%;
+  color: white;
+  background: transparent;
+  border-style: none;
+}
+
+.rcs-code-comment {
+  color: lightgray;
+}
+
+.rcs-code-lang {
+  background-color: gray;
+  border-radius: 2px;
 }
 
 .rcs-center {
@@ -415,6 +469,44 @@ div.content {
 /* TODO: comment */
 header {
   background-color: hsl(0, 0%, 98%);
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: 90px 0 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  z-index: 99;
+}
+ 
+@media (max-width: 767.98px) {
+  .sidebar {
+    top: 11.5rem;
+    padding: 0;
+  }
+}
+ 
+.navbar {
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .1);
+}
+ 
+@media (min-width: 767.98px) {
+  .navbar {
+    top: 0;
+    position: sticky;
+    z-index: 999;
+  }
+}
+ 
+.sidebar .nav-link {
+  color: #333;
+}
+ 
+.sidebar .nav-link.active {
+  color: #0d6efd;
 }
 // ボタンがコンテナからはみ出るのを修正
 button {

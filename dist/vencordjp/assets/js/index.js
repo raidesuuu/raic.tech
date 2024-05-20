@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  //Feedback Button
+  //Feedback button
   const feedback = document.querySelector("md-fab");
   //Dialog
   const dialog = document.querySelector("md-dialog");

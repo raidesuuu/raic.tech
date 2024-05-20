@@ -21,7 +21,7 @@ import {
 import { moveToPanel } from './rai'
 import { auth } from './firebase'
 
-const SigninButton = document.getElementById('SigninSubmit') as HTMLButtonElement
+const Signinbutton = document.getElementById('SigninSubmit') as HTMLButtonElement
 const SigninGoogle = document.getElementById('SigninGoogle') as HTMLButtonElement
 const SigninGitHub = document.getElementById('SigninGitHub') as HTMLButtonElement
 const SigninMicrosoft = document.getElementById('SigninMicrosoft') as HTMLButtonElement
@@ -56,7 +56,7 @@ SigninGitHub.addEventListener('click', () => {
   loginWithProvider("github.com")
 })
 
-SigninButton.addEventListener('click', () => {
+Signinbutton.addEventListener('click', () => {
   if (email.value === '' || password.value === '') {
     showNotice(SigninError, '全てのフィールドを入力してください')
     return

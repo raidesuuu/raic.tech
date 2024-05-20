@@ -6,6 +6,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth'
 const db = getFirestore()
 
 ;(function () {
+  return;
   onAuthStateChanged(auth, async (user) => {
     console.log('[StudentVerification_PageChecker : INFO (studentVerify.ts)] Checking page...')
     if (window.location.pathname === ('/student/app/' as string)) {

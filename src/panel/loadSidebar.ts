@@ -110,7 +110,7 @@ auth.onAuthStateChanged((user) => {
 
       const premiumUpsellText = document.getElementById('premiumUpgradeUpsell_Text') as HTMLElement
       const premiumUpsellContainer = document.getElementById('premiumUpgradeUpsell_Container') as HTMLElement
-      const premiumUpsellButton = document.getElementById('premiumUpgradeUpsell_Button') as HTMLAnchorElement
+      const premiumUpsellbutton = document.getElementById('premiumUpgradeUpsell_button') as HTMLAnchorElement
       const query = await getDoc(doc(firestore, 'subscription-state', user.uid))
       const userData = query.data() as SubscriptionDataInterface
       if (!query.exists()) {
@@ -133,11 +133,11 @@ auth.onAuthStateChanged((user) => {
       switch (userData.plan) {
         case 'premiumplus':
           premiumUpsellText.textContent = 'プレミアムプラスへアップグレードしていただき、ありがとうございます。最高級プランをお楽しみください。'
-          premiumUpsellButton.classList.add('is-hidden')
+          premiumUpsellbutton.classList.add('is-hidden')
           break
         case 'premium':
           premiumUpsellText.textContent = 'プレミアムプラスにアップグレードすると、メッセージが強調表示されたり、実験中の機能を利用できます。'
-          premiumUpsellButton.innerHTML = '<i class="fas fa-money-bill"></i>アップグレード'
+          premiumUpsellbutton.innerHTML = '<i class="fas fa-money-bill"></i>アップグレード'
           break
         case 'free':
           break
@@ -145,17 +145,17 @@ auth.onAuthStateChanged((user) => {
 
       if (userData.isStudent) {
         premiumUpsellText.textContent = 'あなたは、プレミアムプラスを無料で利用する資格を持っています。学生の間、無料です。'
-        premiumUpsellButton.classList.add('is-hidden')
+        premiumUpsellbutton.classList.add('is-hidden')
       }
       if (userData.isExpired) {
         premiumUpsellText.textContent = 'あなたのプランを再確認する必要があります。サブスクリプションを終了した場合はもう一度決済し、雷へ連絡すると継続できます。'
-        premiumUpsellButton.classList.remove('is-hidden')
-        premiumUpsellButton.textContent = 'サブスクリプションについて'
+        premiumUpsellbutton.classList.remove('is-hidden')
+        premiumUpsellbutton.textContent = 'サブスクリプションについて'
         if (userData.id.startsWith('student-')) {
           premiumUpsellText.innerHTML =
             'あなたが学生であることを再確認する必要があります。再確認するまで、一時的にプレミアムの特典は利用できなくなります。<br>もう学生ではありませんか？<a href="/auth/panel/subscriptions.html">こちら</a>をクリックしてプレミアムへアップグレードしてください。'
-          premiumUpsellButton.textContent = '学生確認へ'
-          premiumUpsellButton.href = '/student/'
+          premiumUpsellbutton.textContent = '学生確認へ'
+          premiumUpsellbutton.href = '/student/'
         }
       }
       ;(document.querySelector('.p-4')! as HTMLElement).style.display = ''

@@ -48,6 +48,7 @@
   "author": "UpLauncher",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "webpack-dev-middleware": "^7.1.1"
   }
 }

@@ -4,6 +4,7 @@ const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 const TerserPlugin = require('terser-webpack-plugin')
 const fs = require("fs")
 const obfuscator = require('webpack-obfuscator')
+const WebpackObfuscatorPlugin = require('webpack-obfuscator')
 
 module.exports = {
   // モジュールバンドルを行う起点となるファイルの指定
@@ -19,6 +20,7 @@ module.exports = {
     'js/firebase': './src/firebase.ts',
     'js/link': './src/link.ts',
     'js/finishLink': './src/finishLink.ts',
+    "js/rales": "./src/rales.ts",
     'js/chat-app': './src/chat/app.ts',
     'js/chat-profile': './src/chat/profile.ts',
     'js/chat-request': './src/chat/request.ts',
@@ -80,6 +82,12 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'dist/css/index.css',
+    }),
+    new WebpackObfuscatorPlugin({
+      StringArrayEncoding: [
+        "base64",
+        "rc4"
+      ],
     }),
     new RemoveEmptyScriptsPlugin(),
   ],
