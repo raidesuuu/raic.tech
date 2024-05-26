@@ -70,7 +70,6 @@ export function xssProtectedText(text: string) {
   text = text.replace(/'/g, '&#x27;')
   text = text.replace(/</g, '&lt;')
   text = text.replace(/>/g, '&gt;')
-  text = text.replace(/\n/g, '<br>')
 
   console.log(text)
 

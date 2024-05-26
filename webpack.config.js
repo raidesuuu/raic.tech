@@ -23,6 +23,7 @@ module.exports = {
     "js/rales": "./src/rales.ts",
     'js/chat-app': './src/chat/app.ts',
     'js/chat-profile': './src/chat/profile.ts',
+    'js/chat-message': './src/chat/message.ts',
     'js/chat-request': './src/chat/request.ts',
     'js/studentVerify': './src/studentVerify.ts',
     'js/chat-settings': './src/chat/settings.ts',

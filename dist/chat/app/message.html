@@ -31,16 +31,16 @@
     <section class="columns p-4 m-0">
       <div class="submenu column is-4" id="settings-sidebar"></div>
       <div id="app-content" class="content">
-        <h1>プロフィール</h1>
-        <div class="box">
-          <img id="app-profile-picture" src="https://pics.prcm.jp/a508a977c6fa9/84540173/png/84540173.png" width="256" />
-          <h3 style="margin-bottom: 0px;"id="app-profile-username">ユーザー名</h3>
-          <p style="margin-top: 0px; color: gray" id="app-profile-handle">ハンドル</p>
-          <p id="app-profile-info">自己紹介</p>
-          <small id="app-profile-followers"></small><br />
-          <button id="app-profile-edit" class="button is-secondary"><i class="far fa-edit"></i>プロフィールを編集</button>
-          <button id="app-profile-follow" class="button is-secondary"><i class="far fa-plus"></i>ユーザーをフォロー</button>
+        <div class="field" id="app-message-container">
+          <div class="control">
+            <textarea id="app-message" class="input" style="width: 500px" placeholder="メッセージ"></textarea>
+            <button id="app-send-message" class="button is-primary">返信</button><br />
+            <p id="app-message-alert" class="is-hidden"><i class="fas fa-info"></i><label></label></p>
+          </div>
         </div>
+        <h1>メッセージ</h1>
+        <ul id="original-post"></ul>
+        <h1>返信</h1>
         <ul id="app-timeline"></ul>
       </div>
     </section>
@@ -169,6 +169,6 @@
 
     <script src="/js/index.js"></script>
     <script src="/js/chat-sidebar.js"></script>
-    <script src="/js/chat-profile.js"></script>
+    <script src="/js/chat-message.js"></script>
   </body>
 </html>
