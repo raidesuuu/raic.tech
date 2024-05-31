@@ -22,11 +22,24 @@
     <section class="columns p-4 m-0">
       <div class="submenu column is-4" id="settings-sidebar"></div>
       <div id="app-content" class="content">
-        <h1>トレンド</h1>
-        <p>いいねが2以上のメッセージを掲載します。(いいねが多い順で)</p>
-        <ul id="app-trend-messages">
-
-        </ul>
+        <h1>探索</h1>
+        <div>
+          <div class="tabs">
+            <ul>
+              <li id="app-tab-trend" class="is-active"><a>トレンド</a></li>
+              <li id="app-tab-following"><a>フォロー中</a></li>
+            </ul>
+          </div>
+          <br />
+          <div id="tab-trending">
+            <p>いいねが2以上のお手紙を掲載します。(いいねが多い順で)</p>
+            <ul id="app-trend-messages"></ul>
+          </div>
+          <div id="tab-following" class="is-hidden">
+            <p>フォロー中のユーザーのお手紙を表示します</p>
+            <ul id="app-following-messages"></ul>
+          </div>
+        </div>
         <br />
       </div>
     </section>
