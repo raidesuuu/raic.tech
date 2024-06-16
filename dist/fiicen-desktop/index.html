@@ -29,11 +29,89 @@
   <body style="display: none">
     <header></header>
 
-    <div class="content has-text-centered">
-      <h1>Fiicen Desktop</h1>
-      <p>Fiicen Desktopは、Fiicenの体験を最大限に快適にするアプリです。</p>
+    <div class="content">
+      <section class="hero">
+        <div class="columns p-4 m-0" style="flex-wrap: wrap">
+          <div class="column is-6 is-narrow">
+            <div class="hero-body">
+              <div>
+                <h1 class="title" style="font-size: 3rem">Fiicen Desktop</h1>
+                <p class="subtitle">Fiicen Desktopでは、Fiicenをデスクトップで利用でき、すぐに起動してすぐに使用することができます。PCを起動した直後にも。もうブックマークからFiicenを選ぶ必要がなくなります！</p>
 
-      <a href="https://s3.ap-northeast-1-ntt.wasabisys.com/ak1520d-filenow-4/files/20240601-0002_b1e098eb63f39387e8f5a8f05070a51c.exe" class="button is-primary">ダウンロード(v1.0.0)</a>
+                <p class="subtitle">さあ！すぐにFiicen Desktopを始めましょう。きっと便利になりますよ！</p>
+
+                <a href="#downloads" class="button is-link">ダウンロード</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hero is-link">
+        <div class="hero-body">
+          <p class="title">Fiicen Desktopとは？</p>
+          <div class="columns" style="flex-wrap: wrap">
+            <div class="column is-narrow" style="width: 500px">
+              <div class="box">
+                <h1 class="title is-3">すぐ使用できる</h1>
+                <p>Fiicen Desktopは、デスクトップアプリなので、すぐに実行することができます。もうFiicenをブックマークに登録する必要はありません！</p>
+              </div>
+            </div>
+
+            <div class="column is-narrow" style="width: 500px">
+              <div class="box">
+                <h1 class="title is-3">いつも通り使用できる</h1>
+                <p>
+                  Fiicen Desktopは、Chrome<small><a href="#warning-1">※1</a></small
+                  >ベースなので、いつも通り使用することができます！また、Fiicenの機能はそのままです！
+                </p>
+              </div>
+            </div>
+
+            <div class="column is-narrow" style="width: 500px">
+              <div class="box">
+                <h1 class="title is-3">独自の機能を搭載</h1>
+                <p>Fiicen Desktopならではの機能を搭載していて、元々のFiicenよりも使用が簡単になるかもしれません！</p>
+              </div>
+            </div>
+            <p>
+              <small id="warning-1">※1 - Fiicen Desktopには、Electronを使用しています。Electronは、Chromiumを組み込んでいます。</small>
+            </p>
+          </div>
+        </div>
+      </section>
+      <br />
+
+      <section class="hero is-primary" id="downloads">
+        <div class="hero-body">
+          <div class="columns" style="flex-wrap: wrap">
+            <div class="column is-narrow">
+              <div class="box">
+                <h1 class="title is-3">今すぐ開始する</h1>
+                <p>
+                  Fiicen Desktopのインストールはすぐです！ファイルをダウンロードして実行するとすぐに使用できます！<small><a href="#warning-2">※2</a></small
+                  ><br />
+                  <a href="https://github.com/uplauncher/fiicenelectron/releases/download/v1.1.0/fiicenDesktop_win32_installer.exe" class="button is-primary">Windows 用をダウンロード</a>
+                  <a href="https://github.com/uplauncher/fiicenelectron/releases/download/v1.1.0/fiicenDesktop_linux_installer.deb" class="button">Linux (deb) 用をダウンロード (ベータ)</a>
+
+                  <details title="Linuxのインストール方法を見る">
+                    <summary>Linuxのインストール方法を見る</summary>
+                    <p>Linuxはdebのみ利用できます。近日中にrpmバージョンをリリースする予定です。</p>
+                    <ol>
+                      <li>上のボタンから、Linux (deb) 用をダウンロードします。</li>
+                      <li>ダウンロードしたフォルダで端末(ターミナル)を開き、<br /><span class="rcs-code">&nbsp; sudo apt install ./fiicenDesktop_linux_installer.deb &nbsp;</span><br />と入力します。</li>
+                      <li>インストールが完了するのを待ちます。</li>
+                      <li>インストールが完了しました！あとはアプリを起動してFiicen Desktopを楽しむだけです！</li>
+                    </ol>
+                  </details>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p id="warning-2"><small>※2 - Windowsの場合。Linuxの場合はインストール方法が少し複雑です。</small></p>
+        </div>
+      </section>
     </div>
 
     <footer></footer>

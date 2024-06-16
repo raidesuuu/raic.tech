@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
   <head>
     <!--meta-->
@@ -6,34 +6,24 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta
-      name="description"
-      content="雷やUpLauncherに連絡する方法が書いてあるページです。"
-    />
+    <meta name="description" content="雷やUpLauncherに連絡する方法が書いてあるページです。" />
     <link rel="canonical" href="https://raic.tech/" />
 
     <meta content="連絡 - 雷のサイト" property="og:title" />
-    <meta
-      content="雷やUpLauncherに連絡する方法が書いてあるページです。"
-      property="og:description"
-    />
+    <meta content="雷やUpLauncherに連絡する方法が書いてあるページです。" property="og:description" />
     <meta content="https://raic.tech" property="og:url" />
-    <meta
-      content="https://raic.tech/images/profile-image.png"
-      property="og:image"
-    />
+    <meta content="https://raic.tech/images/profile-image.png" property="og:image" />
     <meta content="#43B581" data-react-helmet="true" name="theme-color" />
 
     <!--Stylesheet-->
     <link rel="stylesheet" href="/css/index.css" />
 
-
     <!--favicon-->
     <link rel="icon" href="/images/profile-image.png" />
 
     <!--JavaScript-->
-    
-<script src="/js/menu.js"></script>
+
+    <script src="/js/menu.js"></script>
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3326621014935824"
@@ -46,84 +36,37 @@
   <body style="display: none">
     <header></header>
 
-    <div class="content text-center">
-      <h1>コンタクトページ</h1>
-      <p>
-        雷に連絡したい場合は、ここに書いてある連絡先に連絡してください。<br />
-      </p>
+    <section class="columns p-4 m-0">
+      <div class="submenu column is-2"></div>
+      <div class="content">
+        <h1>コンタクトページ</h1>
+        <p>雷に連絡したい場合は、ここに書いてある連絡先に連絡してください。<br /></p>
 
-      <h2>Discord</h2>
-      <p>まずは、Discordのサーバーへ参加してください。</p>
-      <a href="https://discord.gg/PqUbFf7fyt" class="button is-primary"
-        >サーバーに参加する</a
-      >
+        <h2>Discord</h2>
+        <p>まずは、Discordのサーバーへ参加してください。</p>
+        <a href="/discord.html" class="button is-primary">サーバーに参加する</a>
 
-      <div class="center-left">
         <ul>
-          <li>
-            雷のサービスの場合は、専用のサポートフォーラムを使用してください。
-          </li>
+          <li>雷のサービスの場合は、専用のサポートフォーラムを使用してください。</li>
           <li>それ以外の連絡は、サポートと質問フォーラムで行ってください。</li>
           <li>プライベートな連絡がしたい場合、チケットを作成してください。</li>
         </ul>
-      </div>
 
-      <h2>X</h2>
-      <p>Xの場合は、ダイレクトメッセージを送信してください。</p>
-      <a href="https://x.com/raidesuuu" class="button is-link"
-        >Xのプロフィール
-      </a>
+        <h2>X（旧Twitter）</h2>
+        <p>Xの場合は、ダイレクトメッセージを送信してください。</p>
+        <a href="/twitter.html" class="button is-link">Xのプロフィール </a>
 
-      <div class="center-left">
         <ul>
-          <li>
-            フォローして、フォロバを待ってください。(フォロバ規約も読んでください)
-          </li>
           <li>Xの場合は、反応が遅い場合があります。ご了承ください。</li>
         </ul>
+
+        <h2>メール</h2>
+        <p id="contactMail">メールを送信してヘルプを得ることもできます。</p>
+        <a href="mailto:contact@raic.tech" class="button is-warning">メールを送信する</a>
       </div>
-
-      <h2>メール</h2>
-      <p id="contactMail">
-        メールアプリでメールを送信してください。<br />
-        メールアドレス: (スパム対策のため、Captchaを突破してください。)
-      </p>
-      <button id="displayCaptcha" class="button is-primary">
-        Captchaを表示</button
-      ><br /><br />
-
-      <div id="turnstile"></div>
-
-      <p>
-        CaptchaはCloudflareにより提供されている「Turnstile」を使用しています。<br /><a
-          href="https://www.cloudflare.com/privacypolicy/"
-          >プライバシーポリシー。</a
-        >
-      </p>
-    </div>
+    </section>
 
     <script src="/js/index.js"></script>
-
-    <script>
-      window.onloadTurnstileCallback = function () {
-        turnstile.render("#turnstile", {
-          sitekey: "0x4AAAAAAACYWAGYl5B5l4E9",
-          callback: function (token) {
-            document.querySelector("#contactMail").innerHTML = document
-              .querySelector("#contactMail")
-              .innerHTML.replace(
-                "(スパム対策のため、Captchaを突破してください。)",
-                "admin@raic.tech"
-              );
-          },
-        });
-      };
-      const displayCaptcha = document.querySelector("#displayCaptcha");
-      displayCaptcha.addEventListener("click", () => {
-        displayCaptcha.disabled = true;
-        turnstile.ready(onloadTurnstileCallback);
-      });
-    </script>
 
     <footer></footer>
   </body>

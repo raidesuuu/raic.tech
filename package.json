@@ -39,7 +39,7 @@
   },
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "concurrently \"yarn sass:dev\" \"yarn server:dev\"",
+    "dev": "concurrently \"pnpm sass:dev\" \"pnpm server:dev\"",
     "server:dev": "webpack-dev-server --mode development",
     "sass:dev": "sass --watch src/index.scss:dist/css/index.css",
     "lint": "eslint --fix ./src/**/*.ts && prettier --write ./src/**/*.ts",
@@ -50,5 +50,6 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "webpack-dev-middleware": "^7.1.1"
-  }
+  },
+  "packageManager": "pnpm@9.2.0+sha512.98a80fd11c2e7096747762304106432b3ddc67dcf54b5a8c01c93f68a2cd5e05e6821849522a06fb76284d41a2660d5e334f2ee3bbf29183bf2e739b1dafa771"
 }
