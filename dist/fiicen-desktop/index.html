@@ -91,13 +91,34 @@
                 <p>
                   Fiicen Desktopのインストールはすぐです！ファイルをダウンロードして実行するとすぐに使用できます！<small><a href="#warning-2">※2</a></small
                   ><br />
-                  <a href="https://github.com/uplauncher/fiicenelectron/releases/download/v1.1.0/fiicenDesktop_win32_installer.exe" class="button is-primary">Windows 用をダウンロード</a>
-                  <a href="https://github.com/uplauncher/fiicenelectron/releases/download/v1.1.0/fiicenDesktop_linux_installer.deb" class="button">Linux (deb) 用をダウンロード (ベータ)</a>
-                  <a href="https://github.com/uplauncher/fiicenelectron/releases/download/v1.1.0/fiicenDesktop_darwin_installer.zip" class="button">Mac (Intel) 用をダウンロード (ベータ)</a>
+                  <details title="Windows">
+                    <summary class="title is-5" style="color: var(--bulma-content-heading-color)">Windows 用をダウンロード</summary>
+                    <br />
 
-                  <details title="Linuxのインストール方法を見る">
-                    <summary>Linuxのインストール方法を見る</summary>
-                    <p>Linuxはdebのみ利用できます。近日中にrpmバージョンをリリースする予定です。</p>
+                    <a href="https://github.com/uplauncher/fiicenelectron/releases/download/v1.1.0/fiicenDesktop_win32_installer.exe" class="button">Windows</a>
+                    <br />
+
+                    <p>Windowsの場合は、上のダウンロードボタンからファイルをダウンロードし、それを開くだけです。</p>
+                  </details>
+
+                  <details title="Mac (ベータ)">
+                    <summary class="title is-5" style="color: var(--bulma-content-heading-color)">macOS (ベータ) 用をダウンロード</summary>
+                    <br />
+
+                    <a href="https://github.com/uplauncher/fiicenelectron/releases/download/v1.1.0/fiicenDesktop_darwin_installer.zip" class="button">Mac (Intel)</a>
+                    <a href="https://github.com/uplauncher/fiicenelectron/releases/download/v1.1.0/fiicenDesktop_darwin_arm64_installer.zip" class="button">Mac (Apple シリコン)</a>
+                    <br />
+
+                    <p>Macの場合は、上のダウンロードボタンからZIPをダウンロードし、それを解凍してその中にある.appファイルを開くだけです。</p>
+                  </details>
+
+                  <details title="Linux (ベータ)">
+                    <summary class="title is-5" style="color: var(--bulma-content-heading-color)">Linux (ベータ) 用をダウンロード</summary>
+                    <br />
+
+                    <a href="https://github.com/uplauncher/fiicenelectron/releases/download/v1.1.0/fiicenDesktop_linux_installer.deb" class="button">Linux (deb)</a>
+                    <a href="https://github.com/uplauncher/fiicenelectron/releases/download/v1.1.0/fiicenDesktop_linux_installer.rpm" class="button">Linux (rpm)</a>
+
                     <ol>
                       <li>上のボタンから、Linux (deb) 用をダウンロードします。</li>
                       <li>ダウンロードしたフォルダで端末(ターミナル)を開き、<br /><span class="rcs-code">&nbsp; sudo apt install ./fiicenDesktop_linux_installer.deb &nbsp;</span><br />と入力します。</li>
