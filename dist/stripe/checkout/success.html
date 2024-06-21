@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!--meta-->
+    <title>ご購入ありがとうございます！ / 雷のサイト</title>
+
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="/css/index.css" />
+
+    <!--Favicon-->
+    <link rel="icon" href="/images/profile-image.png" />
+
+    <!--Script-->
+
+    <script src="/js/menu.js"></script>
+  </head>
+
+  <body style="display: none">
+    <header></header>
+
+    <div class="content">
+      <section class="hero">
+        <div class="columns p-4 m-0" style="flex-wrap: wrap">
+          <div class="column is-6 is-narrow" style="width: 100%">
+            <div class="hero-body">
+              <div class="has-text-centered">
+                <h1 class="title" style="font-size: 3rem">ご購入ありがとうございます！</h1>
+                <p class="subtitle">Stripeでのチェックアウトが完了し、プレミアムを入手できるようになりました！<br />プレミアムの付与が完了するまでお待ちください。完了すると自動的にパネルへ移動されます。</p>
+                <h1 class="title">
+                  注意: 処理が終わるまでブラウザを操作しないでください。<br />
+                  一分以上待っても終わらない場合は、サポートに連絡してください。
+                </h1><br>
+                <p class="subtitle" id="app_paidEquipProgress">処理中です。しばらくお待ちください。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer></footer>
+
+    <script src="/js/stripe/checkoutComplete.js"></script>
+    <script src="/js/index.js"></script>
+  </body>
+</html>

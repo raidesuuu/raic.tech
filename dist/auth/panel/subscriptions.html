@@ -34,32 +34,69 @@
       <div class="submenu column is-4" id="settings-sidebar"></div>
 
       <div class="content">
-        <h1>1. プレミアムのサブスクリプションを購入</h1>
-        <p>
-          GitHub Sponsorsで、プレミアム以上のランクを購入してください。<br />
-          サブスクリプション(ランク)についての詳細は<a href="/category/infomation/ranks">こちら</a>をご覧ください。<br /><br />
+        <h1>プレミアムを管理</h1>
+        <p>プレミアムを購入したり、サブスクリプションを管理したりします。</p>
+        <div class="app_payContainer">
+          <h1>プレミアムを購入する</h1>
+          <p>
+            GitHub SponsorsまたはStripeで、プレミアム以上のランクを購入してください。<br />
+            サブスクリプション(ランク)についての詳細は<a href="/category/infomation/ranks.html">こちら</a>をご覧ください。<br /><br />
+  
+            サブスクリプションを購入すると、<a href="/category/infomation/purchaser-tos.html">購入者の利用規約</a>に同意したことになります。
+          </p>
 
-          サブスクリプションを購入すると、<a href="/category/infomation/purchaser-tos.html">購入者の利用規約</a>に同意したことになります。
-        </p>
-        <a href="https://github.com/sponsors/raidesuuu/sponsorships?tier_id=397842&preview=false" class="button is-primary"><i class="fas fa-cart-arrow-down"></i>プレミアムを購入</a>
-        <a href="https://github.com/sponsors/raidesuuu/sponsorships?tier_id=182791&preview=false" class="button is-secondary"><i class="fas fa-cart-arrow-down"></i>プレミアムプラスを購入</a>
+          <h2>Stripeで購入する</h2>
+          <form id="checkoutCreateForm" method="post" action="http://api.raic.tech/stripe/create-checkout-session">
+            <div class="box">
+              <h2>期間を選択</h2>
+              <!-- Period -->
+              <div>
+                <input type="radio" checked id="selectPlan_monthly" name="selectPeriod" value="monthly" />
+                <label for="selectPeriod_monthly">一か月</label>&nbsp;
 
-        <article class="message is-warning" id="patreonNotice">
-          <br />
-          <div class="message-body has-text-left">
-            <p>
-              Patreonでの購入を探していますか？すべてのサブスクリプションはGitHub Sponsorsへ移動されました。<br />
-              特典の付与手続きは、スタッフチームが確認して行います。(不正利用を防ぐため)
-            </p>
-          </div>
-        </article>
+                <input type="radio" id="selectPlan_yearly" name="selectPeriod" value="yearly" />
+                <label for="selectPeriod_yearly">一年</label>
+              </div>
+              <br />
 
-        <h1>2. 特典を入手する</h1>
+              <h2>プランを選択</h2>
 
-        <p class="half">
-          雷のDiscordサーバーへ参加し、DMしてください。常にDMを開放しています。(お手紙を送信できない場合は、あなたがDMをブロックしている可能性があります。サーバー、DiscordのDM設定をご確認ください。)<br />
-          もしくは、チケットを立ててリクエストすることができます。
-        </p>
+              <!-- Select Plans -->
+              <div>
+                <input type="radio" checked id="selectPlan_P" name="selectPlan" value="premium" />
+                <label for="selectPlan_P">プレミアム</label>&nbsp;
+
+                <input type="radio" id="selectPlan_PP" name="selectPlan" value="premiumPlus" />
+                <label for="selectPlan_PP">プレミアムプラス</label>&nbsp;
+
+                <input type="radio" id="selectPlan_PPP" name="selectPlan" value="pro" />
+                <label for="selectPlan_PPP">Pro</label>
+              </div>
+              <br />
+              <!-- <select name="selectPlan" class="input">
+              <option value="premium">プレミアム</option>
+              <option value="premiumPlus">プレミアムプラス</option>
+              <option value="pro">Pro</option>
+            </select> -->
+
+              <input class="button pay-buttons is-primary" type="submit" value="購入" />
+            </div>
+          </form>
+          <!-- <button class="button" id="buy">buy</button>
+        <script>
+          document.getElementById("buy").addEventListener("click", () => {
+            fetch("http://127.0.0.1:5656/create-checkout-session", {method: "POST", redirect: "follow"}).then((res) =>{
+              window.open(res.url)
+            })
+          })
+        </script> --><br>
+        </div>
+
+        <h1>サブスクリプションを管理</h1>
+
+        <p>次のボタンをクリックして、Stripeカスタマーポータルを開きます。購入する際に入力したメールアドレスを入力してサインインしてください。</p>
+
+        <a class="button is-link" target="_blank" href="https://billing.stripe.com/p/login/8wM3d63qXeic1WgfYY">Stripeでサブスクリプションを管理</a><br /><br />
 
         <article id="subscriptionStateContainer" class="is-hidden message is-success">
           <div class="message-header">

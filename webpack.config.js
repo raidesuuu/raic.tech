@@ -36,6 +36,7 @@ module.exports = {
     'js/panel-security': './src/panel/security.ts',
     'js/loadSidebar': './src/panel/loadSidebar.ts',
     'js/panel-patreon': './src/panel/patreon.ts',
+    'js/stripe/checkoutComplete': './src/stripe/checkoutComplete.ts',
     'css/index': './src/index.scss',
   },
   // モジュールバンドルを行った結果を出力する場所やファイル名の指定

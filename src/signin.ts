@@ -39,6 +39,7 @@ onAuthStateChanged(auth, (user) => {
 })
 const urlParams = new URLSearchParams(window.location.search)
 const state = urlParams.get('continue_with')
+const continueTo = urlParams.get('continue_to')
 const title = document.getElementById('LoginTitle') as HTMLElement
 if (state === 'student') {
   title.textContent = 'ログインして学生連携を続行'
@@ -81,6 +82,12 @@ function loginWithProvider(providerId: string) {
         location.href = '/student/app/'
         return
       }
+
+      if (continueTo) {
+        location.href = continueTo
+        return
+      }
+
       moveToPanel()
     })
     .catch((error) => {
@@ -95,6 +102,12 @@ function login() {
         location.href = '/student/app/'
         return
       }
+
+      if (continueTo) {
+        location.href = continueTo
+        return
+      }
+
       moveToPanel()
     })
     .catch(async (error) => {
