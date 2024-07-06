@@ -223,6 +223,9 @@ input[type='checkbox']:checked + .checkbox::after {
 .color-blue {
   color: lightblue; // #add8e6
 }
+.color-solid-blue {
+  color: rgb(122, 122, 255)
+}
 .color-green {
   color: lightgreen; // #90ee90
 }

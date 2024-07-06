@@ -43381,6 +43381,10 @@ input[type=checkbox]:checked + .checkbox::after {
   color: lightblue;
 }
 
+.color-solid-blue {
+  color: rgb(122, 122, 255);
+}
+
 .color-green {
   color: lightgreen;
 }

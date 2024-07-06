@@ -1,4 +1,4 @@
-if (window.location.pathname == '/rales/downloads' || window.location.pathname == '/rales/downloads.html') {
+if (window.location.pathname.startsWith("/rales/downloads")) {
   document.addEventListener('DOMContentLoaded', () => {
     console.log('aa')
     const targetElem = document.getElementById('app-commit-history')
@@ -9,17 +9,26 @@ if (window.location.pathname == '/rales/downloads' || window.location.pathname =
 
     fetch('https://api.github.com/repos/uplauncher/rales/commits?per_page=10')
       .then((response) => response.json())
-      .then((res) => {
-        Object.keys(res).forEach((key) => {
-            const boxElement = document.createElement("div")
+      .then((res: any) => {
+        if (!res.message.startsWith('API rate limit')) {
+          Object.keys(res).forEach((key) => {
+            const boxElement = document.createElement('div')
             boxElement.classList.add('box')
             const titleElement = document.createElement('p')
             titleElement.style.fontSize = '20px'
-            console.log(res[key])
             titleElement.innerHTML = `${res[key].commit.verification.verified ? '<span class="c-tooltip" data-tooltip="認証済みのコミット"><i class="fas fa-check"></i></span>' : ''}${res[key].commit.message} <small>${new Date(res[key].commit.committer.date).toLocaleString()}</small>`
             boxElement.appendChild(titleElement)
             targetElem.appendChild(boxElement)
-        })
+          })
+        } else {
+          const boxElement = document.createElement('div')
+          boxElement.classList.add('box')
+          const titleElement = document.createElement('p')
+          titleElement.style.fontSize = '20px'
+          titleElement.innerHTML = `申し訳ございません。GitHubでレートリミットが発生しているためコミットをロードできませんでした。`
+          boxElement.appendChild(titleElement)
+          targetElem.appendChild(boxElement)
+        }
       })
   })
 } else {
@@ -38,7 +47,7 @@ if (window.location.pathname == '/rales/downloads' || window.location.pathname =
     setTimeout(() => {
       targetElem.innerHTML += `[${toMCDate()} INFO] Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]<br>`
       setTimeout(() => {
-        targetElem.innerHTML += `[${toMCDate()} INFO] Rales サーバー (マインクラフト 1.20.6) を起動中です...<br>`
+        targetElem.innerHTML += `[${toMCDate()} INFO] Rales サーバー (マインクラフト 1.21) を起動中です...<br>`
         targetElem.innerHTML += `[${toMCDate()} INFO] レベル "world" を準備中です...<br>`
         targetElem.innerHTML += `[${toMCDate()} INFO] ディメンションの準備: minecraft:overworld<br>`
         setTimeout(() => {
