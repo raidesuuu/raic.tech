@@ -23,11 +23,7 @@
     <!--Script-->
 
     <script src="/js/menu.js"></script>
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3326621014935824"
-      crossorigin="anonymous"
-    ></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3326621014935824" crossorigin="anonymous"></script>
   </head>
 
   <body style="display: none">
@@ -46,19 +42,17 @@
 
           <div class="field is-hidden" id="app-edit-container">
             <div class="control">
-              <p id="app-edit-jump" style="margin-bottom: 0">
-                お手紙(ジャンプ)を編集中です <a id="app-edit-cancel">キャンセル</a>
-              </p>
+              <p id="app-edit-jump" style="margin-bottom: 0">お手紙(ジャンプ)を編集中です <a id="app-edit-cancel">キャンセル</a></p>
               <textarea id="app-edit-content" class="input" style="width: 500px" placeholder="お手紙"></textarea>
               <button id="app-edit-message" class="button is-primary">編集</button><br />
               <p id="app-edit-alert" class="is-hidden"><i class="fas fa-info"></i><label></label></p>
             </div>
           </div>
           <br />
-          <div style="overflow-y: scroll; overflow-x: scroll; width: 100%; overflow-wrap:break-word; height: 90vh">
+          <div style="overflow-y: scroll; overflow-x: scroll; width: 100%; overflow-wrap: break-word; height: 90vh">
             <h2>タイムライン</h2>
             <input type="text" class="input" id="searchInput" placeholder="ワード、名前、時間で検索" />
-            <ul id="app-timeline" style="width: 100%;">
+            <ul id="app-timeline" style="width: 100%">
               <li style="display: none">Test</li>
             </ul>
             <div id="searchResultNotFoundContainer" class="is-hidden">
@@ -82,14 +76,7 @@
             <p id="app-message-dialog-description">パスワードと2段階認証のコードを入力して続行します。</p>
 
             <button id="app-message-dialog-button" class="is-hidden button is-danger"><i class="fas fa-check"></i>続行</button>
-            <button
-              onclick="document.querySelector('#app-message-dialog').close();"
-              id="app-message-dialog-close"
-              class="button is-primary"
-              aria-label="close"
-            >
-              OK
-            </button>
+            <button onclick="document.querySelector('#app-message-dialog').close();" id="app-message-dialog-close" class="button is-primary" aria-label="close">OK</button>
           </div>
         </div>
       </div>
@@ -112,9 +99,7 @@
                 <h2><input type="radio" name="report-type" value="spam" checked /> スパム</h2>
                 <p>スパム、広告、詐欺、不正なリンク、不正な画像、不正なファイルを送信している場合に選択してください。</p>
                 <h2><input type="radio" name="report-type" value="harassment" /> 言葉と情報の発信</h2>
-                <p>
-                  他者を傷つける言葉、差別的な言葉、暴言、性的な言葉、人の気分を害する言葉、虚偽の情報を発信している場合に選択してください。
-                </p>
+                <p>他者を傷つける言葉、差別的な言葉、暴言、性的な言葉、人の気分を害する言葉、虚偽の情報を発信している場合に選択してください。</p>
                 <h2><input type="radio" name="report-type" value="other" /> その他</h2>
                 <p>
                   その他のRai Chatの利用規約に違反している場合に選択してください。<br />
@@ -127,29 +112,13 @@
 
             <div class="box">
               <h2>自分が著作権者・著作権者の正式な代理人の場合</h2>
-              <p>
-                <a href="/chat/docs/dmca.html">このページ</a>を使って連絡してください。早急にUpLauncher
-                スタッフが対応させていただきます。
-              </p>
+              <p><a href="/chat/docs/dmca.html">このページ</a>を使って連絡してください。早急にUpLauncher スタッフが対応させていただきます。</p>
             </div>
 
-            <textarea
-              id="app-report-dialog-message"
-              class="input"
-              style="width: 500px; height: 100px"
-              placeholder="詳細"
-            ></textarea
-            ><br />
+            <textarea id="app-report-dialog-message" class="input" style="width: 500px; height: 100px" placeholder="詳細"></textarea><br />
 
             <button id="app-report-dialog-button" class="is-hidden button is-danger"><i class="fas fa-check"></i>送信</button>
-            <button
-              onclick="document.querySelector('#app-report-dialog').close();"
-              id="app-report-dialog-close"
-              class="button is-primary"
-              aria-label="close"
-            >
-              OK
-            </button>
+            <button onclick="document.querySelector('#app-report-dialog').close();" id="app-report-dialog-close" class="button is-primary" aria-label="close">OK</button>
           </div>
         </div>
       </div>

@@ -5,13 +5,7 @@
     Description: TFA module for the Rai Website.
 */
 
-import {
-  getAuth,
-  getMultiFactorResolver,
-  TotpMultiFactorGenerator,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-} from '@firebase/auth'
+import { getAuth, getMultiFactorResolver, TotpMultiFactorGenerator, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
 import { moveToPanel } from './rai'
 import { auth } from './firebase'
 
@@ -26,21 +20,14 @@ if (tfaSubmit == null || tfaCode == null) {
 
 onAuthStateChanged(auth, () => {
   tfaSubmit.addEventListener('click', () => {
-    signInWithEmailAndPassword(
-      auth,
-      window.sessionStorage.getItem('email') || 'Eメールの取得に失敗しました。',
-      window.sessionStorage.getItem('password') || 'パスワードの取得に失敗しました。',
-    ).catch(async function (error) {
+    signInWithEmailAndPassword(auth, window.sessionStorage.getItem('email') || 'Eメールの取得に失敗しました。', window.sessionStorage.getItem('password') || 'パスワードの取得に失敗しました。').catch(async function (error) {
       if (error.code == 'auth/multi-factor-auth-required') {
         const mfaResolver = getMultiFactorResolver(getAuth(), error)
 
         const resolver = getMultiFactorResolver(auth, error)
         // Ask user which second factor to use.
         if (resolver.hints[0].factorId === TotpMultiFactorGenerator.FACTOR_ID) {
-          const multiFactorAssertion = TotpMultiFactorGenerator.assertionForSignIn(
-            mfaResolver.hints[0].uid,
-            tfaCode.value,
-          )
+          const multiFactorAssertion = TotpMultiFactorGenerator.assertionForSignIn(mfaResolver.hints[0].uid, tfaCode.value)
           try {
             await mfaResolver.resolveSignIn(multiFactorAssertion).then(() => {
               moveToPanel() // Move to panel

@@ -5,10 +5,7 @@
     Description: Load Sidebar module for the Rai Website.
 */
 
-import { getDoc, doc, setDoc } from 'firebase/firestore'
-import { auth, firestore } from '../firebase'
-import { SubscriptionDataInterface } from 'chat/raiChatTypes'
-import { getPlan } from '../rai'
+import { auth } from '../firebase'
 
 //Initialize Firebase
 
@@ -16,26 +13,7 @@ console.info('[loadSidebar.ts]: Loading Sidebar...')
 ;(document.querySelector('.p-4')! as HTMLElement).style.display = 'none'
 
 auth.onAuthStateChanged((user) => {
-  //check ie
-  if (/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor) && navigator.userAgent.includes('Chrome') && (navigator.userAgent.match(/Chrome\/(\d{3})/) ?? [])[1] && parseInt((navigator.userAgent.match(/Chrome\/(\d{3})/) ?? [])[1]) < 107) {
-    if (navigator.userAgent.includes('Chrome')) {
-      window.location.href = '/category/infomation/unsupported-browser.html'
-      return
-    }
-  } else if (Number.isNaN(parseInt((navigator.userAgent.match(/Chrome\/(\d{3})/) ?? [])[1]))) {
-    if (navigator.userAgent.includes('Chrome')) {
-      window.location.href = '/category/infomation/unsupported-browser.html'
-      return
-    }
-  }
-
   const ENDPOINT_URL = window.location.hostname === '10.249.176.251' ? 'http://127.0.0.1:4649' : 'https://api.raic.tech'
-
-  //ie
-  if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
-    window.location.href = '/category/infomation/unsupported-browser.html'
-    return
-  }
 
   if (user === null) {
     console.log('[loadSidebar.ts] User is not signed in')
@@ -104,82 +82,6 @@ auth.onAuthStateChanged((user) => {
       if (element !== null) element.innerHTML = response
 
       console.info('[loadSidebar.ts] Sidebar loaded')
-
-      const premiumUpsellText = document.getElementById('premiumUpgradeUpsell_Text') as HTMLElement
-      const premiumUpsellContainer = document.getElementById('premiumUpgradeUpsell_Container') as HTMLElement
-      const premiumUpsellbutton = document.getElementById('premiumUpgradeUpsell_button') as HTMLAnchorElement
-      const query = await getDoc(doc(firestore, 'subscription-state', user.uid))
-      const userData = query.data() as SubscriptionDataInterface
-      if (!query.exists()) {
-        ;(document.querySelector('.p-4')! as HTMLElement).style.display = ''
-        return
-      }
-      //7d
-      if (userData.expiryDate * 1000 < Date.now() && userData.plan !== 'free' && !userData.isStudent) {
-        let res = null
-        try {
-          res = await fetch(`${ENDPOINT_URL}/stripe/check_customer_plan`, { method: 'POST', headers: { authorization: await user.getIdToken() } })
-        } catch (e) {
-          premiumUpsellText.textContent = 'サブスクリプションの状態の確認中にエラーが発生しました。再読み込みしても解決しない場合、サポートにStripeのメールアドレスとメールアドレスを書いて送ってください。'
-          return
-        }
-        if (res) {
-          res.json().then(async (data) => {
-            if (res.ok) {
-              if (data.state == 'not_active') {
-                premiumUpsellText.textContent = 'あなたのプランを再確認する必要があります。サブスクリプションを終了した場合はもう一度決済し、雷へ連絡すると継続できます。'
-                premiumUpsellbutton.classList.remove('is-hidden')
-                premiumUpsellbutton.href = '/'
-                premiumUpsellbutton.textContent = 'サブスクリプションについて'
-              }
-            } else {  
-              premiumUpsellText.textContent = 'サブスクリプションの状態の確認中にエラーが発生しました。再読み込みしても解決しない場合、サポートにStripeのメールアドレスとメールアドレスを書いて送ってください。'
-            }
-          })
-        }
-
-        ;(document.querySelector('.p-4')! as HTMLElement).style.display = ''
-        return
-      }
-      //1y student
-      if (userData.lastChecked + 31556952000 < Date.now() && userData.isStudent) {
-        userData.isExpired = true
-        userData.plan = 'free'
-        setDoc(doc(firestore, 'subscription-state', user.uid), userData)
-      }
-
-      switch (getPlan(userData.plan)) {
-        case 'pro':
-          premiumUpsellText.textContent = 'Proへアップグレードしていただき、ありがとうございます！'
-          premiumUpsellbutton.classList.add('is-hidden')
-          break
-        case 'premiumplus':
-          premiumUpsellText.textContent = 'プレミアムプラスへアップグレードしていただき、ありがとうございます！'
-          premiumUpsellbutton.classList.add('is-hidden')
-          break
-        case 'premium':
-          premiumUpsellText.textContent = 'プレミアムプラスにアップグレードすると、メッセージが強調表示されたり、実験中の機能を利用できます。'
-          premiumUpsellbutton.innerHTML = '<i class="fas fa-money-bill"></i>アップグレード'
-          break
-        case 'free':
-          break
-      }
-
-      if (userData.isStudent) {
-        premiumUpsellText.textContent = 'あなたは、プレミアムプラスを無料で利用する資格を持っています。学生の間、無料です。'
-        premiumUpsellbutton.classList.add('is-hidden')
-      }
-      if (userData.isExpired) {
-        premiumUpsellText.textContent = 'あなたのプランを再確認する必要があります。サブスクリプションを終了した場合はもう一度決済し、雷へ連絡すると継続できます。'
-        premiumUpsellbutton.classList.remove('is-hidden')
-        premiumUpsellbutton.textContent = 'サブスクリプションについて'
-        if (userData.isStudent) {
-          premiumUpsellText.innerHTML = 'あなたが学生であることを再確認する必要があります。再確認するまで、一時的にプレミアムの特典は利用できなくなります。<br>もう学生ではありませんか？<a href="/auth/panel/subscriptions.html">こちら</a>をクリックしてプレミアムへアップグレードしてください。'
-          premiumUpsellbutton.textContent = '学生確認へ'
-          premiumUpsellbutton.href = '/student/'
-        }
-      }
-
       ;(document.querySelector('.p-4')! as HTMLElement).style.display = ''
     }
   }

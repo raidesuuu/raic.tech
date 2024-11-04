@@ -2,7 +2,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 const TerserPlugin = require('terser-webpack-plugin')
-const fs = require("fs")
+const fs = require('fs')
 const obfuscator = require('webpack-obfuscator')
 const WebpackObfuscatorPlugin = require('webpack-obfuscator')
 
@@ -20,7 +20,7 @@ module.exports = {
     'js/firebase': './src/firebase.ts',
     'js/link': './src/link.ts',
     'js/finishLink': './src/finishLink.ts',
-    "js/rales": "./src/rales.ts",
+    'js/rales': './src/rales.ts',
     'js/chat-app': './src/chat/app.ts',
     'js/chat-profile': './src/chat/profile.ts',
     'js/chat-message': './src/chat/message.ts',
@@ -32,11 +32,8 @@ module.exports = {
     'js/chat-trend': './src/chat/trend.ts',
     'js/panel-data': './src/panel/data.ts',
     'js/chat-sidebar': './src/chat/loadSidebar.ts',
-    'js/api-sidebar': './src/api/loadSidebar.ts',
     'js/panel-security': './src/panel/security.ts',
     'js/loadSidebar': './src/panel/loadSidebar.ts',
-    'js/panel-patreon': './src/panel/patreon.ts',
-    'js/stripe/checkoutComplete': './src/stripe/checkoutComplete.ts',
     'css/index': './src/index.scss',
   },
   // モジュールバンドルを行った結果を出力する場所やファイル名の指定
@@ -64,7 +61,7 @@ module.exports = {
         cert: fs.readFileSync('cert.crt'),
         ca: fs.readFileSync('ca.crt'),
       },
-    }
+    },
   },
   // モジュールに適用するルールの設定（ローダーの設定を行う事が多い）
   module: {
@@ -86,10 +83,7 @@ module.exports = {
       filename: 'dist/css/index.css',
     }),
     new WebpackObfuscatorPlugin({
-      StringArrayEncoding: [
-        "base64",
-        "rc4"
-      ],
+      StringArrayEncoding: ['base64', 'rc4'],
     }),
     new RemoveEmptyScriptsPlugin(),
   ],

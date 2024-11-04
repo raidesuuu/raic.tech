@@ -5,17 +5,7 @@
     Description: Panel Home module for the Rai Website.
 */
 
-import {
-  getAuth,
-  onAuthStateChanged,
-  EmailAuthProvider,
-  updateProfile,
-  TotpMultiFactorGenerator,
-  getMultiFactorResolver,
-  sendEmailVerification,
-  multiFactor,
-  reauthenticateWithCredential,
-} from '@firebase/auth'
+import { getAuth, onAuthStateChanged, EmailAuthProvider, updateProfile, TotpMultiFactorGenerator, getMultiFactorResolver, sendEmailVerification, multiFactor, reauthenticateWithCredential } from 'firebase/auth'
 
 import { NotLoggedError } from '../rai'
 import { verifyBeforeUpdateEmail } from 'firebase/auth'
@@ -39,9 +29,7 @@ auth.onAuthStateChanged((user) => {
       const errorCode = error.code
       const errorMessage = error.message
       if (errorCode === 'auth/too-many-requests') {
-        alert(
-          'デフォルトの名前を設定する際にエラーが発生しました。ページを再読み込み、ロードしすぎているか、アクションを実行しすぎている可能性があります。',
-        )
+        alert('デフォルトの名前を設定する際にエラーが発生しました。ページを再読み込み、ロードしすぎているか、アクションを実行しすぎている可能性があります。')
       } else {
         alert('デフォルトの名前を設定する際にエラーが発生しました: ' + errorMessage)
       }
@@ -78,18 +66,7 @@ auth.onAuthStateChanged((user) => {
 
   emailNew.value = email || 'メールアドレスがありません'
 
-  if (
-    emailNew === null ||
-    emailPassword === null ||
-    emailAlert === null ||
-    emailSubmit === null ||
-    emailTFA === null ||
-    helloName === null ||
-    helloDate === null ||
-    emailVerificationAlert === null ||
-    emailVerificationbutton === null ||
-    emailTFAContainer === null
-  ) {
+  if (emailNew === null || emailPassword === null || emailAlert === null || emailSubmit === null || emailTFA === null || helloName === null || helloDate === null || emailVerificationAlert === null || emailVerificationbutton === null || emailTFAContainer === null) {
     console.error('[security.ts : P1]: No Required element found')
 
     return
@@ -109,18 +86,15 @@ auth.onAuthStateChanged((user) => {
   emailVerificationbutton.addEventListener('click', () => {
     sendEmailVerification(user)
       .then(() => {
-        emailVerificationAlert.querySelector('p')!.innerHTML =
-          '<p>下のボタンをクリックして、メールアドレスを認証してください。<br><i class="fas fa-check"></i>送信が完了しました。メールアドレスのメールボックスを確認してください。</p>'
+        emailVerificationAlert.querySelector('p')!.innerHTML = '<p>下のボタンをクリックして、メールアドレスを認証してください。<br><i class="fas fa-check"></i>送信が完了しました。メールアドレスのメールボックスを確認してください。</p>'
       })
       .catch((error) => {
         const errorCode = error.code
         if (errorCode === 'auth/too-many-requests') {
-          emailVerificationAlert.querySelector('p')!.innerHTML =
-            '<p>下のボタンをクリックして、メールアドレスを認証してください。<br><i class="fas fa-circle-xmark"></i>短時間に多くのアクションを起こしています。後でお試しください。</p>'
+          emailVerificationAlert.querySelector('p')!.innerHTML = '<p>下のボタンをクリックして、メールアドレスを認証してください。<br><i class="fas fa-circle-xmark"></i>短時間に多くのアクションを起こしています。後でお試しください。</p>'
         }
       })
   })
-
 
   if (user.providerData[0].providerId != 'password') {
     showNotice(emailAlert, 'メールアドレスとパスワード以外でログインしているため、メールアドレスを変更できません。')
@@ -137,10 +111,7 @@ auth.onAuthStateChanged((user) => {
       .then(() => {
         verifyBeforeUpdateEmail(user, emailNew.value)
           .then(() => {
-            showNotice(
-              emailAlert,
-              'メールアドレスの変更を完了するには、新しいメールアドレスを認証する必要があります。\n新しいメールアドレスのメールボックスを確認してください。',
-            )
+            showNotice(emailAlert, 'メールアドレスの変更を完了するには、新しいメールアドレスを認証する必要があります。\n新しいメールアドレスのメールボックスを確認してください。')
           })
           .catch((error) => {
             if (error.code === 'auth/email-already-in-use') {
@@ -169,17 +140,12 @@ auth.onAuthStateChanged((user) => {
         } else if (errorCode === 'auth/multi-factor-auth-required') {
           const mfaResolver = getMultiFactorResolver(getAuth(), error)
 
-          const cred = await mfaResolver.resolveSignIn(
-            TotpMultiFactorGenerator.assertionForSignIn(mfaResolver.hints[0].uid, emailTFA.value),
-          )
+          const cred = await mfaResolver.resolveSignIn(TotpMultiFactorGenerator.assertionForSignIn(mfaResolver.hints[0].uid, emailTFA.value))
 
           try {
             verifyBeforeUpdateEmail(cred.user, emailNew.value)
               .then(() => {
-                showNotice(
-                  emailAlert,
-                  'メールアドレスの変更を完了するには、新しいメールアドレスを認証する必要があります。\n新しいメールアドレスのメールボックスを確認してください。',
-                )
+                showNotice(emailAlert, 'メールアドレスの変更を完了するには、新しいメールアドレスを認証する必要があります。\n新しいメールアドレスのメールボックスを確認してください。')
               })
               .catch((error) => {
                 if (error.code === 'auth/email-already-in-use') {

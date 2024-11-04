@@ -208,6 +208,10 @@ input[type='checkbox']:checked + .checkbox::after {
 }
 //===[END] Signin, Signup CSS [END]===//
 
+.bigger {
+  font-size: large;
+}
+
 //===[START] Table CSS [START]===//
 .table-title {
   font-weight: bold; // Font weight bold
@@ -240,7 +244,7 @@ input[type='checkbox']:checked + .checkbox::after {
 .favorite:hover {
   color: #ff1f1f; // Red
 }
-
+  
 .no-deco {
   text-decoration: none !important;
 }

@@ -6,7 +6,7 @@
 */
 
 // @ts-ignore
-if (window.document.documentMode) {
+if (document.documentMode && document.uniqueID) {
   window.location.href = "/unsupported-browser-fallback.html"
 }
 
