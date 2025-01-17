@@ -5,8 +5,6 @@
     Description: Menu module for the Rai Website.
 */
 
-import { auth } from './firebase'
-import { getURL } from './rai'
 const isHeaderLoadingCompleted = false
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,42 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.info('[XHR : INFO (menu.ts)]: Header loaded')
       } else {
         console.error('[XHR : ERROR (menu.ts)]: No header element found')
-      }
-
-      if (!getURL().includes('panel')) {
-        auth.onAuthStateChanged((user) => {
-          if (user !== null) {
-            // User is signed in
-            window.localStorage.setItem('userId', user.uid)
-
-            // Get the elements
-            const signupElement = document.getElementById('signup')
-            const signinElement = document.getElementById('signin')
-            const panelElement = document.getElementById('panel')
-            const logoutElement = document.getElementById('logout')
-
-            // Check if the elements exist
-            if (signupElement == null || signinElement == null || panelElement == null || logoutElement == null) return
-
-            // If the elements exist, add or remove classes
-            signupElement.classList.add('is-hidden')
-            signinElement.classList.add('is-hidden')
-            panelElement.classList.remove('is-hidden')
-            logoutElement.classList.remove('is-hidden')
-            // Add the event listener
-            logoutElement.addEventListener('click', () => {
-              // Sign out
-              auth.signOut()
-              window.localStorage.removeItem('userId')
-              window.location.reload()
-            })
-
-            document.body.style.display = 'block'
-          } else {
-            document.body.style.display = 'block'
-          }
-        })
-        document.body.style.display = 'block'
       }
 
       const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0)

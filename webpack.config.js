@@ -13,23 +13,6 @@ module.exports = {
   entry: {
     'js/index': './src/index.ts',
     'js/menu': './src/menu.ts',
-    'js/signin': './src/signin.ts',
-    'js/signup': './src/signup.ts',
-    'js/forgot': './src/forgot.ts',
-    'js/tfa': './src/tfa.ts',
-    'js/firebase': './src/firebase.ts',
-    'js/link': './src/link.ts',
-    'js/finishLink': './src/finishLink.ts',
-    'js/chat-app': './src/chat/app.ts',
-    'js/chat-profile': './src/chat/profile.ts',
-    'js/chat-message': './src/chat/message.ts',
-    'js/chat-request': './src/chat/request.ts',
-    'js/chat-settings': './src/chat/settings.ts',
-    'js/chat-banned': './src/chat/banned.ts',
-    'js/panel-home': './src/panel/home.ts',
-    'js/chat-trend': './src/chat/trend.ts',
-    'js/chat-sidebar': './src/chat/loadSidebar.ts',
-    'js/loadSidebar': './src/panel/loadSidebar.ts',
     'css/index': './src/index.scss',
   },
   // モジュールバンドルを行った結果を出力する場所やファイル名の指定
@@ -50,14 +33,6 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'dist'),
     }, // webpack-dev-serverの公開フォルダ
-    server: {
-      type: 'https',
-      options: {
-        key: fs.readFileSync('cert.key'),
-        cert: fs.readFileSync('cert.crt'),
-        ca: fs.readFileSync('ca.crt'),
-      },
-    },
   },
   // モジュールに適用するルールの設定（ローダーの設定を行う事が多い）
   module: {
