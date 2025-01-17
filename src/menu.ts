@@ -25,23 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('[XHR : ERROR (menu.ts)]: No header element found')
       }
 
-      const lightDarkSwitch = document.getElementById("lightDarkSwitch");
-      lightDarkSwitch?.addEventListener("click", () => {
-        if (!document.querySelector("html")?.classList.contains("theme-dark") && !document.querySelector("html")?.classList.contains("theme-light")) {
-          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.querySelector("html")?.classList.add("theme-light")
-          } else {
-            document.querySelector("html")?.classList.add("theme-dark")
-          }
-        } else if (document.querySelector("html")?.classList.contains("theme-dark")) {
-          document.querySelector("html")?.classList.remove("theme-dark")
-          document.querySelector("html")?.classList.add("theme-light")
-        } else {
-          document.querySelector("html")?.classList.remove("theme-light")
-          document.querySelector("html")?.classList.add("theme-dark")
-        }
-      })
-
       if (!getURL().includes('panel')) {
         auth.onAuthStateChanged((user) => {
           if (user !== null) {
@@ -77,13 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         document.body.style.display = 'block'
       }
-
-      // Get the elements
-      document.getElementById('SearchBarSearch')?.addEventListener('click', () => {
-        const searchBar = document.getElementById('SearchBar') as HTMLInputElement
-        if (searchBar.value === '') return
-        window.location.href = 'https://cse.google.com/cse?cx=3463a8dc396be47a7&q=' + searchBar.value
-      })
 
       const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0)
 

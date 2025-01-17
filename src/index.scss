@@ -14,18 +14,8 @@
 // Dialog for HTML
 @import './dialog.scss';
 
-// Rales Header
-@import './header-rales.scss';
-
 // Fireworks for HTML
 @import './fireworks.scss';
-
-// Font Awesome 6.5.1 Pro
-$fa-font-path: './FontAwesome/webfonts';
-@import './FontAwesome/scss/fontawesome.scss';
-@import './FontAwesome/scss/solid.scss';
-@import './FontAwesome/scss/duotone.scss';
-@import './FontAwesome/scss/brands.scss';
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&display=swap');
 
@@ -208,18 +198,6 @@ input[type='checkbox']:checked + .checkbox::after {
 }
 //===[END] Signin, Signup CSS [END]===//
 
-.bigger {
-  font-size: large;
-}
-
-//===[START] Table CSS [START]===//
-.table-title {
-  font-weight: bold; // Font weight bold
-  vertical-align: baseline; // Vertical align baseline
-  text-align: left !important; // Text align left
-}
-//===[END] Table CSS [END]===//
-
 //===[START] Rai Chat CSS [START]===//
 .color-gold {
   color: #ffd700; // Gold
@@ -278,100 +256,6 @@ input {
 }
 //[END] Font Applier [END]//
 
-/* Tooltip */
-.c-tooltip {
-	display: inline-block;
-	position: relative;
-}
-
-.c-tooltip::before,
-.c-tooltip::after {
-	-webkit-transition: all 0.2s;
-	opacity: 0;
-	position: absolute;
-	transition: all 0.2s;
-	visibility: hidden;
-	z-index: 11;
-}
-
-.c-tooltip::before {
-	-webkit-transform: translateY(-50%);
-	border-color: transparent #5f6368 transparent transparent;
-	border-style: solid;
-	border-width: 3px 7px 3px 0;
-	content: "";
-	height: 0;
-	left: calc(100% + 6px);
-	top: 50%;
-	transform: translateY(-50%);
-	width: 0;
-}
-
-.c-tooltip::after {
-	-webkit-transform: translateY(-50%);
-	background: #5f6368;
-	border-radius: 3px;
-	color: #fff;
-	content: attr(data-tooltip);
-	display: block;
-	font-size: 11px;
-	font-weight: 600;
-	left: calc(100% + 13px);
-	padding: 5px 10px;
-	top: 50%;
-	transform: translateY(-50%);
-	white-space: nowrap;
-}
-
-.c-tooltip:hover {
-	cursor: pointer;
-}
-
-.c-tooltip:hover::before {
-	opacity: 1;
-	visibility: visible;
-}
-
-.c-tooltip:hover::after {
-	opacity: 1;
-	visibility: visible;
-}
-
-/* Roal.css for Rai Website */
-.rcs-code {
-  background-color: #333;
-  border-radius: 5px;
-  color: white;
-  text-align: left;
-  overflow-y: hidden;
-}
-
-.rcs-code-blue {
-  color: lightskyblue;
-}
-
-.rcs-code-input {
-  width: 95%;
-  color: white;
-  background: transparent;
-  border-style: none;
-}
-
-.rcs-code-comment {
-  color: lightgray;
-}
-
-.rcs-code-lang {
-  background-color: gray;
-  border-radius: 2px;
-}
-
-.rcs-center {
-  align-items: center;
-  justify-content: center;
-  display: flex;
-}
-
 /* Zoom */
 .zoom:hover {
   transform: scale(1.7);
@@ -400,18 +284,6 @@ label {
 .center-left input {
   text-align: left;
   display: inline-block;
-}
-
-.fa-solid,
-.fas,
-.far,
-.fab,
-.fad {
-  margin-right: 10px;
-}
-
-.fals {
-  margin-left: 10px;
 }
 
 .content {
@@ -518,87 +390,4 @@ header {
 // ボタンがコンテナからはみ出るのを修正
 button {
   width: auto;
-}
-
-.products {
-  text-align: left;
-
-  width: 100%;
-}
-
-@media screen and (min-width: 430px) {
-  .products > .columns {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-}
-
-.products > .column {
-  margin-left: 15px;
-  width: 25%;
-}
-
-.products.anim {
-  opacity: 0.3;
-}
-.anim {
-  animation: fadeIn 1s;
-  opacity: 1;
-  transform: translateY(0);
-  animation-timeline: scroll();
-
-  animation-range: 0% 70%;
-}
-.pfanim {
-  animation: pFfadeIn 1s;
-  opacity: 1;
-
-  //circle
-  border-radius: 50%;
-}
-.pfanim:hover {
-  animation: zoomAnim 1s;
-  transform: scale(0.6);
-  opacity: 1;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0.3;
-    transform: translateY(100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pFfadeIn {
-  0% {
-    transform: scale(0.6);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes fadeout {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-}
-
-@keyframes zoomAnim {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0.6);
-  }
 }
